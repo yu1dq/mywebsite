@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>World Travel - Yu's Adventures</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #0f0f0f;
+            color: white;
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 2rem;
+            background: rgba(0, 0, 0, 0.8);
+            backdrop-filter: blur(10px);
+            z-index: 100;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .header h1 {
+            font-size: 1.8rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .back-btn {
+            padding: 0.6rem 1.5rem;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            color: white;
+            text-decoration: none;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 60vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 80px;
+        }
+
+        .hero h2 {
+            font-size: 3.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            max-width: 600px;
+        }
+
+        /* Main Content */
+        .content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        /* Country Section */
+        .country-section {
+            margin-bottom: 5rem;
+        }
+
+        .country-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .country-flag {
+            font-size: 3rem;
+        }
+
+        .country-info h3 {
+            font-size: 2.5rem;
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .country-info .date {
+            color: #999;
+            font-size: 1.1rem;
+        }
+
+        /* Photo Grid */
+        .photo-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .photo-card {
+            background: #1a1a1a;
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .photo-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3);
+        }
+
+        .photo-placeholder {
+            width: 100%;
+            height: 250px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+        }
+
+        .photo-caption {
+            padding: 1.5rem;
+        }
+
+        .photo-caption h4 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: #667eea;
+        }
+
+        .photo-caption p {
+            color: #ccc;
+            line-height: 1.6;
+        }
+
+        /* Journal Entry */
+        .journal-entry {
+            background: #1a1a1a;
+            border-radius: 20px;
+            padding: 2.5rem;
+            border-left: 4px solid #667eea;
+        }
+
+        .journal-entry h4 {
+            font-size: 1.5rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .journal-entry p {
+            color: #ccc;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+        }
+
+        /* Upload Instructions */
+        .upload-instructions {
+            background: linear-gradient(135deg, #1e3c72, #2a5298);
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 4rem 0;
+            text-align: center;
+        }
+
+        .upload-instructions h3 {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            color: #ffd700;
+        }
+
+        .upload-instructions p {
+            font-size: 1.1rem;
+            line-height: 1.8;
+            margin-bottom: 1rem;
+            opacity: 0.9;
+        }
+
+        .upload-instructions code {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 0.3rem 0.8rem;
+            border-radius: 5px;
+            font-family: 'Courier New', monospace;
+            color: #ffd700;
+        }
+
+        /* Footer */
+        footer {
+            background: #1a1a1a;
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        @media (max-width: 768px) {
+            .hero h2 {
+                font-size: 2rem;
+            }
+
+            .country-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .photo-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <h1>🌍 World Travel Journal</h1>
+        <a href="index.html" class="back-btn">← Back to Home</a>
+    </div>
+
+    <!-- Hero Section -->
+    <div class="hero">
+        <h2>Adventures Around the Globe</h2>
+        <p>Capturing moments, cultures, and memories from every corner of the world</p>
+    </div>
+
+    <!-- Main Content -->
+    <div class="content">
+        
+        <!-- Example Country 1: Japan -->
+        <div class="country-section">
+            <div class="country-header">
+                <div class="country-flag">🇯🇵</div>
+                <div class="country-info">
+                    <h3>Japan</h3>
+                    <p class="date">March 2024 • 10 Days</p>
+                </div>
+            </div>
+
+            <div class="photo-grid">
+                <div class="photo-card">
+                    <div class="photo-placeholder">🏯</div>
+                    <div class="photo-caption">
+                        <h4>Tokyo Skyline</h4>
+                        <p>The bustling metropolis viewed from Tokyo Skytree at sunset. The city lights beginning to glow.</p>
+                    </div>
+                </div>
+
+                <div class="photo-card">
+                    <div class="photo-placeholder">🌸</div>
+                    <div class="photo-caption">
+                        <h4>Cherry Blossom Season</h4>
+                        <p>Hanami at Ueno Park. The perfect timing to witness the beauty of sakura in full bloom.</p>
+                    </div>
+                </div>
+
+                <div class="photo-card">
+                    <div class="photo-placeholder">🍜</div>
+                    <div class="photo-caption">
+                        <h4>Ramen Street</h4>
+                        <p>Exploring the famous ramen alley in Osaka. Each bowl tells a unique story of craftsmanship.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="journal-entry">
+                <h4>📖 Travel Journal: Japan</h4>
+                <p>
+                    Japan exceeded all my expectations. From the moment I stepped into the organized chaos of Shibuya Crossing 
+                    to the serene temples of Kyoto, every moment was magical. The contrast between ultra-modern Tokyo and 
+                    traditional Kyoto showed me how this country beautifully balances innovation with tradition.
+                </p>
+                <p>
+                    The food was an adventure in itself - from street yakitori to high-end sushi, every meal was an experience. 
+                    The kindness of locals, despite the language barrier, made me feel welcome everywhere I went.
+                </p>
+            </div>
+        </div>
+
+        <!-- Example Country 2: France -->
+        <div class="country-section">
+            <div class="country-header">
+                <div class="country-flag">🇫🇷</div>
+                <div class="country-info">
+                    <h3>France</h3>
+                    <p class="date">July 2023 • 2 Weeks</p>
+                </div>
+            </div>
+
+            <div class="photo-grid">
+                <div class="photo-card">
+                    <div class="photo-placeholder">🗼</div>
+                    <div class="photo-caption">
+                        <h4>Eiffel Tower at Dusk</h4>
+                        <p>The iconic iron lady illuminated against the Paris evening sky. A moment I'll never forget.</p>
+                    </div>
+                </div>
+
+                <div class="photo-card">
+                    <div class="photo-placeholder">🥐</div>
+                    <div class="photo-caption">
+                        <h4>Parisian Café Culture</h4>
+                        <p>Morning coffee and croissants at a charming café in Montmartre. The French way of life.</p>
+                    </div>
+                </div>
+
+                <div class="photo-card">
+                    <div class="photo-placeholder">🎨</div>
+                    <div class="photo-caption">
+                        <h4>Louvre Museum</h4>
+                        <p>Getting lost in art and history. The Mona Lisa's smile is even more enigmatic in person.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="journal-entry">
+                <h4>📖 Travel Journal: France</h4>
+                <p>
+                    Paris is everything they say it is - romantic, artistic, and utterly captivating. Walking along the Seine 
+                    at sunset, exploring hidden bookshops in the Latin Quarter, and tasting fresh pastries at every corner 
+                    made me fall in love with this city.
+                </p>
+                <p>
+                    Beyond Paris, the lavender fields of Provence and the beaches of Nice showed me the diverse beauty of France. 
+                    Each region has its own character, cuisine, and charm.
+                </p>
+            </div>
+        </div>
+
+        <!-- Example Country 3: Thailand -->
+        <div class="country-section">
+            <div class="country-header">
+                <div class="country-flag">🇹🇭</div>
+                <div class="country-info">
+                    <h3>Thailand</h3>
+                    <p class="date">December 2022 • 12 Days</p>
+                </div>
+            </div>
+
+            <div class="photo-grid">
+                <div class="photo-card">
+                    <div class="photo-placeholder">🏝️</div>
+                    <div class="photo-caption">
+                        <h4>Phi Phi Islands</h4>
+                        <p>Crystal clear waters and limestone cliffs. Paradise found in Southern Thailand.</p>
+                    </div>
+                </div>
+
+                <div class="photo-card">
+                    <div class="photo-placeholder">🛕</div>
+                    <div class="photo-caption">
+                        <h4>Bangkok Temples</h4>
+                        <p>The golden spires of Wat Arun reflecting in the Chao Phraya River at sunrise.</p>
+                    </div>
+                </div>
+
+                <div class="photo-card">
+                    <div class="photo-placeholder">🐘</div>
+                    <div class="photo-caption">
+                        <h4>Elephant Sanctuary</h4>
+                        <p>An ethical encounter with rescued elephants in Chiang Mai. A humbling experience.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="journal-entry">
+                <h4>📖 Travel Journal: Thailand</h4>
+                <p>
+                    Thailand welcomed me with open arms and warm smiles. From the bustling streets of Bangkok to the tranquil 
+                    beaches of Krabi, this country offers incredible diversity. The street food alone is worth the trip - 
+                    pad thai at 2 AM never tasted so good!
+                </p>
+                <p>
+                    The hospitality of Thai people is legendary. Whether getting lost in night markets or exploring ancient 
+                    temples, locals were always ready to help with genuine kindness.
+                </p>
+            </div>
+        </div>
+
+        <!-- Upload Instructions -->
+        <div class="upload-instructions">
+            <h3>📸 How to Add Your Own Photos & Journals</h3>
+            <p>
+                This is a template page! To add your real travel photos and stories:
+            </p>
+            <p>
+                <strong>1.</strong> Replace the emoji placeholders (<code>🏯 🌸 🍜</code>) with your actual images<br>
+                <strong>2.</strong> Update the country names, dates, and descriptions<br>
+                <strong>3.</strong> Add your personal travel journal entries<br>
+                <strong>4.</strong> Upload your photos to an image hosting service or add them to your GitHub repository
+            </p>
+            <p style="margin-top: 1.5rem; font-size: 0.95rem; opacity: 0.8;">
+                To add images: Replace <code>&lt;div class="photo-placeholder"&gt;</code> with<br>
+                <code>&lt;img src="your-photo.jpg" style="width:100%; height:250px; object-fit:cover;"&gt;</code>
+            </p>
+        </div>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Yu's World Travel Journal</p>
+        <p style="margin-top: 0.5rem; opacity: 0.7;">Collecting moments, not things 🌍✈️</p>
+    </footer>
+</body>
+</html>

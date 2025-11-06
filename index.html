@@ -357,6 +357,7 @@
                     <button class="lang-btn active" data-lang="en">EN</button>
                     <button class="lang-btn" data-lang="zh">中文</button>
                     <button class="lang-btn" data-lang="de">DE</button>
+                    <button class="lang-btn" data-lang="ar">عربي</button>
                 </div>
             </div>
         </div>
@@ -522,6 +523,23 @@
                 'finance3-title': 'Investitionsanalyse', 'finance3-item1': 'Portfolio-Theorie', 'finance3-item2': 'Risikomanagement', 'finance3-item3': 'Asset-Allokation', 'finance3-item4': 'Leistungskennzahlen',
                 'skills-title': 'Fähigkeiten', 'skill-finance': 'Finanzanalyse', 'skill-data': 'Datenvisualisierung', 'skill-problem': 'Problemlösung',
                 'contact-title': 'Kontaktiere mich', 'contact-subtitle': 'Lass uns verbinden!', 'footer-text': '© 2024 Yu. Mit ❤️ gemacht'
+            },
+            ar: {
+                'nav-home': 'الرئيسية', 'nav-about': 'عني', 'nav-projects': 'المشاريع', 'nav-finance': 'المالية', 'nav-skills': 'المهارات', 'nav-contact': 'اتصل',
+                'hero-title': 'مرحباً بك في عالمي', 'hero-subtitle': 'استكشف | أنشئ | انمُ',
+                'hero-desc': 'مرحباً! أنا يو، مستكشف ومتعلم شغوف. أحب اكتشاف التقنيات الجديدة، والبقاء نشطاً من خلال التنس، وأستعد حالياً لتقديم طلب الماجستير مع الغوص العميق في عالم التمويل.',
+                'hero-cta': 'اعرف المزيد', 'about-title': 'عني',
+                'about-desc': 'أنا متعلم فضولي لديه شغف بالتكنولوجيا والرياضة والمالية. البرمجة تمكنني من الإبداع، والتنس يبقيني نشيطاً، والتعلم المستمر يدفع نموي الشخصي.',
+                'about-motto': '💡 شعاري: ابقَ فضولياً، واصل التعلم', 'projects-title': 'مشاريعي',
+                'project1-title': '🎓 طلب الماجستير', 'project1-desc': 'إعداد مواد طلب شاملة تشمل البيان الشخصي ورسائل التوصية ومقترح البحث. الهدف هو متابعة الدراسات المتقدمة في مؤسسة من الدرجة الأولى.',
+                'project2-title': '🎾 رحلة التنس', 'project2-desc': 'شغوف بالتنس مع تدريب منتظم ومشاركة في البطولات. علمني التنس التركيز والعزيمة وقيمة الممارسة المستمرة.',
+                'project3-title': '💻 الموقع الشخصي', 'project3-desc': 'بنيت هذا الموقع الشخصي لعرض مشاريعي ومهاراتي. التعلم المستمر لتقنيات الواجهة الأمامية لجعله أكثر أناقة وعملية.',
+                'finance-title': 'رحلة تعلم المالية', 'finance-intro': 'استكشاف العالم الرائع للتمويل من خلال التعلم المنظم والتطبيق العملي',
+                'finance1-title': 'الأسواق المالية', 'finance1-item1': 'أساسيات سوق الأسهم', 'finance1-item2': 'أسواق السندات والدخل الثابت', 'finance1-item3': 'المشتقات والخيارات', 'finance1-item4': 'الفوركس والسلع',
+                'finance2-title': 'التمويل المؤسسي', 'finance2-item1': 'تحليل البيانات المالية', 'finance2-item2': 'طرق التقييم (DCF، المضاعفات)', 'finance2-item3': 'هيكل رأس المال', 'finance2-item4': 'أساسيات الاندماج والاستحواذ',
+                'finance3-title': 'تحليل الاستثمار', 'finance3-item1': 'نظرية المحفظة', 'finance3-item2': 'إدارة المخاطر', 'finance3-item3': 'توزيع الأصول', 'finance3-item4': 'مقاييس الأداء',
+                'skills-title': 'مجموعة المهارات', 'skill-finance': 'التحليل المالي', 'skill-data': 'تصور البيانات', 'skill-problem': 'حل المشكلات',
+                'contact-title': 'تواصل معي', 'contact-subtitle': 'لنبقى على اتصال!', 'footer-text': '© 2024 يو. صنع بـ ❤️'
             }
         };
 
@@ -530,6 +548,15 @@
         function changeLanguage(lang) {
             currentLang = lang;
             const trans = translations[lang];
+            
+            // Apply RTL for Arabic
+            if (lang === 'ar') {
+                document.body.style.direction = 'rtl';
+                document.body.style.textAlign = 'right';
+            } else {
+                document.body.style.direction = 'ltr';
+                document.body.style.textAlign = 'left';
+            }
             
             Object.keys(trans).forEach(key => {
                 const element = document.getElementById(key);

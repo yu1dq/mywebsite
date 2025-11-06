@@ -3,7 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Yu - Personal Portfolio</title>
+    <title>World Travel Map - Yu's Adventures</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
     <style>
         * {
             margin: 0;
@@ -12,751 +13,376 @@
         }
 
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            color: #333;
-            overflow-x: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: #0f0f0f;
+            color: white;
         }
 
-        .gradient-bg {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-            background-size: 400% 400%;
-            animation: gradientShift 15s ease infinite;
-            z-index: -1;
-        }
-
-        @keyframes gradientShift {
-            0% { background-position: 0% 50%; }
-            50% { background-position: 100% 50%; }
-            100% { background-position: 0% 50%; }
-        }
-
-        nav {
+        .header {
             position: fixed;
             top: 0;
             width: 100%;
             padding: 1.5rem 2rem;
+            background: rgba(0, 0, 0, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1001;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            z-index: 100;
-            transition: all 0.3s;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
         }
 
-        nav.scrolled {
-            background: rgba(255, 255, 255, 0.95);
-            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-        }
-
-        .nav-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: white;
-            transition: color 0.3s;
-        }
-
-        nav.scrolled .logo {
-            color: #667eea;
-        }
-
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 2rem;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-        }
-
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            transition: all 0.3s;
-        }
-
-        nav.scrolled .nav-links a {
-            color: #333;
-        }
-
-        .language-switcher {
-            display: flex;
-            gap: 0.5rem;
-            background: rgba(255, 255, 255, 0.2);
-            padding: 0.5rem;
-            border-radius: 25px;
-            backdrop-filter: blur(10px);
-        }
-
-        nav.scrolled .language-switcher {
-            background: rgba(102, 126, 234, 0.1);
-        }
-
-        .lang-btn {
-            padding: 0.4rem 1rem;
-            background: transparent;
-            color: white;
-            border: none;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s;
-            font-size: 0.9rem;
-        }
-
-        nav.scrolled .lang-btn {
-            color: #667eea;
-        }
-
-        .lang-btn:hover {
-            background: rgba(255, 255, 255, 0.3);
-        }
-
-        .lang-btn.active {
-            background: white;
-            color: #667eea;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-        }
-
-        nav.scrolled .lang-btn.active {
-            background: #667eea;
-            color: white;
-        }
-
-        .hero {
-            height: 100vh;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            color: white;
-            padding: 2rem;
-        }
-
-        .hero h1 {
-            font-size: 4rem;
-            margin-bottom: 1rem;
-        }
-
-        .hero .subtitle {
-            font-size: 1.5rem;
-            margin-bottom: 2rem;
-            opacity: 0.9;
-        }
-
-        .hero .description {
-            font-size: 1.1rem;
-            max-width: 600px;
-            margin-bottom: 3rem;
-            line-height: 1.8;
-            opacity: 0.85;
-        }
-
-        .cta-button {
-            display: inline-block;
-            padding: 1rem 2.5rem;
-            background: white;
-            color: #667eea;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: 600;
-            transition: all 0.3s;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
-        }
-
-        section {
-            min-height: 100vh;
-            padding: 6rem 2rem;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-        }
-
-        .section-white {
-            background: white;
-        }
-
-        .section-light {
-            background: #f8f9fa;
-        }
-
-        .container {
-            max-width: 1200px;
-            width: 100%;
-        }
-
-        h2 {
-            font-size: 3rem;
-            margin-bottom: 3rem;
-            text-align: center;
-            color: #667eea;
-        }
-
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-            margin-top: 3rem;
-        }
-
-        .info-card {
-            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
-            border-radius: 20px;
-            padding: 2rem;
-            border: 2px solid rgba(102, 126, 234, 0.2);
-            transition: all 0.3s;
-        }
-
-        .info-card:hover {
-            transform: translateY(-5px);
-            border-color: #667eea;
-        }
-
-        .info-card .icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-
-        .info-card h3 {
-            color: #667eea;
-            margin-bottom: 0.5rem;
-            font-size: 1.2rem;
-        }
-
-        .info-card .main-text {
-            color: #666;
-            font-size: 1.1rem;
-        }
-
-        .info-card .sub-text {
-            color: #999;
-            font-size: 0.9rem;
-            margin-top: 0.5rem;
-        }
-
-        .hobbies-section {
-            margin-top: 4rem;
-        }
-
-        .hobbies-section h3 {
-            text-align: center;
-            font-size: 2rem;
-            color: #667eea;
-            margin-bottom: 2rem;
-        }
-
-        .hobbies-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .hobby-card {
-            text-align: center;
-            padding: 1.5rem;
-            background: white;
-            border-radius: 15px;
-            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s;
-        }
-
-        .hobby-card:hover {
-            transform: scale(1.05);
-        }
-
-        .hobby-card .emoji {
-            font-size: 3rem;
-            margin-bottom: 0.5rem;
-        }
-
-        .hobby-card p {
-            color: #667eea;
-            font-weight: 600;
-            font-size: 1.1rem;
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-
-        .project-card {
-            background: white;
-            border-radius: 20px;
-            padding: 2.5rem;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-            transition: all 0.3s;
-            border: 2px solid transparent;
-        }
-
-        .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.3);
-            border-color: #667eea;
-        }
-
-        .project-card.clickable {
-            cursor: pointer;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .project-card.clickable:hover {
-            transform: translateY(-15px) scale(1.02);
-        }
-
-        .project-card.clickable::after {
-            content: '→';
-            position: absolute;
-            bottom: 1.5rem;
-            right: 1.5rem;
-            font-size: 2rem;
-            color: #667eea;
-            opacity: 0;
-            transition: all 0.3s;
-        }
-
-        .project-card.clickable:hover::after {
-            opacity: 1;
-            right: 1rem;
-        }
-
-        .click-hint {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: rgba(102, 126, 234, 0.2);
-            padding: 0.3rem 0.8rem;
-            border-radius: 15px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            color: #667eea;
-        }
-
-        .project-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: #667eea;
-        }
-
-        .project-card p {
-            color: #666;
-            line-height: 1.6;
-        }
-
-        .finance-section {
-            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
-            color: white;
-        }
-
-        .finance-section h2 {
-            color: white;
-        }
-
-        .finance-intro {
-            text-align: center;
-            font-size: 1.2rem;
-            margin-bottom: 3rem;
-            opacity: 0.9;
-        }
-
-        .finance-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-
-        .finance-card {
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 2rem;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.3s;
-        }
-
-        .finance-card:hover {
-            background: rgba(255, 255, 255, 0.15);
-            transform: translateY(-5px);
-            border-color: #ffd700;
-        }
-
-        .finance-card .icon {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-        }
-
-        .finance-card h3 {
-            color: #ffd700;
-            margin-bottom: 1rem;
-        }
-
-        .finance-card ul {
-            list-style: none;
-            padding: 0;
-        }
-
-        .finance-card li {
-            padding: 0.5rem 0;
-            padding-left: 1.5rem;
-            position: relative;
-        }
-
-        .finance-card li::before {
-            content: '→';
-            position: absolute;
-            left: 0;
-            color: #ffd700;
-        }
-
-        .learning-progress {
-            margin-top: 3rem;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 2.5rem;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .learning-progress h3 {
+        .header h1 {
             font-size: 1.8rem;
-            margin-bottom: 2rem;
-            text-align: center;
-            color: #ffd700;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
 
-        .progress-item {
-            margin-bottom: 2rem;
-        }
-
-        .progress-label {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.5rem;
-            font-size: 1.1rem;
-        }
-
-        .progress-bar {
-            height: 10px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            width: 0;
-            background: linear-gradient(90deg, #ffd700, #ffa500);
-            border-radius: 10px;
-            transition: width 1.5s ease;
-        }
-
-        .skills-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1.5rem;
-            justify-content: center;
-        }
-
-        .skill-tag {
-            padding: 1rem 2rem;
+        .back-btn {
+            padding: 0.6rem 1.5rem;
             background: linear-gradient(135deg, #667eea, #764ba2);
             color: white;
-            border-radius: 50px;
-            font-weight: 600;
-        }
-
-        .contact-info {
-            text-align: center;
-            background: white;
-            padding: 3rem;
-            border-radius: 20px;
-            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .contact-info a {
-            color: #667eea;
             text-decoration: none;
-            font-size: 1.2rem;
-            display: block;
-            margin: 1rem 0;
+            border-radius: 25px;
+            font-weight: 600;
+            transition: all 0.3s;
         }
 
-        footer {
-            background: #1a1a1a;
+        .back-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
+        }
+
+        .stats-panel {
+            position: fixed;
+            top: 100px;
+            left: 20px;
+            background: rgba(0, 0, 0, 0.9);
+            padding: 1.5rem;
+            border-radius: 15px;
+            z-index: 1000;
+            border: 2px solid #667eea;
+            min-width: 200px;
+        }
+
+        .stat-item {
+            margin: 1rem 0;
+            padding: 0.5rem 0;
+            border-bottom: 1px solid rgba(102, 126, 234, 0.3);
+        }
+
+        .stat-item:last-child {
+            border-bottom: none;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #667eea;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            margin-top: 0.3rem;
+        }
+
+        #map {
+            position: fixed;
+            top: 80px;
+            left: 0;
+            width: 100%;
+            height: calc(100vh - 80px);
+            z-index: 1;
+        }
+
+        .leaflet-popup-content-wrapper {
+            background: rgba(0, 0, 0, 0.95);
             color: white;
-            text-align: center;
-            padding: 2rem;
+            border-radius: 15px;
+            border: 2px solid #667eea;
+        }
+
+        .leaflet-popup-content {
+            margin: 1rem;
+            min-width: 200px;
+        }
+
+        .popup-title {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 0.5rem;
+        }
+
+        .popup-country {
+            font-size: 1rem;
+            color: #ccc;
+            margin-bottom: 1rem;
+        }
+
+        .popup-cities {
+            font-size: 0.9rem;
+            color: #999;
+            margin: 0.5rem 0;
+        }
+
+        .popup-dates {
+            font-size: 0.85rem;
+            color: #764ba2;
+            font-style: italic;
+            margin-top: 0.8rem;
+            padding-top: 0.8rem;
+            border-top: 1px solid rgba(102, 126, 234, 0.3);
+        }
+
+        .leaflet-popup-tip {
+            background: rgba(0, 0, 0, 0.95);
+        }
+
+        .custom-marker {
+            background: none;
+            border: none;
+        }
+
+        .marker-pin {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: #ff4444;
+            border: 3px solid white;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .marker-pin:hover {
+            transform: scale(1.4);
+            z-index: 1000;
+        }
+
+        .country-list {
+            position: fixed;
+            top: 100px;
+            right: 20px;
+            background: rgba(0, 0, 0, 0.9);
+            padding: 1.5rem;
+            border-radius: 15px;
+            z-index: 1000;
+            max-width: 250px;
+            max-height: calc(100vh - 150px);
+            overflow-y: auto;
+            border: 2px solid #667eea;
+        }
+
+        .country-list h3 {
+            color: #667eea;
+            margin-bottom: 1rem;
+            font-size: 1.2rem;
+        }
+
+        .country-item {
+            padding: 0.8rem;
+            margin: 0.5rem 0;
+            background: rgba(102, 126, 234, 0.1);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s;
+            border-left: 3px solid #667eea;
+        }
+
+        .country-item:hover {
+            background: rgba(102, 126, 234, 0.3);
+            transform: translateX(5px);
+        }
+
+        .country-name {
+            font-weight: 600;
+            color: white;
+        }
+
+        .country-count {
+            font-size: 0.85rem;
+            color: #999;
+            margin-top: 0.3rem;
         }
 
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 2.5rem;
-            }
-            .nav-links {
+            .stats-panel,
+            .country-list {
                 display: none;
             }
-            .info-grid, .hobbies-grid {
-                grid-template-columns: 1fr;
+
+            #map {
+                top: 70px;
+                height: calc(100vh - 70px);
             }
         }
     </style>
 </head>
 <body>
-    <div class="gradient-bg"></div>
+    <div class="header">
+        <h1>🗺️ World Travel Map</h1>
+        <a href="index.html" class="back-btn">← Back</a>
+    </div>
 
-    <nav id="navbar">
-        <div class="nav-content">
-            <div class="logo">Yu</div>
-            <div class="nav-right">
-                <ul class="nav-links">
-                    <li><a href="#home" id="nav-home">Home</a></li>
-                    <li><a href="#about" id="nav-about">About</a></li>
-                    <li><a href="#projects" id="nav-projects">Projects</a></li>
-                    <li><a href="#finance" id="nav-finance">Finance</a></li>
-                    <li><a href="#skills" id="nav-skills">Skills</a></li>
-                    <li><a href="#contact" id="nav-contact">Contact</a></li>
-                </ul>
-                <div class="language-switcher">
-                    <button class="lang-btn active" data-lang="en">EN</button>
-                    <button class="lang-btn" data-lang="zh">中文</button>
-                    <button class="lang-btn" data-lang="de">DE</button>
-                </div>
-            </div>
+    <div class="stats-panel">
+        <div class="stat-item">
+            <div class="stat-number">8</div>
+            <div class="stat-label">Countries Visited</div>
         </div>
-    </nav>
-
-    <section class="hero" id="home">
-        <h1 id="hero-title">Welcome to My World</h1>
-        <p class="subtitle" id="hero-subtitle">Explore | Create | Grow</p>
-        <p class="description" id="hero-desc">Hi! I'm Yu, a passionate explorer and learner. I love discovering new technologies, staying active through tennis, and currently preparing for my Master's application while diving deep into the world of finance.</p>
-        <a href="#about" class="cta-button" id="hero-cta">Learn More</a>
-    </section>
-
-    <section class="section-white" id="about">
-        <div class="container">
-            <h2 id="about-title">About Me</h2>
-            
-            <div class="contact-info">
-                <p style="font-size: 1.3rem; color: #333; line-height: 2; margin-bottom: 2rem;" id="about-desc">
-                    I'm a curious learner with passion for technology, sports, and finance. Coding empowers me to create, staying active keeps me energized, and continuous learning drives my personal growth.
-                </p>
-                
-                <div style="text-align: left; max-width: 600px; margin: 2rem auto; color: #666; line-height: 2;">
-                    <p><strong style="color: #667eea;">🎂 <span id="info-birthday-label">Birthday:</span></strong> <span id="info-birthday">October 27, 2000</span></p>
-                    <p><strong style="color: #667eea;">♏ <span id="info-zodiac-label">Zodiac:</span></strong> <span id="info-zodiac">Scorpio</span></p>
-                    <p><strong style="color: #667eea;">🎓 <span id="info-education-label">University:</span></strong> TU Ilmenau</p>
-                    <p><strong style="color: #667eea;">📚 <span id="info-major-label">Major:</span></strong> <span id="info-major">Industrial Engineering</span></p>
-                    <p><strong style="color: #667eea;">🎯 <span id="info-hobbies-label">Hobbies:</span></strong> <span id="info-hobbies">Tennis, Dance, Piano, Boxing</span></p>
-                </div>
-                
-                <p style="color: #999; font-style: italic; margin-top: 2rem;" id="about-motto">💡 "Stay curious, keep learning"</p>
-            </div>
+        <div class="stat-item">
+            <div class="stat-number">50+</div>
+            <div class="stat-label">Cities Explored</div>
         </div>
-    </section>
-
-    <section class="section-light" id="projects">
-        <div class="container">
-            <h2 id="projects-title">My Projects</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <h3 id="project1-title">🎓 Master's Application</h3>
-                    <p id="project1-desc">Preparing comprehensive application materials including personal statement, recommendation letters, and research proposal.</p>
-                </div>
-                <div class="project-card">
-                    <h3 id="project2-title">💻 Personal Portfolio</h3>
-                    <p id="project2-desc">Built this personal website to showcase my projects and skills.</p>
-                </div>
-                <div class="project-card clickable" onclick="window.open('world.html', '_blank')">
-                    <div class="click-hint">Click to explore</div>
-                    <h3 id="project3-title">🌍 World Travel</h3>
-                    <p id="project3-desc">My journey across different countries captured through photos and travel journals. Click to explore my adventures!</p>
-                </div>
-            </div>
+        <div class="stat-item">
+            <div class="stat-number">3</div>
+            <div class="stat-label">Years Traveling</div>
         </div>
-    </section>
+    </div>
 
-    <section class="finance-section" id="finance">
-        <div class="container">
-            <h2 id="finance-title">Finance Learning Journey</h2>
-            <p class="finance-intro" id="finance-intro">Exploring the fascinating world of finance through structured learning</p>
-            
-            <div class="finance-grid">
-                <div class="finance-card">
-                    <div class="icon">📊</div>
-                    <h3 id="finance1-title">Financial Markets</h3>
-                    <ul>
-                        <li id="finance1-item1">Stock Market Fundamentals</li>
-                        <li id="finance1-item2">Bond Markets & Fixed Income</li>
-                        <li id="finance1-item3">Derivatives & Options</li>
-                        <li id="finance1-item4">Forex & Commodities</li>
-                    </ul>
-                </div>
-                <div class="finance-card">
-                    <div class="icon">💰</div>
-                    <h3 id="finance2-title">Corporate Finance</h3>
-                    <ul>
-                        <li id="finance2-item1">Financial Statement Analysis</li>
-                        <li id="finance2-item2">Valuation Methods</li>
-                        <li id="finance2-item3">Capital Structure</li>
-                        <li id="finance2-item4">M&A Fundamentals</li>
-                    </ul>
-                </div>
-                <div class="finance-card">
-                    <div class="icon">📈</div>
-                    <h3 id="finance3-title">Investment Analysis</h3>
-                    <ul>
-                        <li id="finance3-item1">Portfolio Theory</li>
-                        <li id="finance3-item2">Risk Management</li>
-                        <li id="finance3-item3">Asset Allocation</li>
-                        <li id="finance3-item4">Performance Metrics</li>
-                    </ul>
-                </div>
-                <div class="finance-card">
-                    <div class="icon">🏦</div>
-                    <h3 id="finance4-title">Banking & Economics</h3>
-                    <ul>
-                        <li id="finance4-item1">Monetary Policy</li>
-                        <li id="finance4-item2">Banking Systems</li>
-                        <li id="finance4-item3">Macroeconomic Indicators</li>
-                        <li id="finance4-item4">Interest Rate Models</li>
-                    </ul>
-                </div>
-                <div class="finance-card">
-                    <div class="icon">🤖</div>
-                    <h3 id="finance5-title">Fintech & Quant</h3>
-                    <ul>
-                        <li id="finance5-item1">Algorithmic Trading</li>
-                        <li id="finance5-item2">Blockchain & Crypto</li>
-                        <li id="finance5-item3">Machine Learning in Finance</li>
-                        <li id="finance5-item4">Financial APIs</li>
-                    </ul>
-                </div>
-                <div class="finance-card">
-                    <div class="icon">📚</div>
-                    <h3 id="finance6-title">Certifications</h3>
-                    <ul>
-                        <li id="finance6-item1">CFA Level I (Preparing)</li>
-                        <li id="finance6-item2">Financial Modeling</li>
-                        <li id="finance6-item3">Python for Finance</li>
-                        <li id="finance6-item4">Bloomberg Terminal</li>
-                    </ul>
-                </div>
-            </div>
-
-            <div class="learning-progress">
-                <h3 id="progress-title">Current Learning Progress</h3>
-                <div class="progress-item">
-                    <div class="progress-label">
-                        <span id="progress1-label">Financial Markets</span>
-                        <span>85%</span>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" data-width="85"></div>
-                    </div>
-                </div>
-                <div class="progress-item">
-                    <div class="progress-label">
-                        <span id="progress2-label">Corporate Finance</span>
-                        <span>70%</span>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" data-width="70"></div>
-                    </div>
-                </div>
-                <div class="progress-item">
-                    <div class="progress-label">
-                        <span id="progress3-label">Investment Analysis</span>
-                        <span>60%</span>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" data-width="60"></div>
-                    </div>
-                </div>
-                <div class="progress-item">
-                    <div class="progress-label">
-                        <span id="progress4-label">Python for Finance</span>
-                        <span>75%</span>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" data-width="75"></div>
-                    </div>
-                </div>
-            </div>
+    <div class="country-list">
+        <h3>Countries</h3>
+        <div class="country-item" onclick="flyToLocation(51.5074, 10.4515, 6)">
+            <div class="country-name">🇩🇪 Germany</div>
+            <div class="country-count">20+ cities</div>
         </div>
-    </section>
-
-    <section class="section-white" id="skills">
-        <div class="container">
-            <h2 id="skills-title">Skill Set</h2>
-            <div class="skills-container">
-                <div class="skill-tag">HTML/CSS</div>
-                <div class="skill-tag">JavaScript</div>
-                <div class="skill-tag">Python</div>
-                <div class="skill-tag" id="skill-finance">Financial Analysis</div>
-                <div class="skill-tag" id="skill-data">Data Visualization</div>
-                <div class="skill-tag" id="skill-problem">Problem Solving</div>
-            </div>
+        <div class="country-item" onclick="flyToLocation(52.3676, 4.9041, 8)">
+            <div class="country-name">🇳🇱 Netherlands</div>
+            <div class="country-count">2 cities</div>
         </div>
-    </section>
-
-    <section class="section-light" id="contact">
-        <div class="container">
-            <h2 id="contact-title">Get In Touch</h2>
-            <div class="contact-info">
-                <h3 id="contact-subtitle">Let's Connect!</h3>
-                <a href="mailto:ydq001027@gmail.com">📧 ydq001027@gmail.com</a>
-                <a href="https://github.com/yu1dq" target="_blank">🔗 GitHub: yu1dq</a>
-            </div>
+        <div class="country-item" onclick="flyToLocation(48.2082, 16.3738, 8)">
+            <div class="country-name">🇦🇹 Austria</div>
+            <div class="country-count">2 cities</div>
         </div>
-    </section>
+        <div class="country-item" onclick="flyToLocation(28.2916, -16.6291, 9)">
+            <div class="country-name">🇪🇸 Spain</div>
+            <div class="country-count">1 city</div>
+        </div>
+        <div class="country-item" onclick="flyToLocation(37.9838, 23.7275, 8)">
+            <div class="country-name">🇬🇷 Greece</div>
+            <div class="country-count">2 cities</div>
+        </div>
+        <div class="country-item" onclick="flyToLocation(47.4979, 19.0402, 9)">
+            <div class="country-name">🇭🇺 Hungary</div>
+            <div class="country-count">1 city</div>
+        </div>
+        <div class="country-item" onclick="flyToLocation(45.1, 15.2, 8)">
+            <div class="country-name">🇭🇷 Croatia</div>
+            <div class="country-count">2 cities</div>
+        </div>
+        <div class="country-item" onclick="flyToLocation(44.7866, 20.4489, 9)">
+            <div class="country-name">🇷🇸 Serbia</div>
+            <div class="country-count">1 city</div>
+        </div>
+        <div class="country-item" onclick="flyToLocation(55.6761, 12.5683, 8)">
+            <div class="country-name">🇩🇰 Denmark</div>
+            <div class="country-count">1 location</div>
+        </div>
+        <div class="country-item" onclick="flyToLocation(36.7538, 3.0588, 7)">
+            <div class="country-name">🇩🇿 Algeria</div>
+            <div class="country-count">3 cities</div>
+        </div>
+    </div>
 
-    <footer>
-        <p id="footer-text">&copy; 2024 Yu. Made with ❤️</p>
-    </footer>
+    <div id="map"></div>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
     <script>
-        const translations = {
-            en: {
-                'nav-home': 'Home', 'nav-about': 'About', 'nav-projects': 'Projects', 'nav-finance': 'Finance', 'nav-skills': 'Skills', 'nav-contact': 'Contact',
-                'hero-title': 'Welcome to My World', 'hero-subtitle': 'Explore | Create | Grow',
-                'hero-desc': "Hi! I'm Yu, a passionate explorer and learner. I love discovering new technologies, staying active through tennis, and currently preparing for my Master's application while diving deep into the world of finance.",
-                'hero-cta': 'Learn More',
-                'about-title': 'About Me',
-                'about-desc': "I'm a curious learner with passion for technology, sports, and finance. Coding empowers me to create, staying active keeps me energized, and continuous learning drives my personal growth.",
-                'info-birthday-label': 'Birthday:', 'info-birthday': 'October 27, 2000',
-                'info-zodiac-label': 'Zodiac:', 'info-zodiac': 'Scorpio',
-                'info-education-label': 'University:', 'info-major-label': 'Major:', 'info-major': 'Industrial Engineering',
-                'info-hobbies-label': 'Hobbies:', 'info-hobbies': 'Tennis, Dance, Piano, Boxing',
-                'about-motto': '💡 "Stay curious, keep learning"',
-                'projects-title': 'My Projects',
-                'project1-title': "🎓 Master's Application", 'project1-desc': 'Preparing comprehensive application materials including personal statement, recommendation letters, and research proposal.',
-                'project2-title': '💻 Personal Portfolio', 'project2-desc': 'Built this personal website to showcase my projects and skills.',
-                'project3-title': '🌍 World Travel', 'project3-desc': 'My journey across different countries captured through photos and travel journals. Click to explore my adventures!',
-                'finance-title': 'Finance Learning Journey', 'finance-intro': 'Exploring the fascinating world of finance through structured learning',
-                'finance1-title': 'Financial Markets', 'finance1-item1': 'Stock Market Fundamentals', 'finance1-item2': 'Bond Markets & Fixed Income', 'finance1-item3': 'Derivatives & Options', 'finance1-item4': 'Forex & Commodities',
-                'finance2-title': 'Corporate Finance', 'finance2-item1': 'Financial Statement Analysis', 'finance2-item2': 'Valuation Methods', 'finance2-item3': 'Capital Structure', 'finance2-item4': 'M
+        // Initialize map
+        const map = L.map('map', {
+            zoomControl: true,
+            scrollWheelZoom: true
+        }).setView([50, 10], 5);
+
+        // Dark theme map tiles
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png', {
+            attribution: '© OpenStreetMap contributors © CARTO',
+            maxZoom: 19
+        }).addTo(map);
+
+        // Travel data with real coordinates
+        const locations = [
+            // Germany
+            { name: 'Berlin', country: 'Germany', lat: 52.5200, lng: 13.4050, visits: ['June 17-18, 2023', 'October 27-28, 2024'], cities: 'Berlin' },
+            { name: 'München', country: 'Germany', lat: 48.1351, lng: 11.5820, visits: ['September 9-11, 2023'], cities: 'München' },
+            { name: 'Frankfurt', country: 'Germany', lat: 50.1109, lng: 8.6821, visits: ['September 16-17, 2023', 'September 17 - October 7, 2023', 'September 7, 2024'], cities: 'Frankfurt' },
+            { name: 'Heidelberg', country: 'Germany', lat: 49.3988, lng: 8.6724, visits: ['August 23, 2022'], cities: 'Heidelberg' },
+            { name: 'Köln', country: 'Germany', lat: 50.9375, lng: 6.9603, visits: ['August 28, 2022'], cities: 'Köln, Bonn' },
+            { name: 'Düsseldorf', country: 'Germany', lat: 51.2277, lng: 6.7735, visits: ['August 26, 2023', 'November 25-26, 2023', 'July 11-15, 2024'], cities: 'Düsseldorf' },
+            { name: 'Nürnberg', country: 'Germany', lat: 49.4521, lng: 11.0767, visits: ['September 2-3, 2023', 'April 10-11, 2024'], cities: 'Nürnberg' },
+            { name: 'Leipzig', country: 'Germany', lat: 51.3397, lng: 12.3731, visits: ['June 14-15, 2023'], cities: 'Leipzig' },
+            { name: 'Dresden', country: 'Germany', lat: 51.0504, lng: 13.7373, visits: ['September 7, 2024'], cities: 'Dresden' },
+            
+            // Netherlands
+            { name: 'Amsterdam', country: 'Netherlands', lat: 52.3676, lng: 4.9041, visits: ['August 29 - September 1, 2022'], cities: 'Amsterdam, Den Haag' },
+            
+            // Austria
+            { name: 'Vienna', country: 'Austria', lat: 48.2082, lng: 16.3738, visits: ['April 8-9, 2024'], cities: 'Vienna' },
+            { name: 'Mittelberg', country: 'Austria', lat: 47.3227, lng: 10.1697, visits: ['August 19-22, 2022'], cities: 'Mittelberg' },
+            
+            // Spain
+            { name: 'Tenerife', country: 'Spain', lat: 28.2916, lng: -16.6291, visits: ['October 28 - November 4, 2023'], cities: 'Tenerife' },
+            
+            // Greece
+            { name: 'Athens', country: 'Greece', lat: 37.9838, lng: 23.7275, visits: ['March 30 - April 5, 2024'], cities: 'Athens, Zakynthos' },
+            
+            // Hungary
+            { name: 'Budapest', country: 'Hungary', lat: 47.4979, lng: 19.0402, visits: ['April 5-8, 2024'], cities: 'Budapest' },
+            
+            // Croatia
+            { name: 'Poreč', country: 'Croatia', lat: 45.2250, lng: 13.5969, visits: ['October 8-14, 2023'], cities: 'Poreč, Pula' },
+            
+            // Serbia
+            { name: 'Belgrade', country: 'Serbia', lat: 44.7866, lng: 20.4489, visits: ['September 13-15, 2023'], cities: 'Belgrade' },
+            
+            // Denmark
+            { name: 'Møns Klint', country: 'Denmark', lat: 54.9742, lng: 12.5514, visits: ['May 28 - June 3, 2024'], cities: 'Møns Klint' },
+            
+            // Algeria
+            { name: 'Sétif', country: 'Algeria', lat: 36.1905, lng: 5.4105, visits: ['November 22-29, 2024'], cities: 'Sétif, Bou Saada, Djemila' }
+        ];
+
+        // Add markers to map
+        locations.forEach(location => {
+            const marker = L.marker([location.lat, location.lng], {
+                icon: L.divIcon({
+                    className: 'custom-marker',
+                    html: '<div class="marker-pin">📍</div>',
+                    iconSize: [30, 30],
+                    iconAnchor: [15, 15]
+                })
+            }).addTo(map);
+
+            const popupContent = `
+                <div class="popup-title">${location.name}</div>
+                <div class="popup-country">${location.country}</div>
+                <div class="popup-cities"><strong>Cities:</strong> ${location.cities}</div>
+                <div class="popup-dates"><strong>Visits:</strong><br>${location.visits.join('<br>')}</div>
+            `;
+
+            marker.bindPopup(popupContent, {
+                maxWidth: 300,
+                className: 'custom-popup'
+            });
+
+            // Hover effect
+            marker.on('mouseover', function() {
+                this.openPopup();
+            });
+        });
+
+        // Fly to location function
+        function flyToLocation(lat, lng, zoom) {
+            map.flyTo([lat, lng], zoom, {
+                duration: 1.5
+            });
+        }
+    </script>
+</body>
+</html>

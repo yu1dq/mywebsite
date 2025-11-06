@@ -147,23 +147,15 @@
         }
 
         .marker-pin {
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            background: #ff4444;
-            border: 3px solid white;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
+            font-size: 32px;
             cursor: pointer;
             transition: all 0.3s;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.5));
         }
 
         .marker-pin:hover {
-            transform: scale(1.4);
-            z-index: 1000;
+            transform: scale(1.3);
+            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.8));
         }
 
         .country-list {
@@ -246,7 +238,7 @@
         </div>
     </div>
 
-    <div class="country-list">
+            <div class="country-list">
         <h3>Countries</h3>
         <div class="country-item" onclick="flyToLocation(51.5074, 10.4515, 6)">
             <div class="country-name">🇩🇪 Germany</div>
@@ -306,6 +298,9 @@
             maxZoom: 19
         }).addTo(map);
 
+        // Country color mapping - now all same
+        const colorPin = '📍';
+
         // Travel data with real coordinates
         const locations = [
             // Germany
@@ -318,9 +313,15 @@
             { name: 'Nürnberg', country: 'Germany', lat: 49.4521, lng: 11.0767, visits: ['September 2-3, 2023', 'April 10-11, 2024'], cities: 'Nürnberg' },
             { name: 'Leipzig', country: 'Germany', lat: 51.3397, lng: 12.3731, visits: ['June 14-15, 2023'], cities: 'Leipzig' },
             { name: 'Dresden', country: 'Germany', lat: 51.0504, lng: 13.7373, visits: ['September 7, 2024'], cities: 'Dresden' },
+            { name: 'Jena', country: 'Germany', lat: 50.9272, lng: 11.5892, visits: ['April 2, 2023', 'June 8, 2024'], cities: 'Jena' },
+            { name: 'Würzburg', country: 'Germany', lat: 49.7913, lng: 9.9534, visits: ['June 8, 2023', 'July 21, 2023'], cities: 'Würzburg' },
+            { name: 'Weimar', country: 'Germany', lat: 50.9803, lng: 11.3297, visits: ['June 29, 2024'], cities: 'Weimar' },
+            { name: 'Gelsenkirchen', country: 'Germany', lat: 51.5167, lng: 7.0857, visits: ['July 9-11, 2024'], cities: 'Gelsenkirchen, Dortmund' },
+            { name: 'Braunschweig', country: 'Germany', lat: 52.2689, lng: 10.5268, visits: ['September 27 - October 1, 2024'], cities: 'Braunschweig' },
             
             // Netherlands
             { name: 'Amsterdam', country: 'Netherlands', lat: 52.3676, lng: 4.9041, visits: ['August 29 - September 1, 2022'], cities: 'Amsterdam, Den Haag' },
+            { name: 'Den Haag', country: 'Netherlands', lat: 52.0705, lng: 4.3007, visits: ['August 26, 2023'], cities: 'Den Haag' },
             
             // Austria
             { name: 'Vienna', country: 'Austria', lat: 48.2082, lng: 16.3738, visits: ['April 8-9, 2024'], cities: 'Vienna' },
@@ -353,9 +354,9 @@
             const marker = L.marker([location.lat, location.lng], {
                 icon: L.divIcon({
                     className: 'custom-marker',
-                    html: '<div class="marker-pin">📍</div>',
-                    iconSize: [30, 30],
-                    iconAnchor: [15, 15]
+                    html: `<div class="marker-pin">📍</div>`,
+                    iconSize: [32, 32],
+                    iconAnchor: [16, 32]
                 })
             }).addTo(map);
 

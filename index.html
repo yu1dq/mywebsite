@@ -18,7 +18,6 @@
             background: #0f0f0f;
         }
 
-        /* Dynamic Gradient Background */
         .gradient-bg {
             position: fixed;
             top: 0;
@@ -37,7 +36,6 @@
             100% { background-position: 0% 50%; }
         }
 
-        /* Navigation */
         nav {
             position: fixed;
             top: 0;
@@ -94,37 +92,12 @@
             text-decoration: none;
             font-weight: 500;
             transition: all 0.3s;
-            position: relative;
         }
 
         nav.scrolled .nav-links a {
             color: #333;
         }
 
-        .nav-links a:hover {
-            transform: translateY(-2px);
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: white;
-            transition: width 0.3s;
-        }
-
-        nav.scrolled .nav-links a::after {
-            background: #667eea;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        /* Language Switcher */
         .language-switcher {
             display: flex;
             gap: 0.5rem;
@@ -158,10 +131,6 @@
             background: rgba(255, 255, 255, 0.3);
         }
 
-        nav.scrolled .lang-btn:hover {
-            background: rgba(102, 126, 234, 0.2);
-        }
-
         .lang-btn.active {
             background: white;
             color: #667eea;
@@ -173,7 +142,6 @@
             color: white;
         }
 
-        /* Hero Section */
         .hero {
             height: 100vh;
             display: flex;
@@ -188,14 +156,12 @@
         .hero h1 {
             font-size: 4rem;
             margin-bottom: 1rem;
-            animation: fadeInUp 1s ease;
         }
 
         .hero .subtitle {
             font-size: 1.5rem;
             margin-bottom: 2rem;
             opacity: 0.9;
-            animation: fadeInUp 1s ease 0.2s both;
         }
 
         .hero .description {
@@ -204,18 +170,6 @@
             margin-bottom: 3rem;
             line-height: 1.8;
             opacity: 0.85;
-            animation: fadeInUp 1s ease 0.4s both;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
         }
 
         .cta-button {
@@ -227,16 +181,9 @@
             border-radius: 50px;
             font-weight: 600;
             transition: all 0.3s;
-            animation: fadeInUp 1s ease 0.6s both;
             box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
         }
 
-        .cta-button:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
-        }
-
-        /* Sections */
         section {
             min-height: 100vh;
             padding: 6rem 2rem;
@@ -264,22 +211,8 @@
             margin-bottom: 3rem;
             text-align: center;
             color: #667eea;
-            position: relative;
         }
 
-        h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 100px;
-            height: 4px;
-            background: linear-gradient(90deg, #667eea, #764ba2);
-            border-radius: 2px;
-        }
-
-        /* Project Cards */
         .projects-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -292,13 +225,10 @@
             padding: 2.5rem;
             box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
             transition: all 0.3s;
-            border: 2px solid transparent;
         }
 
         .project-card:hover {
             transform: translateY(-10px);
-            box-shadow: 0 20px 60px rgba(102, 126, 234, 0.3);
-            border-color: #667eea;
         }
 
         .project-card h3 {
@@ -307,12 +237,6 @@
             color: #667eea;
         }
 
-        .project-card p {
-            color: #666;
-            line-height: 1.6;
-        }
-
-        /* Finance Learning Module */
         .finance-section {
             background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
             color: white;
@@ -322,22 +246,10 @@
             color: white;
         }
 
-        .finance-section h2::after {
-            background: linear-gradient(90deg, #ffd700, #ffa500);
-        }
-
-        .finance-intro {
-            text-align: center;
-            font-size: 1.2rem;
-            margin-bottom: 3rem;
-            opacity: 0.9;
-        }
-
         .finance-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 2rem;
-            margin-top: 2rem;
         }
 
         .finance-card {
@@ -346,13 +258,6 @@
             border-radius: 20px;
             padding: 2rem;
             border: 2px solid rgba(255, 255, 255, 0.2);
-            transition: all 0.3s;
-        }
-
-        .finance-card:hover {
-            background: rgba(255, 255, 255, 0.15);
-            transform: translateY(-5px);
-            border-color: #ffd700;
         }
 
         .finance-card .icon {
@@ -361,14 +266,13 @@
         }
 
         .finance-card h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
             color: #ffd700;
+            margin-bottom: 1rem;
         }
 
         .finance-card ul {
             list-style: none;
-            padding-left: 0;
+            padding: 0;
         }
 
         .finance-card li {
@@ -384,55 +288,11 @@
             color: #ffd700;
         }
 
-        .learning-progress {
-            margin-top: 3rem;
-            background: rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 2.5rem;
-            border: 2px solid rgba(255, 255, 255, 0.2);
-        }
-
-        .learning-progress h3 {
-            font-size: 1.8rem;
-            margin-bottom: 2rem;
-            text-align: center;
-            color: #ffd700;
-        }
-
-        .progress-item {
-            margin-bottom: 2rem;
-        }
-
-        .progress-label {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 0.5rem;
-            font-size: 1.1rem;
-        }
-
-        .progress-bar {
-            height: 10px;
-            background: rgba(255, 255, 255, 0.2);
-            border-radius: 10px;
-            overflow: hidden;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #ffd700, #ffa500);
-            border-radius: 10px;
-            transition: width 1s ease;
-        }
-
-        /* Skills */
         .skills-container {
             display: flex;
             flex-wrap: wrap;
             gap: 1.5rem;
             justify-content: center;
-            max-width: 800px;
-            margin: 0 auto;
         }
 
         .skill-tag {
@@ -441,17 +301,8 @@
             color: white;
             border-radius: 50px;
             font-weight: 600;
-            box-shadow: 0 5px 20px rgba(102, 126, 234, 0.3);
-            transition: all 0.3s;
-            cursor: default;
         }
 
-        .skill-tag:hover {
-            transform: scale(1.1) rotate(2deg);
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.5);
-        }
-
-        /* Contact */
         .contact-info {
             text-align: center;
             background: white;
@@ -462,25 +313,14 @@
             margin: 0 auto;
         }
 
-        .contact-info h3 {
-            margin-bottom: 2rem;
-            color: #667eea;
-        }
-
         .contact-info a {
             color: #667eea;
             text-decoration: none;
             font-size: 1.2rem;
             display: block;
             margin: 1rem 0;
-            transition: all 0.3s;
         }
 
-        .contact-info a:hover {
-            transform: translateX(10px);
-        }
-
-        /* Footer */
         footer {
             background: #1a1a1a;
             color: white;
@@ -488,97 +328,33 @@
             padding: 2rem;
         }
 
-        /* Scroll Indicator */
-        .scroll-indicator {
-            position: absolute;
-            bottom: 2rem;
-            left: 50%;
-            transform: translateX(-50%);
-            animation: bounce 2s infinite;
-        }
-
-        @keyframes bounce {
-            0%, 20%, 50%, 80%, 100% {
-                transform: translateX(-50%) translateY(0);
-            }
-            40% {
-                transform: translateX(-50%) translateY(-20px);
-            }
-            60% {
-                transform: translateX(-50%) translateY(-10px);
-            }
-        }
-
-        .scroll-indicator svg {
-            width: 30px;
-            height: 30px;
-            fill: white;
-        }
-
-        /* Responsive */
-        @media (max-width: 1024px) {
-            .nav-links {
-                display: none;
-            }
-        }
-
         @media (max-width: 768px) {
             .hero h1 {
                 font-size: 2.5rem;
             }
-
-            .hero .subtitle {
-                font-size: 1.2rem;
-            }
-
-            h2 {
-                font-size: 2rem;
-            }
-
-            nav {
-                padding: 1rem;
-            }
-
-            .nav-right {
-                gap: 1rem;
-            }
-
-            .projects-grid,
-            .finance-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .language-switcher {
-                gap: 0.3rem;
-                padding: 0.3rem;
-            }
-
-            .lang-btn {
-                padding: 0.3rem 0.7rem;
-                font-size: 0.8rem;
+            .nav-links {
+                display: none;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Dynamic Background -->
     <div class="gradient-bg"></div>
 
-    <!-- Navigation -->
     <nav id="navbar">
         <div class="nav-content">
             <div class="logo">Yu</div>
             <div class="nav-right">
                 <ul class="nav-links">
-                    <li><a href="#home" data-i18n="nav.home">Home</a></li>
-                    <li><a href="#about" data-i18n="nav.about">About</a></li>
-                    <li><a href="#projects" data-i18n="nav.projects">Projects</a></li>
-                    <li><a href="#finance" data-i18n="nav.finance">Finance</a></li>
-                    <li><a href="#skills" data-i18n="nav.skills">Skills</a></li>
-                    <li><a href="#contact" data-i18n="nav.contact">Contact</a></li>
+                    <li><a href="#home" id="nav-home">Home</a></li>
+                    <li><a href="#about" id="nav-about">About</a></li>
+                    <li><a href="#projects" id="nav-projects">Projects</a></li>
+                    <li><a href="#finance" id="nav-finance">Finance</a></li>
+                    <li><a href="#skills" id="nav-skills">Skills</a></li>
+                    <li><a href="#contact" id="nav-contact">Contact</a></li>
                 </ul>
                 <div class="language-switcher">
-                    <button class="lang-btn" data-lang="en">EN</button>
+                    <button class="lang-btn active" data-lang="en">EN</button>
                     <button class="lang-btn" data-lang="zh">中文</button>
                     <button class="lang-btn" data-lang="de">DE</button>
                 </div>
@@ -586,277 +362,214 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <section class="hero" id="home">
-        <h1 data-i18n="hero.title">Welcome to My World</h1>
-        <p class="subtitle" data-i18n="hero.subtitle">Explore | Create | Grow</p>
-        <p class="description" data-i18n="hero.description">
-            Hi! I'm Yu, a passionate explorer and learner. I love discovering new technologies, 
-            staying active through tennis, and currently preparing for my Master's application 
-            while diving deep into the world of finance.
-        </p>
-        <a href="#about" class="cta-button" data-i18n="hero.cta">Learn More</a>
-        
-        <div class="scroll-indicator">
-            <svg viewBox="0 0 24 24">
-                <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
-            </svg>
-        </div>
+        <h1 id="hero-title">Welcome to My World</h1>
+        <p class="subtitle" id="hero-subtitle">Explore | Create | Grow</p>
+        <p class="description" id="hero-desc">Hi! I'm Yu, a passionate explorer and learner. I love discovering new technologies, staying active through tennis, and currently preparing for my Master's application while diving deep into the world of finance.</p>
+        <a href="#about" class="cta-button" id="hero-cta">Learn More</a>
     </section>
 
-    <!-- About Me -->
     <section class="section-white" id="about">
         <div class="container">
-            <h2 data-i18n="about.title">About Me</h2>
+            <h2 id="about-title">About Me</h2>
             <div class="contact-info">
-                <p style="font-size: 1.3rem; color: #333; line-height: 2; margin-bottom: 2rem;" data-i18n="about.description">
-                    I'm a curious learner with passion for technology, sports, and finance.
-                    Coding empowers me to create, tennis keeps me energized, and continuous learning 
-                    drives my personal growth. Currently exploring the intersection of technology and finance.
+                <p style="font-size: 1.3rem; color: #333; line-height: 2; margin-bottom: 2rem;" id="about-desc">
+                    I'm a curious learner with passion for technology, sports, and finance. Coding empowers me to create, tennis keeps me energized, and continuous learning drives my personal growth.
                 </p>
-                <p style="color: #666;" data-i18n="about.motto">💡 Motto: Stay curious, keep learning</p>
+                <p style="color: #666;" id="about-motto">💡 Motto: Stay curious, keep learning</p>
             </div>
         </div>
     </section>
 
-    <!-- My Projects -->
     <section class="section-light" id="projects">
         <div class="container">
-            <h2 data-i18n="projects.title">My Projects</h2>
+            <h2 id="projects-title">My Projects</h2>
             <div class="projects-grid">
                 <div class="project-card">
-                    <h3 data-i18n="projects.masters.title">🎓 Master's Application</h3>
-                    <p data-i18n="projects.masters.description">
-                        Preparing comprehensive application materials including personal statement, 
-                        recommendation letters, and research proposal. Aiming to pursue advanced studies 
-                        at a top-tier institution.
-                    </p>
+                    <h3 id="project1-title">🎓 Master's Application</h3>
+                    <p id="project1-desc">Preparing comprehensive application materials including personal statement, recommendation letters, and research proposal. Aiming to pursue advanced studies at a top-tier institution.</p>
                 </div>
                 <div class="project-card">
-                    <h3 data-i18n="projects.tennis.title">🎾 Tennis Journey</h3>
-                    <p data-i18n="projects.tennis.description">
-                        Passionate about tennis with regular training and tournament participation. 
-                        Tennis has taught me focus, determination, and the value of consistent practice.
-                    </p>
+                    <h3 id="project2-title">🎾 Tennis Journey</h3>
+                    <p id="project2-desc">Passionate about tennis with regular training and tournament participation. Tennis has taught me focus, determination, and the value of consistent practice.</p>
                 </div>
                 <div class="project-card">
-                    <h3 data-i18n="projects.website.title">💻 Personal Portfolio</h3>
-                    <p data-i18n="projects.website.description">
-                        Built this personal website to showcase my projects and skills. 
-                        Continuously learning frontend technologies to make it more elegant and functional.
-                    </p>
+                    <h3 id="project3-title">💻 Personal Portfolio</h3>
+                    <p id="project3-desc">Built this personal website to showcase my projects and skills. Continuously learning frontend technologies to make it more elegant and functional.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Finance Learning Module -->
     <section class="finance-section" id="finance">
         <div class="container">
-            <h2 data-i18n="finance.title">Finance Learning Journey</h2>
-            <p class="finance-intro" data-i18n="finance.intro">
-                Exploring the fascinating world of finance through structured learning and practical application
-            </p>
+            <h2 id="finance-title">Finance Learning Journey</h2>
+            <p style="text-align: center; font-size: 1.2rem; margin-bottom: 3rem;" id="finance-intro">Exploring the fascinating world of finance through structured learning and practical application</p>
             
             <div class="finance-grid">
                 <div class="finance-card">
                     <div class="icon">📊</div>
-                    <h3 data-i18n="finance.markets.title">Financial Markets</h3>
+                    <h3 id="finance1-title">Financial Markets</h3>
                     <ul>
-                        <li data-i18n="finance.markets.item1">Stock Market Fundamentals</li>
-                        <li data-i18n="finance.markets.item2">Bond Markets & Fixed Income</li>
-                        <li data-i18n="finance.markets.item3">Derivatives & Options</li>
-                        <li data-i18n="finance.markets.item4">Forex & Commodities</li>
+                        <li id="finance1-item1">Stock Market Fundamentals</li>
+                        <li id="finance1-item2">Bond Markets & Fixed Income</li>
+                        <li id="finance1-item3">Derivatives & Options</li>
+                        <li id="finance1-item4">Forex & Commodities</li>
                     </ul>
                 </div>
-
                 <div class="finance-card">
                     <div class="icon">💰</div>
-                    <h3 data-i18n="finance.corporate.title">Corporate Finance</h3>
+                    <h3 id="finance2-title">Corporate Finance</h3>
                     <ul>
-                        <li data-i18n="finance.corporate.item1">Financial Statement Analysis</li>
-                        <li data-i18n="finance.corporate.item2">Valuation Methods (DCF, Multiples)</li>
-                        <li data-i18n="finance.corporate.item3">Capital Structure</li>
-                        <li data-i18n="finance.corporate.item4">M&A Fundamentals</li>
+                        <li id="finance2-item1">Financial Statement Analysis</li>
+                        <li id="finance2-item2">Valuation Methods (DCF, Multiples)</li>
+                        <li id="finance2-item3">Capital Structure</li>
+                        <li id="finance2-item4">M&A Fundamentals</li>
                     </ul>
                 </div>
-
                 <div class="finance-card">
                     <div class="icon">📈</div>
-                    <h3 data-i18n="finance.investment.title">Investment Analysis</h3>
+                    <h3 id="finance3-title">Investment Analysis</h3>
                     <ul>
-                        <li data-i18n="finance.investment.item1">Portfolio Theory</li>
-                        <li data-i18n="finance.investment.item2">Risk Management</li>
-                        <li data-i18n="finance.investment.item3">Asset Allocation</li>
-                        <li data-i18n="finance.investment.item4">Performance Metrics</li>
+                        <li id="finance3-item1">Portfolio Theory</li>
+                        <li id="finance3-item2">Risk Management</li>
+                        <li id="finance3-item3">Asset Allocation</li>
+                        <li id="finance3-item4">Performance Metrics</li>
                     </ul>
-                </div>
-
-                <div class="finance-card">
-                    <div class="icon">🏦</div>
-                    <h3 data-i18n="finance.banking.title">Banking & Economics</h3>
-                    <ul>
-                        <li data-i18n="finance.banking.item1">Monetary Policy</li>
-                        <li data-i18n="finance.banking.item2">Banking Systems</li>
-                        <li data-i18n="finance.banking.item3">Macroeconomic Indicators</li>
-                        <li data-i18n="finance.banking.item4">Interest Rate Models</li>
-                    </ul>
-                </div>
-
-                <div class="finance-card">
-                    <div class="icon">🤖</div>
-                    <h3 data-i18n="finance.fintech.title">Fintech & Quant</h3>
-                    <ul>
-                        <li data-i18n="finance.fintech.item1">Algorithmic Trading</li>
-                        <li data-i18n="finance.fintech.item2">Blockchain & Crypto</li>
-                        <li data-i18n="finance.fintech.item3">Machine Learning in Finance</li>
-                        <li data-i18n="finance.fintech.item4">Financial APIs</li>
-                    </ul>
-                </div>
-
-                <div class="finance-card">
-                    <div class="icon">📚</div>
-                    <h3 data-i18n="finance.cert.title">Certifications</h3>
-                    <ul>
-                        <li data-i18n="finance.cert.item1">CFA Level I (Preparing)</li>
-                        <li data-i18n="finance.cert.item2">Financial Modeling</li>
-                        <li data-i18n="finance.cert.item3">Python for Finance</li>
-                        <li data-i18n="finance.cert.item4">Bloomberg Terminal</li>
-                    </ul>
-                </div>
-            </div>
-
-            <!-- Learning Progress -->
-            <div class="learning-progress">
-                <h3 data-i18n="finance.progress.title">Current Learning Progress</h3>
-                
-                <div class="progress-item">
-                    <div class="progress-label">
-                        <span data-i18n="finance.progress.markets">Financial Markets</span>
-                        <span>85%</span>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 85%"></div>
-                    </div>
-                </div>
-
-                <div class="progress-item">
-                    <div class="progress-label">
-                        <span data-i18n="finance.progress.corporate">Corporate Finance</span>
-                        <span>70%</span>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 70%"></div>
-                    </div>
-                </div>
-
-                <div class="progress-item">
-                    <div class="progress-label">
-                        <span data-i18n="finance.progress.investment">Investment Analysis</span>
-                        <span>60%</span>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 60%"></div>
-                    </div>
-                </div>
-
-                <div class="progress-item">
-                    <div class="progress-label">
-                        <span data-i18n="finance.progress.python">Python for Finance</span>
-                        <span>75%</span>
-                    </div>
-                    <div class="progress-bar">
-                        <div class="progress-fill" style="width: 75%"></div>
-                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Skills -->
     <section class="section-white" id="skills">
         <div class="container">
-            <h2 data-i18n="skills.title">Skill Set</h2>
+            <h2 id="skills-title">Skill Set</h2>
             <div class="skills-container">
                 <div class="skill-tag">HTML/CSS</div>
                 <div class="skill-tag">JavaScript</div>
                 <div class="skill-tag">Python</div>
-                <div class="skill-tag" data-i18n="skills.financial">Financial Analysis</div>
-                <div class="skill-tag" data-i18n="skills.data">Data Visualization</div>
-                <div class="skill-tag" data-i18n="skills.problem">Problem Solving</div>
-                <div class="skill-tag" data-i18n="skills.team">Team Collaboration</div>
-                <div class="skill-tag" data-i18n="skills.learning">Continuous Learning</div>
+                <div class="skill-tag" id="skill-finance">Financial Analysis</div>
+                <div class="skill-tag" id="skill-data">Data Visualization</div>
+                <div class="skill-tag" id="skill-problem">Problem Solving</div>
             </div>
         </div>
     </section>
 
-    <!-- Contact -->
     <section class="section-light" id="contact">
         <div class="container">
-            <h2 data-i18n="contact.title">Get In Touch</h2>
+            <h2 id="contact-title">Get In Touch</h2>
             <div class="contact-info">
-                <h3 data-i18n="contact.subtitle">Let's Connect!</h3>
+                <h3 id="contact-subtitle">Let's Connect!</h3>
                 <a href="mailto:ydq001027@gmail.com">📧 ydq001027@gmail.com</a>
                 <a href="https://github.com/yu1dq" target="_blank">🔗 GitHub: yu1dq</a>
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
     <footer>
-        <p data-i18n="footer.text">&copy; 2024 Yu. Made with ❤️ and curiosity</p>
+        <p id="footer-text">&copy; 2024 Yu. Made with ❤️</p>
     </footer>
 
     <script>
-        // Translations
         const translations = {
             en: {
-                nav: {
-                    home: 'Home',
-                    about: 'About',
-                    projects: 'Projects',
-                    finance: 'Finance',
-                    skills: 'Skills',
-                    contact: 'Contact'
-                },
-                hero: {
-                    title: 'Welcome to My World',
-                    subtitle: 'Explore | Create | Grow',
-                    description: "Hi! I'm Yu, a passionate explorer and learner. I love discovering new technologies, staying active through tennis, and currently preparing for my Master's application while diving deep into the world of finance.",
-                    cta: 'Learn More'
-                },
-                about: {
-                    title: 'About Me',
-                    description: "I'm a curious learner with passion for technology, sports, and finance. Coding empowers me to create, tennis keeps me energized, and continuous learning drives my personal growth. Currently exploring the intersection of technology and finance.",
-                    motto: '💡 Motto: Stay curious, keep learning'
-                },
-                projects: {
-                    title: 'My Projects',
-                    masters: {
-                        title: "🎓 Master's Application",
-                        description: 'Preparing comprehensive application materials including personal statement, recommendation letters, and research proposal. Aiming to pursue advanced studies at a top-tier institution.'
-                    },
-                    tennis: {
-                        title: '🎾 Tennis Journey',
-                        description: 'Passionate about tennis with regular training and tournament participation. Tennis has taught me focus, determination, and the value of consistent practice.'
-                    },
-                    website: {
-                        title: '💻 Personal Portfolio',
-                        description: 'Built this personal website to showcase my projects and skills. Continuously learning frontend technologies to make it more elegant and functional.'
-                    }
-                },
-                finance: {
-                    title: 'Finance Learning Journey',
-                    intro: 'Exploring the fascinating world of finance through structured learning and practical application',
-                    markets: {
-                        title: 'Financial Markets',
-                        item1: 'Stock Market Fundamentals',
-                        item2: 'Bond Markets & Fixed Income',
-                        item3: 'Derivatives & Options',
-                        item4: 'Forex & Commodities'
-                    },
-                    corporate: {
-                        title: 'Corporate Finance',
-                        item1: 'Financial Statement Analysis',
-                        item2: 'Valuation Methods (DCF, Multiples)',
-                        item3: 'Capital Structure',
+                'nav-home': 'Home', 'nav-about': 'About', 'nav-projects': 'Projects', 'nav-finance': 'Finance', 'nav-skills': 'Skills', 'nav-contact': 'Contact',
+                'hero-title': 'Welcome to My World', 'hero-subtitle': 'Explore | Create | Grow',
+                'hero-desc': "Hi! I'm Yu, a passionate explorer and learner. I love discovering new technologies, staying active through tennis, and currently preparing for my Master's application while diving deep into the world of finance.",
+                'hero-cta': 'Learn More', 'about-title': 'About Me',
+                'about-desc': "I'm a curious learner with passion for technology, sports, and finance. Coding empowers me to create, tennis keeps me energized, and continuous learning drives my personal growth.",
+                'about-motto': '💡 Motto: Stay curious, keep learning', 'projects-title': 'My Projects',
+                'project1-title': "🎓 Master's Application", 'project1-desc': 'Preparing comprehensive application materials including personal statement, recommendation letters, and research proposal. Aiming to pursue advanced studies at a top-tier institution.',
+                'project2-title': '🎾 Tennis Journey', 'project2-desc': 'Passionate about tennis with regular training and tournament participation. Tennis has taught me focus, determination, and the value of consistent practice.',
+                'project3-title': '💻 Personal Portfolio', 'project3-desc': 'Built this personal website to showcase my projects and skills. Continuously learning frontend technologies to make it more elegant and functional.',
+                'finance-title': 'Finance Learning Journey', 'finance-intro': 'Exploring the fascinating world of finance through structured learning and practical application',
+                'finance1-title': 'Financial Markets', 'finance1-item1': 'Stock Market Fundamentals', 'finance1-item2': 'Bond Markets & Fixed Income', 'finance1-item3': 'Derivatives & Options', 'finance1-item4': 'Forex & Commodities',
+                'finance2-title': 'Corporate Finance', 'finance2-item1': 'Financial Statement Analysis', 'finance2-item2': 'Valuation Methods (DCF, Multiples)', 'finance2-item3': 'Capital Structure', 'finance2-item4': 'M&A Fundamentals',
+                'finance3-title': 'Investment Analysis', 'finance3-item1': 'Portfolio Theory', 'finance3-item2': 'Risk Management', 'finance3-item3': 'Asset Allocation', 'finance3-item4': 'Performance Metrics',
+                'skills-title': 'Skill Set', 'skill-finance': 'Financial Analysis', 'skill-data': 'Data Visualization', 'skill-problem': 'Problem Solving',
+                'contact-title': 'Get In Touch', 'contact-subtitle': "Let's Connect!", 'footer-text': '© 2024 Yu. Made with ❤️'
+            },
+            zh: {
+                'nav-home': '首页', 'nav-about': '关于', 'nav-projects': '项目', 'nav-finance': '金融', 'nav-skills': '技能', 'nav-contact': '联系',
+                'hero-title': '欢迎来到我的世界', 'hero-subtitle': '探索 | 创造 | 成长',
+                'hero-desc': '你好！我是Yu，一个充满热情的探索者和学习者。我热爱探索新技术，通过网球保持活力，目前正在准备硕士申请，同时深入学习金融世界。',
+                'hero-cta': '了解更多', 'about-title': '关于我',
+                'about-desc': '我是一个对技术、运动和金融充满热情的好奇学习者。编程让我能够创造，网球让我充满活力，持续学习推动我的个人成长。',
+                'about-motto': '💡 座右铭：保持好奇，持续学习', 'projects-title': '我的项目',
+                'project1-title': '🎓 硕士申请', 'project1-desc': '准备全面的申请材料，包括个人陈述、推荐信和研究计划。目标是在顶尖学府继续深造。',
+                'project2-title': '🎾 网球之旅', 'project2-desc': '热爱网球，定期训练和参加比赛。网球教会了我专注、决心和坚持练习的价值。',
+                'project3-title': '💻 个人网站', 'project3-desc': '建立这个个人网站来展示我的项目和技能。持续学习前端技术，使其更加优雅和实用。',
+                'finance-title': '金融学习之旅', 'finance-intro': '通过结构化学习和实践应用探索迷人的金融世界',
+                'finance1-title': '金融市场', 'finance1-item1': '股票市场基础', 'finance1-item2': '债券市场与固定收益', 'finance1-item3': '衍生品与期权', 'finance1-item4': '外汇与大宗商品',
+                'finance2-title': '公司金融', 'finance2-item1': '财务报表分析', 'finance2-item2': '估值方法（DCF、倍数法）', 'finance2-item3': '资本结构', 'finance2-item4': '并购基础',
+                'finance3-title': '投资分析', 'finance3-item1': '投资组合理论', 'finance3-item2': '风险管理', 'finance3-item3': '资产配置', 'finance3-item4': '业绩指标',
+                'skills-title': '技能集', 'skill-finance': '金融分析', 'skill-data': '数据可视化', 'skill-problem': '问题解决',
+                'contact-title': '联系我', 'contact-subtitle': '让我们保持联系！', 'footer-text': '© 2024 Yu. 用❤️制作'
+            },
+            de: {
+                'nav-home': 'Start', 'nav-about': 'Über', 'nav-projects': 'Projekte', 'nav-finance': 'Finanzen', 'nav-skills': 'Fähigkeiten', 'nav-contact': 'Kontakt',
+                'hero-title': 'Willkommen in meiner Welt', 'hero-subtitle': 'Erkunden | Erschaffen | Wachsen',
+                'hero-desc': 'Hallo! Ich bin Yu, ein leidenschaftlicher Entdecker und Lerner. Ich liebe es, neue Technologien zu entdecken, durch Tennis aktiv zu bleiben und bereite mich derzeit auf meine Master-Bewerbung vor, während ich tief in die Welt der Finanzen eintauche.',
+                'hero-cta': 'Mehr erfahren', 'about-title': 'Über mich',
+                'about-desc': 'Ich bin ein neugieriger Lerner mit Leidenschaft für Technologie, Sport und Finanzen. Programmierung ermöglicht es mir zu schaffen, Tennis hält mich energiegeladen und kontinuierliches Lernen treibt mein persönliches Wachstum an.',
+                'about-motto': '💡 Motto: Bleib neugierig, lerne weiter', 'projects-title': 'Meine Projekte',
+                'project1-title': '🎓 Master-Bewerbung', 'project1-desc': 'Vorbereitung umfassender Bewerbungsunterlagen einschließlich persönlicher Erklärung, Empfehlungsschreiben und Forschungsvorschlag. Ziel ist es, an einer erstklassigen Einrichtung weiterzustudieren.',
+                'project2-title': '🎾 Tennis-Reise', 'project2-desc': 'Leidenschaftlich für Tennis mit regelmäßigem Training und Turnierteilnahme. Tennis hat mir Fokus, Entschlossenheit und den Wert beständiger Übung beigebracht.',
+                'project3-title': '💻 Persönliches Portfolio', 'project3-desc': 'Diese persönliche Website wurde erstellt, um meine Projekte und Fähigkeiten zu präsentieren. Kontinuierliches Lernen von Frontend-Technologien, um sie eleganter und funktionaler zu gestalten.',
+                'finance-title': 'Finanzlernreise', 'finance-intro': 'Erkundung der faszinierenden Welt der Finanzen durch strukturiertes Lernen und praktische Anwendung',
+                'finance1-title': 'Finanzmärkte', 'finance1-item1': 'Aktienmarkt-Grundlagen', 'finance1-item2': 'Anleihenmärkte & festverzinsliche Wertpapiere', 'finance1-item3': 'Derivate & Optionen', 'finance1-item4': 'Devisen & Rohstoffe',
+                'finance2-title': 'Unternehmensfinanzen', 'finance2-item1': 'Finanzberichtsanalyse', 'finance2-item2': 'Bewertungsmethoden (DCF, Multiples)', 'finance2-item3': 'Kapitalstruktur', 'finance2-item4': 'M&A-Grundlagen',
+                'finance3-title': 'Investitionsanalyse', 'finance3-item1': 'Portfolio-Theorie', 'finance3-item2': 'Risikomanagement', 'finance3-item3': 'Asset-Allokation', 'finance3-item4': 'Leistungskennzahlen',
+                'skills-title': 'Fähigkeiten', 'skill-finance': 'Finanzanalyse', 'skill-data': 'Datenvisualisierung', 'skill-problem': 'Problemlösung',
+                'contact-title': 'Kontaktiere mich', 'contact-subtitle': 'Lass uns verbinden!', 'footer-text': '© 2024 Yu. Mit ❤️ gemacht'
+            }
+        };
+
+        let currentLang = 'en';
+
+        function changeLanguage(lang) {
+            currentLang = lang;
+            const trans = translations[lang];
+            
+            Object.keys(trans).forEach(key => {
+                const element = document.getElementById(key);
+                if (element) {
+                    element.textContent = trans[key];
+                }
+            });
+
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.lang === lang) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                changeLanguage(btn.dataset.lang);
+            });
+        });
+
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

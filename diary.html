@@ -3,132 +3,60 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Yu - Private Diary</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+  <title>Yu - Secure Diary</title>
   <style>
-    * {
-      box-sizing: border-box;
-      margin: 0; padding: 0;
-    }
-
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
+      background: linear-gradient(135deg, #667eea, #764ba2);
       color: #333;
-      background: #0f0f0f;
-      overflow-x: hidden;
-      transition: background 0.5s, color 0.5s;
+      margin: 0;
+      padding: 0;
     }
-
-    body.dark {
-      background: #121212;
-      color: #ddd;
-    }
-
-    .gradient-bg {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
-      background-size: 400% 400%;
-      animation: gradientShift 15s ease infinite;
-      z-index: -1;
-    }
-
-    @keyframes gradientShift {
-      0% { background-position: 0% 50%; }
-      50% { background-position: 100% 50%; }
-      100% { background-position: 0% 50%; }
-    }
-
     header {
       text-align: center;
       color: white;
-      padding: 3rem 1rem 2rem;
+      padding: 2rem 1rem 1rem 1rem;
     }
-
-    header h1 { font-size: 2.5rem; margin-bottom: 0.5rem; }
-
-    .unlock-box {
+    .center {
       text-align: center;
-      margin-top: 5rem;
+      margin-top: 3rem;
     }
-
-    .unlock-inner {
+    .box {
       display: inline-block;
       background: white;
-      border-radius: 20px;
+      border-radius: 15px;
       padding: 2rem 3rem;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
     }
-
-    .unlock-inner input {
+    input, button {
       padding: 0.8rem 1rem;
+      margin: 0.5rem;
       border-radius: 10px;
       border: 1px solid #ccc;
-      width: 200px;
+      font-size: 1rem;
     }
-
-    .unlock-inner button {
-      margin-left: 1rem;
-      padding: 0.8rem 1.5rem;
-      border: none;
-      border-radius: 10px;
+    button {
       background: linear-gradient(135deg, #667eea, #764ba2);
       color: white;
+      border: none;
       font-weight: bold;
       cursor: pointer;
-      transition: all 0.3s;
     }
-
-    .unlock-inner button:hover {
-      background: linear-gradient(135deg, #764ba2, #f093fb);
-    }
-
+    button:hover { background: #5a67d8; }
     .calendar {
+      display: none;
       max-width: 900px;
-      margin: 0 auto;
+      margin: 2rem auto;
       background: white;
       border-radius: 20px;
       padding: 2rem;
-      box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-      display: none;
-      margin-bottom: 3rem;
-      transition: background 0.5s, color 0.5s;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
     }
-
-    body.dark .calendar {
-      background: #1f1f1f;
-      color: #eee;
-      box-shadow: 0 10px 40px rgba(255,255,255,0.05);
-    }
-
-    .calendar-header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 1rem;
-    }
-
-    .calendar-header button {
-      background: none;
-      border: none;
-      color: #667eea;
-      font-size: 1.5rem;
-      cursor: pointer;
-      transition: color 0.3s;
-    }
-
-    .calendar-header button:hover { color: #764ba2; }
-
-    .weekdays, .days {
+    .days {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
       text-align: center;
     }
-
-    .weekdays div { font-weight: bold; color: #764ba2; padding: 0.5rem 0; }
-    body.dark .weekdays div { color: #d0afff; }
-
     .days div {
       padding: 1rem;
       border-radius: 10px;
@@ -136,251 +64,156 @@
       cursor: pointer;
       transition: all 0.2s;
     }
-
-    .days div:hover { background: #f3f0ff; }
-    body.dark .days div:hover { background: #2a2a3f; }
-
-    .days div.today { background: #667eea; color: white; font-weight: bold; }
-
+    .days div.today {
+      background: #667eea;
+      color: white;
+      font-weight: bold;
+    }
     .days div.has-entry {
       background: rgba(255, 215, 0, 0.25);
       border: 2px solid #ffd700;
       color: #8a6d00;
       font-weight: 700;
-      box-shadow: 0 0 10px rgba(255,215,0,0.4);
+      box-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
     }
-
     .entry-box {
       margin-top: 2rem;
+      background: #f9f9ff;
       padding: 1.5rem;
-      background: #f8f8ff;
       border-radius: 15px;
     }
-
-    .entry-box textarea {
+    textarea {
       width: 100%;
-      height: 120px;
+      height: 100px;
+      border-radius: 10px;
       padding: 1rem;
-      border-radius: 10px;
       border: 1px solid #ccc;
-      font-size: 1rem;
-    }
-
-    .entry-box button {
-      margin-top: 1rem;
-      padding: 0.8rem 1.5rem;
-      border: none;
-      border-radius: 10px;
-      background: linear-gradient(135deg, #667eea, #764ba2);
-      color: white;
-      font-weight: bold;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-
-    .entry-box button:hover {
-      background: linear-gradient(135deg, #764ba2, #f093fb);
-    }
-
-    .tools {
-      text-align: center;
-      margin-top: 1.5rem;
-    }
-
-    .tools button {
-      margin: 0.5rem;
-      padding: 0.5rem 1rem;
-      border: none;
-      border-radius: 8px;
-      background: #eee;
-      cursor: pointer;
-      transition: all 0.3s;
-    }
-
-    .tools button:hover { background: #ddd; }
-    body.dark .tools button { background: #333; color: white; }
-
-    .back-link {
-      text-align: center;
-      display: block;
-      margin-bottom: 2rem;
-      color: white;
-      text-decoration: none;
-      font-weight: 600;
     }
   </style>
 </head>
 <body>
-  <div class="gradient-bg"></div>
+  <header><h1>🔐 Secure Diary</h1></header>
 
-  <header>
-    <h1>🔐 Private Diary</h1>
-    <p>Enter your secret key to unlock your calendar</p>
-  </header>
-
-  <!-- Unlock -->
-  <div class="unlock-box" id="unlockSection">
-    <div class="unlock-inner">
-      <input type="password" id="passwordInput" placeholder="Enter your key">
-      <button id="unlockBtn">Unlock</button>
+  <!-- 密码输入 / 创建区 -->
+  <div class="center" id="authSection">
+    <div class="box">
+      <h3 id="authTitle">Set your diary password</h3>
+      <input type="password" id="passwordInput" placeholder="Enter password">
+      <button id="confirmBtn">Confirm</button>
     </div>
   </div>
 
-  <!-- Calendar -->
+  <!-- 日历与日志 -->
   <div class="calendar" id="calendarSection">
-    <div class="calendar-header">
-      <button id="prevMonth">←</button>
-      <h2 id="monthYear"></h2>
-      <button id="nextMonth">→</button>
-    </div>
-    <div class="weekdays">
-      <div>Sun</div><div>Mon</div><div>Tue</div>
-      <div>Wed</div><div>Thu</div><div>Fri</div><div>Sat</div>
-    </div>
+    <h2 id="monthYear"></h2>
     <div class="days" id="days"></div>
-
     <div class="entry-box" id="entryBox" style="display:none;">
       <h3 id="entryDate"></h3>
       <textarea id="entryText" placeholder="Write something..."></textarea>
-      <button id="saveEntry">Save Entry</button>
-    </div>
-
-    <div class="tools">
-      <button id="exportJSON">Export JSON</button>
-      <button id="exportTXT">Export TXT</button>
-      <button id="themeToggle">Toggle Theme</button>
+      <button id="saveBtn">Save Entry</button>
     </div>
   </div>
 
-  <a href="life.html" class="back-link">← Back to Life Journal</a>
-
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
   <script>
-    let SECRET_KEY = "";
-    const unlockBtn = document.getElementById('unlockBtn');
-    const unlockSection = document.getElementById('unlockSection');
+    const authSection = document.getElementById('authSection');
     const calendarSection = document.getElementById('calendarSection');
     const passwordInput = document.getElementById('passwordInput');
+    const confirmBtn = document.getElementById('confirmBtn');
+    const authTitle = document.getElementById('authTitle');
+
     const daysContainer = document.getElementById('days');
     const monthYear = document.getElementById('monthYear');
     const entryBox = document.getElementById('entryBox');
     const entryDate = document.getElementById('entryDate');
     const entryText = document.getElementById('entryText');
-    const saveEntry = document.getElementById('saveEntry');
-    const prevMonth = document.getElementById('prevMonth');
-    const nextMonth = document.getElementById('nextMonth');
-    const themeToggle = document.getElementById('themeToggle');
+    const saveBtn = document.getElementById('saveBtn');
 
-    let now = new Date();
-    let currentMonth = now.getMonth();
-    let currentYear = now.getFullYear();
-    let selectedDate = null;
+    let userKey = '';
+    let selectedDate = '';
 
-    unlockBtn.onclick = () => {
-      if (passwordInput.value.trim() === "") return alert("Enter a key!");
-      SECRET_KEY = passwordInput.value;
-      unlockSection.style.display = "none";
-      calendarSection.style.display = "block";
-      renderCalendar(currentMonth, currentYear);
-    };
+    const now = new Date();
+    const month = now.getMonth();
+    const year = now.getFullYear();
 
-    function encrypt(text) {
-      return CryptoJS.AES.encrypt(text, SECRET_KEY).toString();
+    // 初始化密码状态
+    const storedHash = localStorage.getItem('diary_password_hash');
+
+    if (storedHash) {
+      authTitle.textContent = "Enter your password to unlock diary 🔒";
+    } else {
+      authTitle.textContent = "Set your diary password 🔑";
     }
 
-    function decrypt(cipher) {
-      try {
-        const bytes = CryptoJS.AES.decrypt(cipher, SECRET_KEY);
-        return bytes.toString(CryptoJS.enc.Utf8);
-      } catch {
-        return "";
-      }
-    }
+    confirmBtn.addEventListener('click', () => {
+      const pass = passwordInput.value.trim();
+      if (!pass) return alert("Please enter a password.");
 
-    function renderCalendar(month, year) {
-      const firstDay = new Date(year, month).getDay();
-      const daysInMonth = new Date(year, month + 1, 0).getDate();
-
-      const monthName = new Date(year, month).toLocaleString("default", { month: "long" });
-      monthYear.textContent = `${monthName} ${year}`;
-      daysContainer.innerHTML = "";
-
-      for (let i = 0; i < firstDay; i++) {
-        const empty = document.createElement("div");
-        daysContainer.appendChild(empty);
-      }
-
-      for (let day = 1; day <= daysInMonth; day++) {
-        const cell = document.createElement("div");
-        cell.textContent = day;
-        const dateKey = `${year}-${month + 1}-${day}`;
-        const data = localStorage.getItem(dateKey);
-        if (data) cell.classList.add("has-entry");
-        if (day === now.getDate() && month === now.getMonth() && year === now.getFullYear()) {
-          cell.classList.add("today");
+      if (!storedHash) {
+        // 首次设置密码
+        const hash = CryptoJS.SHA256(pass).toString();
+        localStorage.setItem('diary_password_hash', hash);
+        alert('✅ Password set! You can now access your diary.');
+        userKey = pass;
+        unlockDiary();
+      } else {
+        // 验证密码
+        const inputHash = CryptoJS.SHA256(pass).toString();
+        if (inputHash === storedHash) {
+          userKey = pass;
+          unlockDiary();
+        } else {
+          alert('❌ Wrong password.');
         }
-        cell.onclick = () => openEntry(dateKey);
-        daysContainer.appendChild(cell);
+      }
+    });
+
+    function unlockDiary() {
+      authSection.style.display = 'none';
+      calendarSection.style.display = 'block';
+      renderCalendar();
+    }
+
+    function renderCalendar() {
+      const firstDay = new Date(year, month, 1).getDay();
+      const daysInMonth = new Date(year, month + 1, 0).getDate();
+      const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+      monthYear.textContent = `${monthNames[month]} ${year}`;
+      daysContainer.innerHTML = '';
+      for (let i = 0; i < firstDay; i++) daysContainer.appendChild(document.createElement('div'));
+      for (let d = 1; d <= daysInMonth; d++) {
+        const div = document.createElement('div');
+        const key = `${year}-${month+1}-${d}`;
+        if (localStorage.getItem(`entry_${key}`)) div.classList.add('has-entry');
+        if (d === now.getDate()) div.classList.add('today');
+        div.textContent = d;
+        div.onclick = () => openEntry(key);
+        daysContainer.appendChild(div);
       }
     }
 
-    prevMonth.onclick = () => {
-      currentMonth--;
-      if (currentMonth < 0) { currentMonth = 11; currentYear--; }
-      renderCalendar(currentMonth, currentYear);
-    };
-    nextMonth.onclick = () => {
-      currentMonth++;
-      if (currentMonth > 11) { currentMonth = 0; currentYear++; }
-      renderCalendar(currentMonth, currentYear);
-    };
-
-    function openEntry(dateKey) {
-      selectedDate = dateKey;
-      entryBox.style.display = "block";
-      entryDate.textContent = `📅 ${dateKey}`;
-      const data = localStorage.getItem(dateKey);
-      entryText.value = data ? decrypt(data) : "";
+    function openEntry(key) {
+      selectedDate = key;
+      entryBox.style.display = 'block';
+      entryDate.textContent = `📅 ${key}`;
+      const enc = localStorage.getItem(`entry_${key}`);
+      if (enc) {
+        try {
+          const bytes = CryptoJS.AES.decrypt(enc, userKey);
+          entryText.value = bytes.toString(CryptoJS.enc.Utf8);
+        } catch (e) {
+          entryText.value = '[Decryption failed — wrong key?]';
+        }
+      } else entryText.value = '';
     }
 
-    saveEntry.onclick = () => {
+    saveBtn.addEventListener('click', () => {
       if (!selectedDate) return;
-      localStorage.setItem(selectedDate, encrypt(entryText.value));
-      alert("✅ Entry saved!");
-      renderCalendar(currentMonth, currentYear);
-    };
-
-    // Export diary as JSON
-    document.getElementById('exportJSON').onclick = () => {
-      const all = {};
-      for (let i = 0; i < localStorage.length; i++) {
-        const key = localStorage.key(i);
-        all[key] = decrypt(localStorage.getItem(key));
-      }
-      const blob = new Blob([JSON.stringify(all, null, 2)], { type: 'application/json' });
-      const a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
-      a.download = 'diary_export.json';
-      a.click();
-    };
-
-    // Export diary as TXT
-    document.getElementById('exportTXT').onclick = () => {
-      let text = "";
-      for (let i = 0; i < localStorage.length; i++) {
-        const key = localStorage.key(i);
-        const val = decrypt(localStorage.getItem(key));
-        text += `${key}\n${val}\n\n`;
-      }
-      const blob = new Blob([text], { type: 'text/plain' });
-      const a = document.createElement('a');
-      a.href = URL.createObjectURL(blob);
-      a.download = 'diary_export.txt';
-      a.click();
-    };
-
-    themeToggle.onclick = () => {
-      document.body.classList.toggle('dark');
-    };
+      const ciphertext = CryptoJS.AES.encrypt(entryText.value, userKey).toString();
+      localStorage.setItem(`entry_${selectedDate}`, ciphertext);
+      alert('✅ Entry saved securely.');
+      renderCalendar();
+    });
   </script>
 </body>
 </html>

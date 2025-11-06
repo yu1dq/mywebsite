@@ -17,13 +17,12 @@
             color: white;
         }
 
-        /* Header */
         .header {
             position: fixed;
             top: 0;
             width: 100%;
             padding: 1.5rem 2rem;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.9);
             backdrop-filter: blur(10px);
             z-index: 100;
             display: flex;
@@ -53,9 +52,8 @@
             box-shadow: 0 10px 25px rgba(102, 126, 234, 0.4);
         }
 
-        /* Hero Section */
         .hero {
-            height: 60vh;
+            height: 70vh;
             background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
             display: flex;
             flex-direction: column;
@@ -74,140 +72,145 @@
         .hero p {
             font-size: 1.3rem;
             opacity: 0.9;
-            max-width: 600px;
+            max-width: 700px;
         }
 
-        /* Main Content */
+        .stats {
+            display: flex;
+            gap: 3rem;
+            margin-top: 2rem;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .stat-label {
+            font-size: 1rem;
+            opacity: 0.9;
+            margin-top: 0.5rem;
+        }
+
         .content {
             max-width: 1400px;
             margin: 0 auto;
             padding: 4rem 2rem;
         }
 
-        /* Country Section */
         .country-section {
-            margin-bottom: 5rem;
+            margin-bottom: 4rem;
+            background: #1a1a1a;
+            border-radius: 25px;
+            padding: 2.5rem;
+            transition: all 0.3s;
+        }
+
+        .country-section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(102, 126, 234, 0.2);
         }
 
         .country-header {
             display: flex;
             align-items: center;
-            gap: 1rem;
+            gap: 1.5rem;
             margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid #333;
         }
 
         .country-flag {
-            font-size: 3rem;
+            font-size: 4rem;
         }
 
         .country-info h3 {
             font-size: 2.5rem;
-            color: #667eea;
-            margin-bottom: 0.5rem;
-        }
-
-        .country-info .date {
-            color: #999;
-            font-size: 1.1rem;
-        }
-
-        /* Photo Grid */
-        .photo-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 1.5rem;
-            margin-bottom: 2rem;
-        }
-
-        .photo-card {
-            background: #1a1a1a;
-            border-radius: 15px;
-            overflow: hidden;
-            transition: all 0.3s;
-            cursor: pointer;
-        }
-
-        .photo-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(102, 126, 234, 0.3);
-        }
-
-        .photo-placeholder {
-            width: 100%;
-            height: 250px;
             background: linear-gradient(135deg, #667eea, #764ba2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 4rem;
-        }
-
-        .photo-caption {
-            padding: 1.5rem;
-        }
-
-        .photo-caption h4 {
-            font-size: 1.2rem;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
             margin-bottom: 0.5rem;
+        }
+
+        .country-stats {
+            display: flex;
+            gap: 2rem;
+            color: #999;
+            font-size: 1rem;
+        }
+
+        .cities-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .city-card {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+            border: 2px solid rgba(102, 126, 234, 0.3);
+            border-radius: 15px;
+            padding: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .city-card:hover {
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2));
+            border-color: #667eea;
+            transform: translateX(5px);
+        }
+
+        .city-name {
+            font-size: 1.3rem;
+            font-weight: 600;
             color: #667eea;
+            margin-bottom: 0.5rem;
         }
 
-        .photo-caption p {
-            color: #ccc;
-            line-height: 1.6;
+        .city-dates {
+            color: #999;
+            font-size: 0.95rem;
         }
 
-        /* Journal Entry */
-        .journal-entry {
-            background: #1a1a1a;
-            border-radius: 20px;
-            padding: 2.5rem;
-            border-left: 4px solid #667eea;
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
         }
 
-        .journal-entry h4 {
-            font-size: 1.5rem;
-            color: #667eea;
-            margin-bottom: 1rem;
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            height: 100%;
+            width: 2px;
+            background: linear-gradient(180deg, #667eea, #764ba2);
         }
 
-        .journal-entry p {
-            color: #ccc;
-            line-height: 1.8;
-            margin-bottom: 1rem;
-        }
-
-        /* Upload Instructions */
-        .upload-instructions {
-            background: linear-gradient(135deg, #1e3c72, #2a5298);
-            border-radius: 20px;
-            padding: 3rem;
-            margin: 4rem 0;
-            text-align: center;
-        }
-
-        .upload-instructions h3 {
-            font-size: 2rem;
+        .timeline-item {
+            position: relative;
             margin-bottom: 1.5rem;
-            color: #ffd700;
+            padding-left: 1.5rem;
         }
 
-        .upload-instructions p {
-            font-size: 1.1rem;
-            line-height: 1.8;
-            margin-bottom: 1rem;
-            opacity: 0.9;
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.5rem;
+            top: 0.5rem;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #667eea;
+            border: 3px solid #1a1a1a;
         }
 
-        .upload-instructions code {
-            background: rgba(0, 0, 0, 0.3);
-            padding: 0.3rem 0.8rem;
-            border-radius: 5px;
-            font-family: 'Courier New', monospace;
-            color: #ffd700;
-        }
-
-        /* Footer */
         footer {
             background: #1a1a1a;
             text-align: center;
@@ -215,212 +218,382 @@
             margin-top: 4rem;
         }
 
+        .photo-placeholder {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, #667eea, #764ba2);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
         @media (max-width: 768px) {
             .hero h2 {
                 font-size: 2rem;
             }
-
+            
+            .stats {
+                gap: 1.5rem;
+            }
+            
+            .stat-number {
+                font-size: 2rem;
+            }
+            
             .country-header {
                 flex-direction: column;
                 align-items: flex-start;
             }
-
-            .photo-grid {
+            
+            .cities-grid {
                 grid-template-columns: 1fr;
             }
         }
     </style>
 </head>
 <body>
-    <!-- Header -->
     <div class="header">
         <h1>🌍 World Travel Journal</h1>
-        <a href="index.html" class="back-btn">← Back to Home</a>
+        <a href="index.html" class="back-btn">← Back</a>
     </div>
 
-    <!-- Hero Section -->
     <div class="hero">
-        <h2>Adventures Around the Globe</h2>
-        <p>Capturing moments, cultures, and memories from every corner of the world</p>
-    </div>
-
-    <!-- Main Content -->
-    <div class="content">
+        <h2>My Journey Across Europe & Beyond</h2>
+        <p>From 2022 to 2024 - Exploring cities, cultures, and creating unforgettable memories</p>
         
-        <!-- Example Country 1: Japan -->
+        <div class="stats">
+            <div class="stat-item">
+                <div class="stat-number">8</div>
+                <div class="stat-label">Countries</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">50+</div>
+                <div class="stat-label">Cities</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">2</div>
+                <div class="stat-label">Years</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="content">
+
+        <!-- Germany -->
         <div class="country-section">
             <div class="country-header">
-                <div class="country-flag">🇯🇵</div>
+                <div class="country-flag">🇩🇪</div>
                 <div class="country-info">
-                    <h3>Japan</h3>
-                    <p class="date">March 2024 • 10 Days</p>
-                </div>
-            </div>
-
-            <div class="photo-grid">
-                <div class="photo-card">
-                    <div class="photo-placeholder">🏯</div>
-                    <div class="photo-caption">
-                        <h4>Tokyo Skyline</h4>
-                        <p>The bustling metropolis viewed from Tokyo Skytree at sunset. The city lights beginning to glow.</p>
-                    </div>
-                </div>
-
-                <div class="photo-card">
-                    <div class="photo-placeholder">🌸</div>
-                    <div class="photo-caption">
-                        <h4>Cherry Blossom Season</h4>
-                        <p>Hanami at Ueno Park. The perfect timing to witness the beauty of sakura in full bloom.</p>
-                    </div>
-                </div>
-
-                <div class="photo-card">
-                    <div class="photo-placeholder">🍜</div>
-                    <div class="photo-caption">
-                        <h4>Ramen Street</h4>
-                        <p>Exploring the famous ramen alley in Osaka. Each bowl tells a unique story of craftsmanship.</p>
+                    <h3>Germany</h3>
+                    <div class="country-stats">
+                        <span>📍 20+ Cities</span>
+                        <span>📅 Multiple Visits</span>
+                        <span>⭐ Most Explored</span>
                     </div>
                 </div>
             </div>
-
-            <div class="journal-entry">
-                <h4>📖 Travel Journal: Japan</h4>
-                <p>
-                    Japan exceeded all my expectations. From the moment I stepped into the organized chaos of Shibuya Crossing 
-                    to the serene temples of Kyoto, every moment was magical. The contrast between ultra-modern Tokyo and 
-                    traditional Kyoto showed me how this country beautifully balances innovation with tradition.
-                </p>
-                <p>
-                    The food was an adventure in itself - from street yakitori to high-end sushi, every meal was an experience. 
-                    The kindness of locals, despite the language barrier, made me feel welcome everywhere I went.
-                </p>
+            
+            <div class="cities-grid">
+                <div class="city-card">
+                    <div class="city-name">📍 Berlin</div>
+                    <div class="city-dates">
+                        June 17-18, 2023<br>
+                        October 27-28, 2024
+                    </div>
+                </div>
+                
+                <div class="city-card">
+                    <div class="city-name">📍 München (Munich)</div>
+                    <div class="city-dates">September 9-11, 2023</div>
+                </div>
+                
+                <div class="city-card">
+                    <div class="city-name">📍 Frankfurt</div>
+                    <div class="city-dates">
+                        September 16-17, 2023<br>
+                        September 17 - October 7, 2023<br>
+                        September 7, 2024
+                    </div>
+                </div>
+                
+                <div class="city-card">
+                    <div class="city-name">📍 Heidelberg</div>
+                    <div class="city-dates">August 23, 2022</div>
+                </div>
+                
+                <div class="city-card">
+                    <div class="city-name">📍 Köln & Bonn</div>
+                    <div class="city-dates">August 28, 2022</div>
+                </div>
+                
+                <div class="city-card">
+                    <div class="city-name">📍 Düsseldorf</div>
+                    <div class="city-dates">
+                        August 26, 2023<br>
+                        November 25-26, 2023<br>
+                        July 11-15, 2024
+                    </div>
+                </div>
+                
+                <div class="city-card">
+                    <div class="city-name">📍 Nürnberg (Nuremberg)</div>
+                    <div class="city-dates">
+                        September 2-3, 2023<br>
+                        April 10-11, 2024
+                    </div>
+                </div>
+                
+                <div class="city-card">
+                    <div class="city-name">📍 Leipzig</div>
+                    <div class="city-dates">June 14-15, 2023</div>
+                </div>
+                
+                <div class="city-card">
+                    <div class="city-name">📍 Würzburg</div>
+                    <div class="city-dates">
+                        June 8, 2023<br>
+                        July 21, 2023
+                    </div>
+                </div>
+                
+                <div class="city-card">
+                    <div class="city-name">📍 Dresden</div>
+                    <div class="city-dates">September 7, 2024</div>
+                </div>
+                
+                <div class="city-card">
+                    <div class="city-name">📍 Jena</div>
+                    <div class="city-dates">
+                        April 2, 2023<br>
+                        June 8, 2024
+                    </div>
+                </div>
+                
+                <div class="city-card">
+                    <div class="city-name">📍 Weimar</div>
+                    <div class="city-dates">June 29, 2024</div>
+                </div>
+                
+                <div class="city-card">
+                    <div class="city-name">📍 Gelsenkirchen & Dortmund</div>
+                    <div class="city-dates">July 9-11, 2024</div>
+                </div>
+                
+                <div class="city-card">
+                    <div class="city-name">📍 Braunschweig</div>
+                    <div class="city-dates">September 27 - October 1, 2024</div>
+                </div>
             </div>
         </div>
 
-        <!-- Example Country 2: France -->
+        <!-- Netherlands -->
         <div class="country-section">
             <div class="country-header">
-                <div class="country-flag">🇫🇷</div>
+                <div class="country-flag">🇳🇱</div>
                 <div class="country-info">
-                    <h3>France</h3>
-                    <p class="date">July 2023 • 2 Weeks</p>
-                </div>
-            </div>
-
-            <div class="photo-grid">
-                <div class="photo-card">
-                    <div class="photo-placeholder">🗼</div>
-                    <div class="photo-caption">
-                        <h4>Eiffel Tower at Dusk</h4>
-                        <p>The iconic iron lady illuminated against the Paris evening sky. A moment I'll never forget.</p>
-                    </div>
-                </div>
-
-                <div class="photo-card">
-                    <div class="photo-placeholder">🥐</div>
-                    <div class="photo-caption">
-                        <h4>Parisian Café Culture</h4>
-                        <p>Morning coffee and croissants at a charming café in Montmartre. The French way of life.</p>
-                    </div>
-                </div>
-
-                <div class="photo-card">
-                    <div class="photo-placeholder">🎨</div>
-                    <div class="photo-caption">
-                        <h4>Louvre Museum</h4>
-                        <p>Getting lost in art and history. The Mona Lisa's smile is even more enigmatic in person.</p>
+                    <h3>Netherlands</h3>
+                    <div class="country-stats">
+                        <span>📍 2 Cities</span>
+                        <span>📅 2 Visits</span>
                     </div>
                 </div>
             </div>
-
-            <div class="journal-entry">
-                <h4>📖 Travel Journal: France</h4>
-                <p>
-                    Paris is everything they say it is - romantic, artistic, and utterly captivating. Walking along the Seine 
-                    at sunset, exploring hidden bookshops in the Latin Quarter, and tasting fresh pastries at every corner 
-                    made me fall in love with this city.
-                </p>
-                <p>
-                    Beyond Paris, the lavender fields of Provence and the beaches of Nice showed me the diverse beauty of France. 
-                    Each region has its own character, cuisine, and charm.
-                </p>
+            
+            <div class="cities-grid">
+                <div class="city-card">
+                    <div class="city-name">📍 Amsterdam & Den Haag</div>
+                    <div class="city-dates">August 29 - September 1, 2022</div>
+                </div>
+                
+                <div class="city-card">
+                    <div class="city-name">📍 Den Haag</div>
+                    <div class="city-dates">August 26, 2023</div>
+                </div>
             </div>
         </div>
 
-        <!-- Example Country 3: Thailand -->
+        <!-- Austria -->
         <div class="country-section">
             <div class="country-header">
-                <div class="country-flag">🇹🇭</div>
+                <div class="country-flag">🇦🇹</div>
                 <div class="country-info">
-                    <h3>Thailand</h3>
-                    <p class="date">December 2022 • 12 Days</p>
-                </div>
-            </div>
-
-            <div class="photo-grid">
-                <div class="photo-card">
-                    <div class="photo-placeholder">🏝️</div>
-                    <div class="photo-caption">
-                        <h4>Phi Phi Islands</h4>
-                        <p>Crystal clear waters and limestone cliffs. Paradise found in Southern Thailand.</p>
-                    </div>
-                </div>
-
-                <div class="photo-card">
-                    <div class="photo-placeholder">🛕</div>
-                    <div class="photo-caption">
-                        <h4>Bangkok Temples</h4>
-                        <p>The golden spires of Wat Arun reflecting in the Chao Phraya River at sunrise.</p>
-                    </div>
-                </div>
-
-                <div class="photo-card">
-                    <div class="photo-placeholder">🐘</div>
-                    <div class="photo-caption">
-                        <h4>Elephant Sanctuary</h4>
-                        <p>An ethical encounter with rescued elephants in Chiang Mai. A humbling experience.</p>
+                    <h3>Austria</h3>
+                    <div class="country-stats">
+                        <span>📍 2 Cities</span>
+                        <span>📅 2 Visits</span>
                     </div>
                 </div>
             </div>
-
-            <div class="journal-entry">
-                <h4>📖 Travel Journal: Thailand</h4>
-                <p>
-                    Thailand welcomed me with open arms and warm smiles. From the bustling streets of Bangkok to the tranquil 
-                    beaches of Krabi, this country offers incredible diversity. The street food alone is worth the trip - 
-                    pad thai at 2 AM never tasted so good!
-                </p>
-                <p>
-                    The hospitality of Thai people is legendary. Whether getting lost in night markets or exploring ancient 
-                    temples, locals were always ready to help with genuine kindness.
-                </p>
+            
+            <div class="cities-grid">
+                <div class="city-card">
+                    <div class="city-name">📍 Mittelberg</div>
+                    <div class="city-dates">August 19-22, 2022</div>
+                </div>
+                
+                <div class="city-card">
+                    <div class="city-name">📍 Vienna (Wien)</div>
+                    <div class="city-dates">April 8-9, 2024</div>
+                </div>
             </div>
         </div>
 
-        <!-- Upload Instructions -->
-        <div class="upload-instructions">
-            <h3>📸 How to Add Your Own Photos & Journals</h3>
-            <p>
-                This is a template page! To add your real travel photos and stories:
-            </p>
-            <p>
-                <strong>1.</strong> Replace the emoji placeholders (<code>🏯 🌸 🍜</code>) with your actual images<br>
-                <strong>2.</strong> Update the country names, dates, and descriptions<br>
-                <strong>3.</strong> Add your personal travel journal entries<br>
-                <strong>4.</strong> Upload your photos to an image hosting service or add them to your GitHub repository
-            </p>
-            <p style="margin-top: 1.5rem; font-size: 0.95rem; opacity: 0.8;">
-                To add images: Replace <code>&lt;div class="photo-placeholder"&gt;</code> with<br>
-                <code>&lt;img src="your-photo.jpg" style="width:100%; height:250px; object-fit:cover;"&gt;</code>
-            </p>
+        <!-- Spain -->
+        <div class="country-section">
+            <div class="country-header">
+                <div class="country-flag">🇪🇸</div>
+                <div class="country-info">
+                    <h3>Spain</h3>
+                    <div class="country-stats">
+                        <span>📍 1 City</span>
+                        <span>🏝️ Island Paradise</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="cities-grid">
+                <div class="city-card">
+                    <div class="city-name">📍 Tenerife</div>
+                    <div class="city-dates">October 28 - November 4, 2023</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Greece -->
+        <div class="country-section">
+            <div class="country-header">
+                <div class="country-flag">🇬🇷</div>
+                <div class="country-info">
+                    <h3>Greece</h3>
+                    <div class="country-stats">
+                        <span>📍 2 Cities</span>
+                        <span>🏛️ Ancient History</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="cities-grid">
+                <div class="city-card">
+                    <div class="city-name">📍 Athens & Zakynthos</div>
+                    <div class="city-dates">March 30 - April 5, 2024</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Hungary -->
+        <div class="country-section">
+            <div class="country-header">
+                <div class="country-flag">🇭🇺</div>
+                <div class="country-info">
+                    <h3>Hungary</h3>
+                    <div class="country-stats">
+                        <span>📍 1 City</span>
+                        <span>🏰 Historic Capital</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="cities-grid">
+                <div class="city-card">
+                    <div class="city-name">📍 Budapest</div>
+                    <div class="city-dates">April 5-8, 2024</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Croatia -->
+        <div class="country-section">
+            <div class="country-header">
+                <div class="country-flag">🇭🇷</div>
+                <div class="country-info">
+                    <h3>Croatia</h3>
+                    <div class="country-stats">
+                        <span>📍 2 Cities</span>
+                        <span>🌊 Adriatic Coast</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="cities-grid">
+                <div class="city-card">
+                    <div class="city-name">📍 Poreč & Pula</div>
+                    <div class="city-dates">October 8-14, 2023</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Serbia -->
+        <div class="country-section">
+            <div class="country-header">
+                <div class="country-flag">🇷🇸</div>
+                <div class="country-info">
+                    <h3>Serbia</h3>
+                    <div class="country-stats">
+                        <span>📍 1 City</span>
+                        <span>🎭 Vibrant Culture</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="cities-grid">
+                <div class="city-card">
+                    <div class="city-name">📍 Belgrade</div>
+                    <div class="city-dates">September 13-15, 2023</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Denmark -->
+        <div class="country-section">
+            <div class="country-header">
+                <div class="country-flag">🇩🇰</div>
+                <div class="country-info">
+                    <h3>Denmark</h3>
+                    <div class="country-stats">
+                        <span>📍 1 Location</span>
+                        <span>🌊 Scenic Cliffs</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="cities-grid">
+                <div class="city-card">
+                    <div class="city-name">📍 Møns Klint</div>
+                    <div class="city-dates">May 28 - June 3, 2024</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Algeria -->
+        <div class="country-section">
+            <div class="country-header">
+                <div class="country-flag">🇩🇿</div>
+                <div class="country-info">
+                    <h3>Algeria</h3>
+                    <div class="country-stats">
+                        <span>📍 3 Cities</span>
+                        <span>🏜️ North Africa</span>
+                        <span>🆕 Latest Adventure</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="cities-grid">
+                <div class="city-card">
+                    <div class="city-name">📍 Sétif, Bou Saada & Djemila</div>
+                    <div class="city-dates">November 22-29, 2024</div>
+                </div>
+            </div>
         </div>
 
     </div>
 
-    <!-- Footer -->
     <footer>
         <p>&copy; 2024 Yu's World Travel Journal</p>
-        <p style="margin-top: 0.5rem; opacity: 0.7;">Collecting moments, not things 🌍✈️</p>
+        <p style="margin-top: 0.5rem; opacity: 0.7;">8 Countries • 50+ Cities • Countless Memories 🌍✈️</p>
     </footer>
 </body>
 </html>

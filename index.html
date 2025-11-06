@@ -561,20 +561,35 @@
         <div class="container">
             <h2 id="about-title">About Me</h2>
             
-            <div class="contact-info">
-                <p style="font-size: 1.3rem; color: #333; line-height: 2; margin-bottom: 2rem;" id="about-desc">
-                    I'm a curious learner with passion for technology, sports, and finance. Coding empowers me to create, staying active keeps me energized, and continuous learning drives my personal growth.
+            <div class="contact-info" style="margin-bottom: 3rem;">
+                <p style="font-size: 1.3rem; color: #333; line-height: 2; margin-bottom: 1.5rem;" id="about-desc">
+                    I'm a curious learner with passion for technology, sports, and finance.
                 </p>
-                
-                <div style="text-align: left; max-width: 600px; margin: 2rem auto; color: #666; line-height: 2;">
-                    <p><strong style="color: #667eea;">🎂 <span id="info-birthday-label">Birthday:</span></strong> <span id="info-birthday">October 27, 2000</span></p>
-                    <p><strong style="color: #667eea;">♏ <span id="info-zodiac-label">Zodiac:</span></strong> <span id="info-zodiac">Scorpio</span></p>
-                    <p><strong style="color: #667eea;">🎓 <span id="info-education-label">University:</span></strong> TU Ilmenau</p>
-                    <p><strong style="color: #667eea;">📚 <span id="info-major-label">Major:</span></strong> <span id="info-major">Industrial Engineering</span></p>
-                    <p><strong style="color: #667eea;">🎯 <span id="info-hobbies-label">Hobbies:</span></strong> <span id="info-hobbies">Tennis, Dance, Piano, Boxing</span></p>
+                <p style="color: #666; margin-bottom: 0.5rem;" id="about-motto">💡 Motto: Stay curious, keep learning</p>
+                <p style="color: #666; margin-bottom: 0.5rem;">🎂 <span id="info-birthday">Birthday: October 27, 2000 (Scorpio ♏)</span></p>
+                <p style="color: #666;">🎓 <span id="info-education">TU Ilmenau - Industrial Engineering</span></p>
+            </div>
+
+            <div class="hobbies-section">
+                <h3 id="hobbies-title">My Hobbies</h3>
+                <div class="hobbies-grid">
+                    <div class="hobby-card">
+                        <div class="emoji">🎾</div>
+                        <p id="hobby-tennis">Tennis</p>
+                    </div>
+                    <div class="hobby-card">
+                        <div class="emoji">💃</div>
+                        <p id="hobby-dance">Dance</p>
+                    </div>
+                    <div class="hobby-card">
+                        <div class="emoji">🎹</div>
+                        <p id="hobby-piano">Piano</p>
+                    </div>
+                    <div class="hobby-card">
+                        <div class="emoji">🥊</div>
+                        <p id="hobby-boxing">Boxing</p>
+                    </div>
                 </div>
-                
-                <p style="color: #999; font-style: italic; margin-top: 2rem;" id="about-motto">💡 "Stay curious, keep learning"</p>
             </div>
         </div>
     </section>
@@ -747,16 +762,146 @@
                 'hero-desc': "Hi! I'm Yu, a passionate explorer and learner. I love discovering new technologies, staying active through tennis, and currently preparing for my Master's application while diving deep into the world of finance.",
                 'hero-cta': 'Learn More',
                 'about-title': 'About Me',
-                'about-desc': "I'm a curious learner with passion for technology, sports, and finance. Coding empowers me to create, staying active keeps me energized, and continuous learning drives my personal growth.",
-                'info-birthday-label': 'Birthday:', 'info-birthday': 'October 27, 2000',
-                'info-zodiac-label': 'Zodiac:', 'info-zodiac': 'Scorpio',
-                'info-education-label': 'University:', 'info-major-label': 'Major:', 'info-major': 'Industrial Engineering',
-                'info-hobbies-label': 'Hobbies:', 'info-hobbies': 'Tennis, Dance, Piano, Boxing',
-                'about-motto': '💡 "Stay curious, keep learning"',
+                'about-desc': "I'm a curious learner with passion for technology, sports, and finance.",
+                'about-motto': '💡 Motto: Stay curious, keep learning',
+                'info-birthday': 'Birthday: October 27, 2000 (Scorpio ♏)',
+                'info-education': 'TU Ilmenau - Industrial Engineering',
+                'hobbies-title': 'My Hobbies',
+                'hobby-tennis': 'Tennis', 'hobby-dance': 'Dance', 'hobby-piano': 'Piano', 'hobby-boxing': 'Boxing',
                 'projects-title': 'My Projects',
                 'project1-title': "🎓 Master's Application", 'project1-desc': 'Preparing comprehensive application materials including personal statement, recommendation letters, and research proposal.',
                 'project2-title': '💻 Personal Portfolio', 'project2-desc': 'Built this personal website to showcase my projects and skills.',
                 'project3-title': '🌍 World Travel', 'project3-desc': 'My journey across different countries captured through photos and travel journals. Click to explore my adventures!',
                 'finance-title': 'Finance Learning Journey', 'finance-intro': 'Exploring the fascinating world of finance through structured learning',
                 'finance1-title': 'Financial Markets', 'finance1-item1': 'Stock Market Fundamentals', 'finance1-item2': 'Bond Markets & Fixed Income', 'finance1-item3': 'Derivatives & Options', 'finance1-item4': 'Forex & Commodities',
-                'finance2-title': 'Corporate Finance', 'finance2-item1': 'Financial Statement Analysis', 'finance2-item2': 'Valuation Methods', 'finance2-item3': 'Capital Structure', 'finance2-item4': 'M
+                'finance2-title': 'Corporate Finance', 'finance2-item1': 'Financial Statement Analysis', 'finance2-item2': 'Valuation Methods', 'finance2-item3': 'Capital Structure', 'finance2-item4': 'M&A Fundamentals',
+                'finance3-title': 'Investment Analysis', 'finance3-item1': 'Portfolio Theory', 'finance3-item2': 'Risk Management', 'finance3-item3': 'Asset Allocation', 'finance3-item4': 'Performance Metrics',
+                'finance4-title': 'Banking & Economics', 'finance4-item1': 'Monetary Policy', 'finance4-item2': 'Banking Systems', 'finance4-item3': 'Macroeconomic Indicators', 'finance4-item4': 'Interest Rate Models',
+                'finance5-title': 'Fintech & Quant', 'finance5-item1': 'Algorithmic Trading', 'finance5-item2': 'Blockchain & Crypto', 'finance5-item3': 'Machine Learning in Finance', 'finance5-item4': 'Financial APIs',
+                'finance6-title': 'Certifications', 'finance6-item1': 'CFA Level I (Preparing)', 'finance6-item2': 'Financial Modeling', 'finance6-item3': 'Python for Finance', 'finance6-item4': 'Bloomberg Terminal',
+                'progress-title': 'Current Learning Progress', 'progress1-label': 'Financial Markets', 'progress2-label': 'Corporate Finance', 'progress3-label': 'Investment Analysis', 'progress4-label': 'Python for Finance',
+                'skills-title': 'Skill Set', 'skill-finance': 'Financial Analysis', 'skill-data': 'Data Visualization', 'skill-problem': 'Problem Solving',
+                'contact-title': 'Get In Touch', 'contact-subtitle': "Let's Connect!", 'footer-text': '© 2024 Yu. Made with ❤️'
+            },
+            zh: {
+                'nav-home': '首页', 'nav-about': '关于', 'nav-projects': '项目', 'nav-finance': '金融', 'nav-skills': '技能', 'nav-contact': '联系',
+                'hero-title': '欢迎来到我的世界', 'hero-subtitle': '探索 | 创造 | 成长',
+                'hero-desc': '你好！我是Yu，一个充满热情的探索者和学习者。我热爱探索新技术，通过网球保持活力，目前正在准备硕士申请，同时深入学习金融世界。',
+                'hero-cta': '了解更多',
+                'about-title': '关于我',
+                'about-desc': '我是一个对技术、运动和金融充满热情的好奇学习者。',
+                'about-motto': '💡 座右铭：保持好奇，持续学习',
+                'info-birthday': '生日：2000年10月27日（天蝎座 ♏）',
+                'info-education': 'TU Ilmenau - 工业工程',
+                'hobbies-title': '我的爱好',
+                'hobby-tennis': '网球', 'hobby-dance': '舞蹈', 'hobby-piano': '钢琴', 'hobby-boxing': '拳击',
+                'projects-title': '我的项目',
+                'project1-title': '🎓 硕士申请', 'project1-desc': '准备全面的申请材料，包括个人陈述、推荐信和研究计划。',
+                'project2-title': '💻 个人网站', 'project2-desc': '建立这个个人网站来展示我的项目和技能。',
+                'project3-title': '🌍 环游世界', 'project3-desc': '通过照片和旅行日志记录我在不同国家的旅程。点击探索我的冒险之旅！',
+                'finance-title': '金融学习之旅', 'finance-intro': '通过结构化学习和实践应用探索迷人的金融世界',
+                'finance1-title': '金融市场', 'finance1-item1': '股票市场基础', 'finance1-item2': '债券市场与固定收益', 'finance1-item3': '衍生品与期权', 'finance1-item4': '外汇与大宗商品',
+                'finance2-title': '公司金融', 'finance2-item1': '财务报表分析', 'finance2-item2': '估值方法', 'finance2-item3': '资本结构', 'finance2-item4': '并购基础',
+                'finance3-title': '投资分析', 'finance3-item1': '投资组合理论', 'finance3-item2': '风险管理', 'finance3-item3': '资产配置', 'finance3-item4': '业绩指标',
+                'finance4-title': '银行与经济学', 'finance4-item1': '货币政策', 'finance4-item2': '银行系统', 'finance4-item3': '宏观经济指标', 'finance4-item4': '利率模型',
+                'finance5-title': '金融科技与量化', 'finance5-item1': '算法交易', 'finance5-item2': '区块链与加密货币', 'finance5-item3': '金融机器学习', 'finance5-item4': '金融API',
+                'finance6-title': '证书认证', 'finance6-item1': 'CFA一级（准备中）', 'finance6-item2': '金融建模', 'finance6-item3': 'Python金融编程', 'finance6-item4': '彭博终端',
+                'progress-title': '当前学习进度', 'progress1-label': '金融市场', 'progress2-label': '公司金融', 'progress3-label': '投资分析', 'progress4-label': 'Python金融编程',
+                'skills-title': '技能集', 'skill-finance': '金融分析', 'skill-data': '数据可视化', 'skill-problem': '问题解决',
+                'contact-title': '联系我', 'contact-subtitle': '让我们保持联系！', 'footer-text': '© 2024 Yu. 用❤️制作'
+            },
+            de: {
+                'nav-home': 'Start', 'nav-about': 'Über', 'nav-projects': 'Projekte', 'nav-finance': 'Finanzen', 'nav-skills': 'Fähigkeiten', 'nav-contact': 'Kontakt',
+                'hero-title': 'Willkommen in meiner Welt', 'hero-subtitle': 'Erkunden | Erschaffen | Wachsen',
+                'hero-desc': 'Hallo! Ich bin Yu, ein leidenschaftlicher Entdecker und Lerner. Ich liebe es, neue Technologien zu entdecken, durch Tennis aktiv zu bleiben und bereite mich derzeit auf meine Master-Bewerbung vor, während ich tief in die Welt der Finanzen eintauche.',
+                'hero-cta': 'Mehr erfahren',
+                'about-title': 'Über mich',
+                'about-desc': 'Ich bin ein neugieriger Lerner mit Leidenschaft für Technologie, Sport und Finanzen.',
+                'about-motto': '💡 Motto: Bleib neugierig, lerne weiter',
+                'info-birthday': 'Geburtstag: 27. Oktober 2000 (Skorpion ♏)',
+                'info-education': 'TU Ilmenau - Wirtschaftsingenieurwesen',
+                'hobbies-title': 'Meine Hobbys',
+                'hobby-tennis': 'Tennis', 'hobby-dance': 'Tanzen', 'hobby-piano': 'Klavier', 'hobby-boxing': 'Boxen',
+                'projects-title': 'Meine Projekte',
+                'project1-title': '🎓 Master-Bewerbung', 'project1-desc': 'Vorbereitung umfassender Bewerbungsunterlagen einschließlich persönlicher Erklärung, Empfehlungsschreiben und Forschungsvorschlag.',
+                'project2-title': '💻 Persönliches Portfolio', 'project2-desc': 'Diese persönliche Website wurde erstellt, um meine Projekte und Fähigkeiten zu präsentieren.',
+                'project3-title': '🌍 Weltreise', 'project3-desc': 'Meine Reise durch verschiedene Länder, festgehalten durch Fotos und Reisetagebücher. Klicken Sie, um meine Abenteuer zu erkunden!',
+                'finance-title': 'Finanzlernreise', 'finance-intro': 'Erkundung der faszinierenden Welt der Finanzen durch strukturiertes Lernen',
+                'finance1-title': 'Finanzmärkte', 'finance1-item1': 'Aktienmarkt-Grundlagen', 'finance1-item2': 'Anleihenmärkte & festverzinsliche Wertpapiere', 'finance1-item3': 'Derivate & Optionen', 'finance1-item4': 'Devisen & Rohstoffe',
+                'finance2-title': 'Unternehmensfinanzen', 'finance2-item1': 'Finanzberichtsanalyse', 'finance2-item2': 'Bewertungsmethoden', 'finance2-item3': 'Kapitalstruktur', 'finance2-item4': 'M&A-Grundlagen',
+                'finance3-title': 'Investitionsanalyse', 'finance3-item1': 'Portfolio-Theorie', 'finance3-item2': 'Risikomanagement', 'finance3-item3': 'Asset-Allokation', 'finance3-item4': 'Leistungskennzahlen',
+                'finance4-title': 'Bankwesen & Wirtschaft', 'finance4-item1': 'Geldpolitik', 'finance4-item2': 'Bankensysteme', 'finance4-item3': 'Makroökonomische Indikatoren', 'finance4-item4': 'Zinsmodelle',
+                'finance5-title': 'Fintech & Quant', 'finance5-item1': 'Algorithmischer Handel', 'finance5-item2': 'Blockchain & Krypto', 'finance5-item3': 'Machine Learning im Finanzwesen', 'finance5-item4': 'Finanz-APIs',
+                'finance6-title': 'Zertifizierungen', 'finance6-item1': 'CFA Level I (In Vorbereitung)', 'finance6-item2': 'Finanzmodellierung', 'finance6-item3': 'Python für Finanzen', 'finance6-item4': 'Bloomberg Terminal',
+                'progress-title': 'Aktueller Lernfortschritt', 'progress1-label': 'Finanzmärkte', 'progress2-label': 'Unternehmensfinanzen', 'progress3-label': 'Investitionsanalyse', 'progress4-label': 'Python für Finanzen',
+                'skills-title': 'Fähigkeiten', 'skill-finance': 'Finanzanalyse', 'skill-data': 'Datenvisualisierung', 'skill-problem': 'Problemlösung',
+                'contact-title': 'Kontaktiere mich', 'contact-subtitle': 'Lass uns verbinden!', 'footer-text': '© 2024 Yu. Mit ❤️ gemacht'
+            }
+        };
+
+        let currentLang = 'en';
+
+        function changeLanguage(lang) {
+            currentLang = lang;
+            const trans = translations[lang];
+            
+            Object.keys(trans).forEach(key => {
+                const element = document.getElementById(key);
+                if (element) {
+                    element.textContent = trans[key];
+                }
+            });
+
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.dataset.lang === lang) {
+                    btn.classList.add('active');
+                }
+            });
+        }
+
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                changeLanguage(btn.dataset.lang);
+            });
+        });
+
+        const navbar = document.getElementById('navbar');
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+            });
+        });
+
+        const progressObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const progressBars = entry.target.querySelectorAll('.progress-fill');
+                    progressBars.forEach(bar => {
+                        const width = bar.getAttribute('data-width');
+                        setTimeout(() => {
+                            bar.style.width = width + '%';
+                        }, 200);
+                    });
+                    progressObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.3 });
+
+        const progressSection = document.querySelector('.learning-progress');
+        if (progressSection) {
+            progressObserver.observe(progressSection);
+        }
+    </script>

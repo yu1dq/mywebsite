@@ -1,0 +1,65 @@
+[
+  {
+    "university": "TU Munich (TUM)",
+    "program": "Master in Finance and Information Management (FIM)",
+    "intake": "Winter",
+    "deadline": "April 30 (every year)",
+    "tuition": "Semester fee ~€140",
+    "link": "https://www.fim-rc.de/master-program/fim-master-program/",
+    "details": "Joint program by TUM, LMU, and University of Augsburg focusing on quantitative finance, risk management, and information systems."
+  },
+  {
+    "university": "RWTH Aachen University",
+    "program": "MSc Management and Engineering in Technology, Innovation, Marketing & Entrepreneurship",
+    "intake": "Winter",
+    "deadline": "March 1 – July 15",
+    "tuition": "No tuition, semester fee ~€300",
+    "link": "https://www.rwth-aachen.de/go/id/bfoe/lidx/1",
+    "details": "Combines engineering with management and entrepreneurship. Offered jointly by RWTH Aachen and Fraunhofer Institute."
+  },
+  {
+    "university": "TU Berlin",
+    "program": "MSc Industrial Engineering and Management (Wirtschaftsingenieurwesen)",
+    "intake": "Winter",
+    "deadline": "April 1 – May 31",
+    "tuition": "No tuition, semester fee ~€307",
+    "link": "https://www.tu.berlin/en/studying/application/",
+    "details": "Focuses on bridging technology and economics; highly quantitative program in the capital of Germany."
+  },
+  {
+    "university": "KIT – Karlsruhe Institute of Technology",
+    "program": "MSc in Economics Engineering (Wirtschaftsingenieurwesen)",
+    "intake": "Winter",
+    "deadline": "Dec 1 – Mar 31",
+    "tuition": "EU – free; Non-EU – €1,500/semester",
+    "link": "https://www.intl.kit.edu/istudies/12591.php",
+    "details": "A top technical university offering interdisciplinary training in finance, economics, and engineering."
+  },
+  {
+    "university": "TU Dresden",
+    "program": "MSc Business and Economics (Finance track)",
+    "intake": "Winter",
+    "deadline": "April 1 – July 15",
+    "tuition": "No tuition, semester fee ~€280",
+    "link": "https://tu-dresden.de/studium/bewerbung/voraussetzungen/fristen",
+    "details": "Offers finance and quantitative economics specializations. Modern campus with strong international support."
+  },
+  {
+    "university": "TU Dortmund",
+    "program": "MSc Econometrics / Data Science (Finance modules)",
+    "intake": "Winter",
+    "deadline": "April 1 – July 15",
+    "tuition": "No tuition, semester fee ~€320",
+    "link": "https://www.tu-dortmund.de/en/studies/application/application-procedure/",
+    "details": "Focus on econometrics, machine learning, and quantitative finance modeling."
+  },
+  {
+    "university": "Freie Universität Berlin",
+    "program": "MSc Finance, Accounting and Taxation",
+    "intake": "Winter",
+    "deadline": "April 15 – May 31",
+    "tuition": "No tuition, semester fee ~€315",
+    "link": "https://www.fu-berlin.de/en/studium/studienangebot/master/finance_accounting_taxation/index.html",
+    "details": "Emphasizes corporate finance, taxation, and international accounting standards."
+  }
+]

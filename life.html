@@ -95,6 +95,40 @@
   transform: translateY(-2px);
   box-shadow: 0 5px 15px rgba(118, 75, 162, 0.3);
 }
+    /* --- Sports Section --- */
+.sports-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+.sport-card {
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+  text-align: center;
+  padding: 2rem 1rem;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.sport-card:hover {
+  transform: scale(1.07);
+  box-shadow: 0 10px 30px rgba(102,126,234,0.3);
+}
+
+.sport-card .emoji {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+}
+
+.sport-card h3 {
+  color: #667eea;
+  font-weight: 700;
+  font-size: 1.3rem;
+  margin: 0;
+}
   </style>
 </head>
 <body>
@@ -119,10 +153,21 @@
     </div>
   </section>
 
-  <section id="sports">
+   <section id="sports">
     <h2>🎾 Sports</h2>
-    <div class="card">
-      <p>Playing tennis helps me stay focused and disciplined. I’m also trying boxing for balance and strength.</p>
+    <div class="sports-grid">
+      <div class="sport-card" onclick="window.open('tennis.html', '_blank')">
+        <div class="emoji">🎾</div>
+        <h3>Tennis</h3>
+      </div>
+      <div class="sport-card" onclick="window.open('boxing.html', '_blank')">
+        <div class="emoji">🥊</div>
+        <h3>Boxing</h3>
+      </div>
+      <div class="sport-card" onclick="window.open('dance.html', '_blank')">
+        <div class="emoji">💃</div>
+        <h3>Dance</h3>
+      </div>
     </div>
   </section>
 

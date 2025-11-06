@@ -4,31 +4,62 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Yu - Secure Diary</title>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
   <style>
+    * {
+      box-sizing: border-box;
+    }
+
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
-      background: linear-gradient(135deg, #667eea, #764ba2);
-      color: #333;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
       margin: 0;
-      padding: 0;
+      color: #333;
+      overflow-x: hidden;
     }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
     header {
       text-align: center;
       color: white;
-      padding: 2rem 1rem 1rem 1rem;
+      padding: 2rem 1rem 1rem;
     }
+
+    .back-link {
+      display: inline-block;
+      text-decoration: none;
+      color: white;
+      background: rgba(255,255,255,0.2);
+      padding: 0.5rem 1.5rem;
+      border-radius: 20px;
+      font-weight: bold;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s;
+    }
+
+    .back-link:hover {
+      background: rgba(255,255,255,0.4);
+    }
+
     .center {
       text-align: center;
-      margin-top: 3rem;
+      margin-top: 4rem;
     }
+
     .box {
       display: inline-block;
       background: white;
-      border-radius: 15px;
+      border-radius: 20px;
       padding: 2rem 3rem;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
     }
+
     input, button {
       padding: 0.8rem 1rem;
       margin: 0.5rem;
@@ -36,6 +67,7 @@
       border: 1px solid #ccc;
       font-size: 1rem;
     }
+
     button {
       background: linear-gradient(135deg, #667eea, #764ba2);
       color: white;
@@ -43,71 +75,119 @@
       font-weight: bold;
       cursor: pointer;
     }
-    button:hover { background: #5a67d8; }
+
+    button:hover {
+      background: linear-gradient(135deg, #5a67d8, #8b5cf6);
+    }
+
     .calendar {
       display: none;
       max-width: 900px;
-      margin: 2rem auto;
+      margin: 2rem auto 4rem;
       background: white;
       border-radius: 20px;
       padding: 2rem;
       box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+      text-align: center;
     }
+
+    .calendar-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .month-btn {
+      background: rgba(102,126,234,0.1);
+      border: none;
+      border-radius: 10px;
+      font-size: 1.5rem;
+      cursor: pointer;
+      color: #667eea;
+      font-weight: bold;
+      width: 40px;
+      height: 40px;
+    }
+
+    .month-btn:hover {
+      background: rgba(102,126,234,0.3);
+    }
+
     .days {
       display: grid;
       grid-template-columns: repeat(7, 1fr);
       text-align: center;
     }
+
     .days div {
       padding: 1rem;
       border-radius: 10px;
-      margin: 2px;
+      margin: 3px;
       cursor: pointer;
+      position: relative;
       transition: all 0.2s;
     }
+
+    .days div:hover {
+      background: #f3f0ff;
+    }
+
     .days div.today {
       background: #667eea;
       color: white;
       font-weight: bold;
     }
-    .days div.has-entry {
-      background: rgba(255, 215, 0, 0.25);
-      border: 2px solid #ffd700;
-      color: #8a6d00;
-      font-weight: 700;
-      box-shadow: 0 0 10px rgba(255, 215, 0, 0.4);
+
+    .days div.has-entry::after {
+      content: "•";
+      color: red;
+      position: absolute;
+      bottom: 6px;
+      right: 8px;
+      font-size: 1.2rem;
     }
+
     .entry-box {
       margin-top: 2rem;
       background: #f9f9ff;
       padding: 1.5rem;
       border-radius: 15px;
     }
+
     textarea {
       width: 100%;
       height: 100px;
       border-radius: 10px;
       padding: 1rem;
       border: 1px solid #ccc;
+      font-family: inherit;
+      font-size: 1rem;
     }
   </style>
 </head>
 <body>
-  <header><h1>🔐 Secure Diary</h1></header>
+  <header>
+    <a href="life.html" class="back-link">← Back to Life</a>
+    <h1>🔐 Secure Diary</h1>
+  </header>
 
-  <!-- 密码输入 / 创建区 -->
   <div class="center" id="authSection">
     <div class="box">
-      <h3 id="authTitle">Set your diary password</h3>
+      <h3 id="authTitle">Set your diary password 🔑</h3>
       <input type="password" id="passwordInput" placeholder="Enter password">
       <button id="confirmBtn">Confirm</button>
     </div>
   </div>
 
-  <!-- 日历与日志 -->
   <div class="calendar" id="calendarSection">
-    <h2 id="monthYear"></h2>
+    <div class="calendar-header">
+      <button class="month-btn" id="prevMonth">‹</button>
+      <h2 id="monthYear"></h2>
+      <button class="month-btn" id="nextMonth">›</button>
+    </div>
     <div class="days" id="days"></div>
+
     <div class="entry-box" id="entryBox" style="display:none;">
       <h3 id="entryDate"></h3>
       <textarea id="entryText" placeholder="Write something..."></textarea>
@@ -115,7 +195,9 @@
     </div>
   </div>
 
+  <!-- 引入 AES 加密库 -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+
   <script>
     const authSection = document.getElementById('authSection');
     const calendarSection = document.getElementById('calendarSection');
@@ -129,21 +211,18 @@
     const entryDate = document.getElementById('entryDate');
     const entryText = document.getElementById('entryText');
     const saveBtn = document.getElementById('saveBtn');
+    const prevMonth = document.getElementById('prevMonth');
+    const nextMonth = document.getElementById('nextMonth');
 
     let userKey = '';
     let selectedDate = '';
+    let currentMonth = new Date().getMonth();
+    let currentYear = new Date().getFullYear();
 
-    const now = new Date();
-    const month = now.getMonth();
-    const year = now.getFullYear();
-
-    // 初始化密码状态
     const storedHash = localStorage.getItem('diary_password_hash');
 
     if (storedHash) {
       authTitle.textContent = "Enter your password to unlock diary 🔒";
-    } else {
-      authTitle.textContent = "Set your diary password 🔑";
     }
 
     confirmBtn.addEventListener('click', () => {
@@ -151,14 +230,12 @@
       if (!pass) return alert("Please enter a password.");
 
       if (!storedHash) {
-        // 首次设置密码
         const hash = CryptoJS.SHA256(pass).toString();
         localStorage.setItem('diary_password_hash', hash);
         alert('✅ Password set! You can now access your diary.');
         userKey = pass;
         unlockDiary();
       } else {
-        // 验证密码
         const inputHash = CryptoJS.SHA256(pass).toString();
         if (inputHash === storedHash) {
           userKey = pass;
@@ -172,26 +249,50 @@
     function unlockDiary() {
       authSection.style.display = 'none';
       calendarSection.style.display = 'block';
-      renderCalendar();
+      renderCalendar(currentMonth, currentYear);
     }
 
-    function renderCalendar() {
+    function renderCalendar(month, year) {
       const firstDay = new Date(year, month, 1).getDay();
       const daysInMonth = new Date(year, month + 1, 0).getDate();
       const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
       monthYear.textContent = `${monthNames[month]} ${year}`;
       daysContainer.innerHTML = '';
+
       for (let i = 0; i < firstDay; i++) daysContainer.appendChild(document.createElement('div'));
+
       for (let d = 1; d <= daysInMonth; d++) {
         const div = document.createElement('div');
         const key = `${year}-${month+1}-${d}`;
-        if (localStorage.getItem(`entry_${key}`)) div.classList.add('has-entry');
-        if (d === now.getDate()) div.classList.add('today');
+        const enc = localStorage.getItem(`entry_${key}`);
+        if (enc) div.classList.add('has-entry');
+        const today = new Date();
+        if (d === today.getDate() && month === today.getMonth() && year === today.getFullYear()) {
+          div.classList.add('today');
+        }
         div.textContent = d;
         div.onclick = () => openEntry(key);
         daysContainer.appendChild(div);
       }
     }
+
+    prevMonth.onclick = () => {
+      currentMonth--;
+      if (currentMonth < 0) {
+        currentMonth = 11;
+        currentYear--;
+      }
+      renderCalendar(currentMonth, currentYear);
+    };
+
+    nextMonth.onclick = () => {
+      currentMonth++;
+      if (currentMonth > 11) {
+        currentMonth = 0;
+        currentYear++;
+      }
+      renderCalendar(currentMonth, currentYear);
+    };
 
     function openEntry(key) {
       selectedDate = key;
@@ -202,7 +303,7 @@
         try {
           const bytes = CryptoJS.AES.decrypt(enc, userKey);
           entryText.value = bytes.toString(CryptoJS.enc.Utf8);
-        } catch (e) {
+        } catch {
           entryText.value = '[Decryption failed — wrong key?]';
         }
       } else entryText.value = '';
@@ -213,7 +314,7 @@
       const ciphertext = CryptoJS.AES.encrypt(entryText.value, userKey).toString();
       localStorage.setItem(`entry_${selectedDate}`, ciphertext);
       alert('✅ Entry saved securely.');
-      renderCalendar();
+      renderCalendar(currentMonth, currentYear);
     });
   </script>
 </body>

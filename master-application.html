@@ -120,14 +120,78 @@
   <script>
     let programs = [];
 
-    // Load data
+    // 🧩 内置备份数据
+    const fallbackPrograms = [
+      {
+        "university": "TUM – Technical University of Munich",
+        "program": "Master in Finance and Information Management (FIM)",
+        "intake": "Winter",
+        "deadline": "April 30",
+        "tuition": "Free (~€140 semester fee)",
+        "link": "https://www.fim-rc.de/master-program/fim-master-program/",
+        "details": "Joint elite program by TUM, LMU, and University of Augsburg combining finance, management, and digital innovation."
+      },
+      {
+        "university": "RWTH Aachen University",
+        "program": "M.Sc. in Management and Engineering in Finance, Accounting, and Taxation",
+        "intake": "Winter",
+        "deadline": "March 1",
+        "tuition": "Free (~€300 semester fee)",
+        "link": "https://www.mme.rwth-aachen.de/",
+        "details": "Combines management with engineering and finance disciplines; taught in English."
+      },
+      {
+        "university": "TU Berlin",
+        "program": "M.Sc. in Economics and Management",
+        "intake": "Winter",
+        "deadline": "April 30",
+        "tuition": "Free (~€300 semester fee)",
+        "link": "https://www.tu.berlin/studieren/studienangebot/master/economics-and-management",
+        "details": "Focus on economic theory, quantitative methods, and business management."
+      },
+      {
+        "university": "Karlsruhe Institute of Technology (KIT)",
+        "program": "M.Sc. in Economics Engineering (Wirtschaftsingenieurwesen)",
+        "intake": "Winter & Summer",
+        "deadline": "July 15 / January 15",
+        "tuition": "Free (~€150 semester fee)",
+        "link": "https://www.wiwi.kit.edu/english/master_wiing.php",
+        "details": "Strong integration of economics, management, and engineering disciplines."
+      },
+      {
+        "university": "TU Dresden",
+        "program": "M.Sc. in Business and Economics",
+        "intake": "Winter",
+        "deadline": "May 31",
+        "tuition": "Free (~€280 semester fee)",
+        "link": "https://tu-dresden.de/studium/studienangebot/master/bwl",
+        "details": "Covers accounting, finance, and international business strategy."
+      },
+      {
+        "university": "TU Dortmund",
+        "program": "M.Sc. in Econometrics, Statistics and Mathematical Economics",
+        "intake": "Winter",
+        "deadline": "April 30",
+        "tuition": "Free (~€300 semester fee)",
+        "link": "https://www.statistik.tu-dortmund.de/master-econometrics.html",
+        "details": "Emphasizes data-driven decision-making and financial econometrics."
+      }
+    ];
+
+    // 🧠 加载 JSON 数据（失败则用 fallback）
     fetch('programs.json')
-      .then(res => res.json())
+      .then(res => res.ok ? res.json() : Promise.reject('No file'))
       .then(data => {
         programs = data.sort((a,b) => a.deadline.localeCompare(b.deadline));
         renderTable(programs);
+      })
+      .catch(() => {
+        console.warn("⚠️ Couldn't load programs.json, using fallback data.");
+        programs = fallbackPrograms;
+        renderTable(programs);
       });
 
+    // 🪄 渲染表格
     function renderTable(data) {
       const tbody = document.querySelector('#programTable tbody');
       tbody.innerHTML = '';
@@ -145,6 +209,7 @@
       });
     }
 
+    // 🔍 搜索
     document.getElementById('searchInput').addEventListener('input', e => {
       const q = e.target.value.toLowerCase();
       const filtered = programs.filter(p =>
@@ -154,23 +219,24 @@
       renderTable(filtered);
     });
 
+    // 🎓 按季节筛选
     document.getElementById('intakeFilter').addEventListener('change', e => {
       const val = e.target.value;
-      const filtered = val ? programs.filter(p => p.intake === val) : programs;
+      const filtered = val ? programs.filter(p => p.intake.includes(val)) : programs;
       renderTable(filtered);
     });
 
+    // 📘 弹出详情
     function showDetails(title, details) {
       document.getElementById('modalTitle').textContent = title;
       document.getElementById('modalDetails').textContent = details;
       document.getElementById('infoModal').style.display = 'flex';
     }
-
     function closeModal() {
       document.getElementById('infoModal').style.display = 'none';
     }
 
-    // Simple multilingual dictionary
+    // 🌐 多语言切换
     const dict = {
       zh: { title: '🎓 德国金融硕士项目', search: '搜索大学或专业...', all: '所有学期', winter: '冬季', summer: '夏季', close: '关闭' },
       de: { title: '🎓 Masterstudiengänge Finanzen in Deutschland', search: 'Suche nach Universität oder Programm...', all: 'Alle Semester', winter: 'Winter', summer: 'Sommer', close: 'Schließen' },
@@ -184,7 +250,7 @@
       document.getElementById('searchInput').placeholder = d.search;
       const opts = document.querySelectorAll('#intakeFilter option');
       opts[0].textContent = d.all;
-      opts[1]..textContent = d.winter;
+      opts[1].textContent = d.winter;
       opts[2].textContent = d.summer;
       document.querySelector('.close-btn').textContent = d.close;
     });

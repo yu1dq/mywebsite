@@ -288,6 +288,48 @@
             color: #ffd700;
         }
 
+        .learning-progress {
+            margin-top: 3rem;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2.5rem;
+            border: 2px solid rgba(255, 255, 255, 0.2);
+        }
+
+        .learning-progress h3 {
+            font-size: 1.8rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: #ffd700;
+        }
+
+        .progress-item {
+            margin-bottom: 2rem;
+        }
+
+        .progress-label {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .progress-bar {
+            height: 10px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 0;
+            background: linear-gradient(90deg, #ffd700, #ffa500);
+            border-radius: 10px;
+            transition: width 1.5s ease;
+        }
+
         .skills-container {
             display: flex;
             flex-wrap: wrap;
@@ -357,7 +399,6 @@
                     <button class="lang-btn active" data-lang="en">EN</button>
                     <button class="lang-btn" data-lang="zh">中文</button>
                     <button class="lang-btn" data-lang="de">DE</button>
-                    <button class="lang-btn" data-lang="ar">عربي</button>
                 </div>
             </div>
         </div>
@@ -438,6 +479,80 @@
                         <li id="finance3-item4">Performance Metrics</li>
                     </ul>
                 </div>
+                <div class="finance-card">
+                    <div class="icon">🏦</div>
+                    <h3 id="finance4-title">Banking & Economics</h3>
+                    <ul>
+                        <li id="finance4-item1">Monetary Policy</li>
+                        <li id="finance4-item2">Banking Systems</li>
+                        <li id="finance4-item3">Macroeconomic Indicators</li>
+                        <li id="finance4-item4">Interest Rate Models</li>
+                    </ul>
+                </div>
+                <div class="finance-card">
+                    <div class="icon">🤖</div>
+                    <h3 id="finance5-title">Fintech & Quant</h3>
+                    <ul>
+                        <li id="finance5-item1">Algorithmic Trading</li>
+                        <li id="finance5-item2">Blockchain & Crypto</li>
+                        <li id="finance5-item3">Machine Learning in Finance</li>
+                        <li id="finance5-item4">Financial APIs</li>
+                    </ul>
+                </div>
+                <div class="finance-card">
+                    <div class="icon">📚</div>
+                    <h3 id="finance6-title">Certifications</h3>
+                    <ul>
+                        <li id="finance6-item1">CFA Level I (Preparing)</li>
+                        <li id="finance6-item2">Financial Modeling</li>
+                        <li id="finance6-item3">Python for Finance</li>
+                        <li id="finance6-item4">Bloomberg Terminal</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="learning-progress">
+                <h3 id="progress-title">Current Learning Progress</h3>
+                
+                <div class="progress-item">
+                    <div class="progress-label">
+                        <span id="progress1-label">Financial Markets</span>
+                        <span>85%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" data-width="85"></div>
+                    </div>
+                </div>
+
+                <div class="progress-item">
+                    <div class="progress-label">
+                        <span id="progress2-label">Corporate Finance</span>
+                        <span>70%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" data-width="70"></div>
+                    </div>
+                </div>
+
+                <div class="progress-item">
+                    <div class="progress-label">
+                        <span id="progress3-label">Investment Analysis</span>
+                        <span>60%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" data-width="60"></div>
+                    </div>
+                </div>
+
+                <div class="progress-item">
+                    <div class="progress-label">
+                        <span id="progress4-label">Python for Finance</span>
+                        <span>75%</span>
+                    </div>
+                    <div class="progress-bar">
+                        <div class="progress-fill" data-width="75"></div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -487,6 +602,10 @@
                 'finance1-title': 'Financial Markets', 'finance1-item1': 'Stock Market Fundamentals', 'finance1-item2': 'Bond Markets & Fixed Income', 'finance1-item3': 'Derivatives & Options', 'finance1-item4': 'Forex & Commodities',
                 'finance2-title': 'Corporate Finance', 'finance2-item1': 'Financial Statement Analysis', 'finance2-item2': 'Valuation Methods (DCF, Multiples)', 'finance2-item3': 'Capital Structure', 'finance2-item4': 'M&A Fundamentals',
                 'finance3-title': 'Investment Analysis', 'finance3-item1': 'Portfolio Theory', 'finance3-item2': 'Risk Management', 'finance3-item3': 'Asset Allocation', 'finance3-item4': 'Performance Metrics',
+                'finance4-title': 'Banking & Economics', 'finance4-item1': 'Monetary Policy', 'finance4-item2': 'Banking Systems', 'finance4-item3': 'Macroeconomic Indicators', 'finance4-item4': 'Interest Rate Models',
+                'finance5-title': 'Fintech & Quant', 'finance5-item1': 'Algorithmic Trading', 'finance5-item2': 'Blockchain & Crypto', 'finance5-item3': 'Machine Learning in Finance', 'finance5-item4': 'Financial APIs',
+                'finance6-title': 'Certifications', 'finance6-item1': 'CFA Level I (Preparing)', 'finance6-item2': 'Financial Modeling', 'finance6-item3': 'Python for Finance', 'finance6-item4': 'Bloomberg Terminal',
+                'progress-title': 'Current Learning Progress', 'progress1-label': 'Financial Markets', 'progress2-label': 'Corporate Finance', 'progress3-label': 'Investment Analysis', 'progress4-label': 'Python for Finance',
                 'skills-title': 'Skill Set', 'skill-finance': 'Financial Analysis', 'skill-data': 'Data Visualization', 'skill-problem': 'Problem Solving',
                 'contact-title': 'Get In Touch', 'contact-subtitle': "Let's Connect!", 'footer-text': '© 2024 Yu. Made with ❤️'
             },
@@ -504,6 +623,10 @@
                 'finance1-title': '金融市场', 'finance1-item1': '股票市场基础', 'finance1-item2': '债券市场与固定收益', 'finance1-item3': '衍生品与期权', 'finance1-item4': '外汇与大宗商品',
                 'finance2-title': '公司金融', 'finance2-item1': '财务报表分析', 'finance2-item2': '估值方法（DCF、倍数法）', 'finance2-item3': '资本结构', 'finance2-item4': '并购基础',
                 'finance3-title': '投资分析', 'finance3-item1': '投资组合理论', 'finance3-item2': '风险管理', 'finance3-item3': '资产配置', 'finance3-item4': '业绩指标',
+                'finance4-title': '银行与经济学', 'finance4-item1': '货币政策', 'finance4-item2': '银行系统', 'finance4-item3': '宏观经济指标', 'finance4-item4': '利率模型',
+                'finance5-title': '金融科技与量化', 'finance5-item1': '算法交易', 'finance5-item2': '区块链与加密货币', 'finance5-item3': '金融机器学习', 'finance5-item4': '金融API',
+                'finance6-title': '证书认证', 'finance6-item1': 'CFA一级（准备中）', 'finance6-item2': '金融建模', 'finance6-item3': 'Python金融编程', 'finance6-item4': '彭博终端',
+                'progress-title': '当前学习进度', 'progress1-label': '金融市场', 'progress2-label': '公司金融', 'progress3-label': '投资分析', 'progress4-label': 'Python金融编程',
                 'skills-title': '技能集', 'skill-finance': '金融分析', 'skill-data': '数据可视化', 'skill-problem': '问题解决',
                 'contact-title': '联系我', 'contact-subtitle': '让我们保持联系！', 'footer-text': '© 2024 Yu. 用❤️制作'
             },
@@ -521,25 +644,12 @@
                 'finance1-title': 'Finanzmärkte', 'finance1-item1': 'Aktienmarkt-Grundlagen', 'finance1-item2': 'Anleihenmärkte & festverzinsliche Wertpapiere', 'finance1-item3': 'Derivate & Optionen', 'finance1-item4': 'Devisen & Rohstoffe',
                 'finance2-title': 'Unternehmensfinanzen', 'finance2-item1': 'Finanzberichtsanalyse', 'finance2-item2': 'Bewertungsmethoden (DCF, Multiples)', 'finance2-item3': 'Kapitalstruktur', 'finance2-item4': 'M&A-Grundlagen',
                 'finance3-title': 'Investitionsanalyse', 'finance3-item1': 'Portfolio-Theorie', 'finance3-item2': 'Risikomanagement', 'finance3-item3': 'Asset-Allokation', 'finance3-item4': 'Leistungskennzahlen',
+                'finance4-title': 'Bankwesen & Wirtschaft', 'finance4-item1': 'Geldpolitik', 'finance4-item2': 'Bankensysteme', 'finance4-item3': 'Makroökonomische Indikatoren', 'finance4-item4': 'Zinsmodelle',
+                'finance5-title': 'Fintech & Quant', 'finance5-item1': 'Algorithmischer Handel', 'finance5-item2': 'Blockchain & Krypto', 'finance5-item3': 'Machine Learning im Finanzwesen', 'finance5-item4': 'Finanz-APIs',
+                'finance6-title': 'Zertifizierungen', 'finance6-item1': 'CFA Level I (In Vorbereitung)', 'finance6-item2': 'Finanzmodellierung', 'finance6-item3': 'Python für Finanzen', 'finance6-item4': 'Bloomberg Terminal',
+                'progress-title': 'Aktueller Lernfortschritt', 'progress1-label': 'Finanzmärkte', 'progress2-label': 'Unternehmensfinanzen', 'progress3-label': 'Investitionsanalyse', 'progress4-label': 'Python für Finanzen',
                 'skills-title': 'Fähigkeiten', 'skill-finance': 'Finanzanalyse', 'skill-data': 'Datenvisualisierung', 'skill-problem': 'Problemlösung',
                 'contact-title': 'Kontaktiere mich', 'contact-subtitle': 'Lass uns verbinden!', 'footer-text': '© 2024 Yu. Mit ❤️ gemacht'
-            },
-            ar: {
-                'nav-home': 'الرئيسية', 'nav-about': 'عني', 'nav-projects': 'المشاريع', 'nav-finance': 'المالية', 'nav-skills': 'المهارات', 'nav-contact': 'اتصل',
-                'hero-title': 'مرحباً بك في عالمي', 'hero-subtitle': 'استكشف | أنشئ | انمُ',
-                'hero-desc': 'مرحباً! أنا يو، مستكشف ومتعلم شغوف. أحب اكتشاف التقنيات الجديدة، والبقاء نشطاً من خلال التنس، وأستعد حالياً لتقديم طلب الماجستير مع الغوص العميق في عالم التمويل.',
-                'hero-cta': 'اعرف المزيد', 'about-title': 'عني',
-                'about-desc': 'أنا متعلم فضولي لديه شغف بالتكنولوجيا والرياضة والمالية. البرمجة تمكنني من الإبداع، والتنس يبقيني نشيطاً، والتعلم المستمر يدفع نموي الشخصي.',
-                'about-motto': '💡 شعاري: ابقَ فضولياً، واصل التعلم', 'projects-title': 'مشاريعي',
-                'project1-title': '🎓 طلب الماجستير', 'project1-desc': 'إعداد مواد طلب شاملة تشمل البيان الشخصي ورسائل التوصية ومقترح البحث. الهدف هو متابعة الدراسات المتقدمة في مؤسسة من الدرجة الأولى.',
-                'project2-title': '🎾 رحلة التنس', 'project2-desc': 'شغوف بالتنس مع تدريب منتظم ومشاركة في البطولات. علمني التنس التركيز والعزيمة وقيمة الممارسة المستمرة.',
-                'project3-title': '💻 الموقع الشخصي', 'project3-desc': 'بنيت هذا الموقع الشخصي لعرض مشاريعي ومهاراتي. التعلم المستمر لتقنيات الواجهة الأمامية لجعله أكثر أناقة وعملية.',
-                'finance-title': 'رحلة تعلم المالية', 'finance-intro': 'استكشاف العالم الرائع للتمويل من خلال التعلم المنظم والتطبيق العملي',
-                'finance1-title': 'الأسواق المالية', 'finance1-item1': 'أساسيات سوق الأسهم', 'finance1-item2': 'أسواق السندات والدخل الثابت', 'finance1-item3': 'المشتقات والخيارات', 'finance1-item4': 'الفوركس والسلع',
-                'finance2-title': 'التمويل المؤسسي', 'finance2-item1': 'تحليل البيانات المالية', 'finance2-item2': 'طرق التقييم (DCF، المضاعفات)', 'finance2-item3': 'هيكل رأس المال', 'finance2-item4': 'أساسيات الاندماج والاستحواذ',
-                'finance3-title': 'تحليل الاستثمار', 'finance3-item1': 'نظرية المحفظة', 'finance3-item2': 'إدارة المخاطر', 'finance3-item3': 'توزيع الأصول', 'finance3-item4': 'مقاييس الأداء',
-                'skills-title': 'مجموعة المهارات', 'skill-finance': 'التحليل المالي', 'skill-data': 'تصور البيانات', 'skill-problem': 'حل المشكلات',
-                'contact-title': 'تواصل معي', 'contact-subtitle': 'لنبقى على اتصال!', 'footer-text': '© 2024 يو. صنع بـ ❤️'
             }
         };
 
@@ -548,15 +658,6 @@
         function changeLanguage(lang) {
             currentLang = lang;
             const trans = translations[lang];
-            
-            // Apply RTL for Arabic
-            if (lang === 'ar') {
-                document.body.style.direction = 'rtl';
-                document.body.style.textAlign = 'right';
-            } else {
-                document.body.style.direction = 'ltr';
-                document.body.style.textAlign = 'left';
-            }
             
             Object.keys(trans).forEach(key => {
                 const element = document.getElementById(key);
@@ -597,6 +698,27 @@
                 }
             });
         });
+
+        // Animate progress bars when scrolled into view
+        const progressObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const progressBars = entry.target.querySelectorAll('.progress-fill');
+                    progressBars.forEach(bar => {
+                        const width = bar.getAttribute('data-width');
+                        setTimeout(() => {
+                            bar.style.width = width + '%';
+                        }, 200);
+                    });
+                    progressObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.3 });
+
+        const progressSection = document.querySelector('.learning-progress');
+        if (progressSection) {
+            progressObserver.observe(progressSection);
+        }
     </script>
 </body>
 </html>

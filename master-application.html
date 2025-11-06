@@ -1,119 +1,193 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Master Application – Finance in Germany</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Master Application – Finance Programs</title>
   <style>
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Arial, sans-serif;
       margin: 0; padding: 2rem;
-      background: #f8f9fa;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%);
+      background-size: 400% 400%;
+      animation: gradientShift 15s ease infinite;
       color: #333;
     }
-    h1 {
-      color: #667eea;
+    @keyframes gradientShift {
+      0% {background-position: 0% 50%;}
+      50% {background-position: 100% 50%;}
+      100% {background-position: 0% 50%;}
+    }
+    h1 { color: white; text-align: center; margin-bottom: 2rem; }
+    .controls {
       text-align: center;
       margin-bottom: 2rem;
+    }
+    input, select {
+      padding: 0.6rem;
+      margin: 0.5rem;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
     }
     table {
       width: 100%;
       border-collapse: collapse;
-      margin-bottom: 3rem;
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
     }
     th, td {
-      border: 1px solid #ccc;
-      padding: 0.75rem 1rem;
+      padding: 0.8rem 1rem;
       text-align: left;
     }
     th {
-      background-color: #667eea;
+      background: #667eea;
       color: white;
+      cursor: pointer;
     }
-    tr:nth-child(even) {
-      background-color: #f2f2f2;
+    tr:nth-child(even) { background: #f9f9f9; }
+    a { color: #764ba2; text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5);
+      justify-content: center;
+      align-items: center;
     }
-    .link {
-      color: #764ba2;
-      text-decoration: none;
-      font-weight: 600;
+    .modal-content {
+      background: white;
+      border-radius: 15px;
+      padding: 2rem;
+      max-width: 600px;
+      box-shadow: 0 10px 40px rgba(0,0,0,0.2);
+      text-align: center;
     }
-    .link:hover {
-      text-decoration: underline;
+    .close-btn {
+      background: #667eea;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      margin-top: 1rem;
     }
   </style>
 </head>
 <body>
-  <h1>Germany – Master Finance Programs and Deadlines</h1>
-  <table>
-  <thead>
-    <tr>
-      <th>University</th>
-      <th>Program</th>
-      <th>Intake</th>
-      <th>Application Deadline</th>
-      <th>Tuition</th>
-      <th>Official Link</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>TU Munich (TUM)</td>
-      <td>Master in Finance and Information Management (FIM)</td>
-      <td>Winter</td>
-      <td>April 30 (every year)</td>
-      <td>~€140 semester fee only</td>
-      <td><a class="link" href="https://www.fim-rc.de/master-program/fim-master-program/" target="_blank">Program Page</a></td>
-    </tr>
-    <tr>
-      <td>RWTH Aachen University</td>
-      <td>MSc Management and Engineering in Technology, Innovation, Marketing & Entrepreneurship</td>
-      <td>Winter</td>
-      <td>March 1 – July 15</td>
-      <td>No tuition, semester fee ~€300</td>
-      <td><a class="link" href="https://www.rwth-aachen.de/go/id/bfoe/lidx/1" target="_blank">Program Page</a></td>
-    </tr>
-    <tr>
-      <td>TU Berlin</td>
-      <td>MSc Industrial Engineering and Management (Wirtschaftsingenieurwesen)</td>
-      <td>Winter</td>
-      <td>April 1 – May 31</td>
-      <td>No tuition, semester fee ~€307</td>
-      <td><a class="link" href="https://www.tu.berlin/en/studying/application/" target="_blank">Application Info</a></td>
-    </tr>
-    <tr>
-      <td>KIT – Karlsruhe Institute of Technology</td>
-      <td>MSc in Economics Engineering (Wirtschaftsingenieurwesen)</td>
-      <td>Winter</td>
-      <td>Dec 1 – Mar 31</td>
-      <td>EU – free; Non-EU – €1,500/semester</td>
-      <td><a class="link" href="https://www.intl.kit.edu/istudies/12591.php" target="_blank">KIT Info</a></td>
-    </tr>
-    <tr>
-      <td>TU Dresden</td>
-      <td>MSc Business and Economics (Finance track)</td>
-      <td>Winter</td>
-      <td>April 1 – July 15</td>
-      <td>No tuition, semester fee ~€280</td>
-      <td><a class="link" href="https://tu-dresden.de/studium/bewerbung/voraussetzungen/fristen" target="_blank">Deadline Page</a></td>
-    </tr>
-    <tr>
-      <td>TU Dortmund</td>
-      <td>MSc Econometrics / Data Science (Finance modules)</td>
-      <td>Winter</td>
-      <td>April 1 – July 15</td>
-      <td>No tuition, semester fee ~€320</td>
-      <td><a class="link" href="https://www.tu-dortmund.de/en/studies/application/application-procedure/" target="_blank">Application Info</a></td>
-    </tr>
-    <tr>
-      <td>Freie Universität Berlin</td>
-      <td>MSc Finance, Accounting and Taxation</td>
-      <td>Winter</td>
-      <td>April 15 – May 31</td>
-      <td>No tuition, semester fee ~€315</td>
-      <td><a class="link" href="https://www.fu-berlin.de/en/studium/studienangebot/master/finance_accounting_taxation/index.html" target="_blank">Program Page</a></td>
-    </tr>
-  </tbody>
-</table>
+  <h1 id="page-title">🎓 Germany – Master Finance Programs</h1>
+
+  <div class="controls">
+    <input type="text" id="searchInput" placeholder="Search by university or program">
+    <select id="intakeFilter">
+      <option value="">All Intakes</option>
+      <option value="Winter">Winter</option>
+      <option value="Summer">Summer</option>
+    </select>
+    <select id="langSelect">
+      <option value="en">EN</option>
+      <option value="zh">中文</option>
+      <option value="de">DE</option>
+    </select>
+  </div>
+
+  <table id="programTable">
+    <thead>
+      <tr>
+        <th>University</th>
+        <th>Program</th>
+        <th>Intake</th>
+        <th>Deadline</th>
+        <th>Tuition</th>
+        <th>Link</th>
+      </tr>
+    </thead>
+    <tbody></tbody>
+  </table>
+
+  <div class="modal" id="infoModal">
+    <div class="modal-content">
+      <h2 id="modalTitle"></h2>
+      <p id="modalDetails"></p>
+      <button class="close-btn" onclick="closeModal()">Close</button>
+    </div>
+  </div>
+
+  <script>
+    let programs = [];
+
+    // Load data
+    fetch('programs.json')
+      .then(res => res.json())
+      .then(data => {
+        programs = data.sort((a,b) => a.deadline.localeCompare(b.deadline));
+        renderTable(programs);
+      });
+
+    function renderTable(data) {
+      const tbody = document.querySelector('#programTable tbody');
+      tbody.innerHTML = '';
+      data.forEach(p => {
+        const row = document.createElement('tr');
+        row.innerHTML = `
+          <td><a href="#" onclick="showDetails('${p.university}', \`${p.details}\`)">${p.university}</a></td>
+          <td>${p.program}</td>
+          <td>${p.intake}</td>
+          <td>${p.deadline}</td>
+          <td>${p.tuition}</td>
+          <td><a href="${p.link}" target="_blank">Link</a></td>
+        `;
+        tbody.appendChild(row);
+      });
+    }
+
+    document.getElementById('searchInput').addEventListener('input', e => {
+      const q = e.target.value.toLowerCase();
+      const filtered = programs.filter(p =>
+        p.university.toLowerCase().includes(q) ||
+        p.program.toLowerCase().includes(q)
+      );
+      renderTable(filtered);
+    });
+
+    document.getElementById('intakeFilter').addEventListener('change', e => {
+      const val = e.target.value;
+      const filtered = val ? programs.filter(p => p.intake === val) : programs;
+      renderTable(filtered);
+    });
+
+    function showDetails(title, details) {
+      document.getElementById('modalTitle').textContent = title;
+      document.getElementById('modalDetails').textContent = details;
+      document.getElementById('infoModal').style.display = 'flex';
+    }
+
+    function closeModal() {
+      document.getElementById('infoModal').style.display = 'none';
+    }
+
+    // Simple multilingual dictionary
+    const dict = {
+      zh: { title: '🎓 德国金融硕士项目', search: '搜索大学或专业...', all: '所有学期', winter: '冬季', summer: '夏季', close: '关闭' },
+      de: { title: '🎓 Masterstudiengänge Finanzen in Deutschland', search: 'Suche nach Universität oder Programm...', all: 'Alle Semester', winter: 'Winter', summer: 'Sommer', close: 'Schließen' },
+      en: { title: '🎓 Germany – Master Finance Programs', search: 'Search by university or program', all: 'All Intakes', winter: 'Winter', summer: 'Summer', close: 'Close' }
+    };
+
+    document.getElementById('langSelect').addEventListener('change', e => {
+      const lang = e.target.value;
+      const d = dict[lang];
+      document.getElementById('page-title').textContent = d.title;
+      document.getElementById('searchInput').placeholder = d.search;
+      const opts = document.querySelectorAll('#intakeFilter option');
+      opts[0].textContent = d.all;
+      opts[1]..textContent = d.winter;
+      opts[2].textContent = d.summer;
+      document.querySelector('.close-btn').textContent = d.close;
+    });
+  </script>
 </body>
 </html>

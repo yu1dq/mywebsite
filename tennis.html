@@ -1,11 +1,162 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <title>Tennis</title>
-</head>
-<body style="font-family: sans-serif; text-align:center; padding-top: 50px;">
-  <h1>🎾 Tennis</h1>
-  <p>Coming soon...</p>
-</body>
-</html>
+<section id="training">
+  <h2>🏋️ Training Goals</h2>
+  <select id="goalCategory">
+    <option value="serve">发球 (Serve)</option>
+    <option value="fitness">体能 (Fitness)</option>
+    <option value="mental">心理 (Mental)</option>
+  </select>
+  <input type="text" id="newGoalText" placeholder="Add new goal...">
+  <button id="addGoalBtn">Add Goal</button>
+  <div id="goalsContainer"></div>
+</section>
+
+<script>
+const categories = {
+  serve: "发球 (Serve)",
+  fitness: "体能 (Fitness)",
+  mental: "心理 (Mental)"
+};
+let goals = JSON.parse(localStorage.getItem('tennis_goals') || '[]');
+
+function saveGoals(){
+  localStorage.setItem('tennis_goals', JSON.stringify(goals));
+}
+
+function renderGoals(){
+  const container = document.getElementById('goalsContainer');
+  container.innerHTML = '';
+  goals.forEach((g,i) => {
+    const div = document.createElement('div');
+    div.style.margin = '0.5rem 0';
+    div.innerHTML = `
+      <strong>[${categories[g.category]}]</strong> ${g.text} <br>
+      <progress value="${g.progress}" max="100"></progress> ${g.progress}% 
+      <button onclick="updateProgress(${i})">+10%</button>
+      <button onclick="removeGoal(${i})">🗑️</button>
+    `;
+    container.appendChild(div);
+  });
+}
+
+function addGoal(){
+  const text = document.getElementById('newGoalText').value.trim();
+  const category = document.getElementById('goalCategory').value;
+  if(!text) return;
+  goals.push({ category, text, progress: 0 });
+  saveGoals();
+  renderGoals();
+  document.getElementById('newGoalText').value = '';
+}
+
+function updateProgress(i){
+  goals[i].progress = Math.min(100, goals[i].progress + 10);
+  saveGoals();
+  renderGoals();
+}
+
+function removeGoal(i){
+  goals.splice(i,1);
+  saveGoals();
+  renderGoals();
+}
+<section id="tech">
+  <h2>🎯 Technical Analysis</h2>
+
+  <div class="tech-card">
+    <h3>Serve Mechanics</h3>
+    <img src="serve_mechanics.gif" alt="Serve mechanics gif" style="max-width:100%;border-radius:15px;">
+    <p>Power generation: legs → hips → shoulders → racquet. Focus on pronation and follow-through.</p>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/VIDEO_ID1" title="YouTube tutorial" frameborder="0" allowfullscreen></iframe>
+  </div>
+
+  <div class="tech-card">
+    <h3>Net Play</h3>
+    <img src="net_play.gif" alt="Net play gif" style="max-width:100%;border-radius:15px;">
+    <p>Move forward after serve or shortened return; split step on opponent hit; sharp volleys.</p>
+    <iframe width="560" height="315" src="https://www.youtube.com/embed/VIDEO_ID2" title="YouTube tutorial" frameborder="0" allowfullscreen></iframe>
+  </div>
+
+  <!-- 更多技术模块… -->
+</section>
+  <section id="brands">
+  <h2>🎾 Tennis Brands</h2>
+  <div class="brand-grid">
+    <a href="https://www.wilson.com/de-de" target="_blank">
+      <img src="logos/wilson.png" alt="Wilson logo" style="height:80px;">
+      <p>Wilson</p>
+    </a>
+    <a href="https://www.head.com/de_DE" target="_blank">
+      <img src="logos/head.png" alt="Head logo" style="height:80px;">
+      <p>Head</p>
+    </a>
+    <a href="https://www.babolat.com/de" target="_blank">
+      <img src="logos/babolat.png" alt="Babolat logo" style="height:80px;">
+      <p>Babolat</p>
+    </a>
+    <a href="https://www.yonex.com/" target="_blank">
+      <img src="logos/yonex.png" alt="Yonex logo" style="height:80px;">
+      <p>Yonex</p>
+    </a>
+  </div>
+</section>
+
+<style>
+.brand-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px,1fr));
+  gap: 2rem;
+  justify-items: center;
+}
+.brand-grid img {
+  transition: transform 0.3s;
+}
+.brand-grid img:hover {
+  transform: scale(1.1);
+}
+.brand-grid p {
+  margin-top: 0.5rem;
+  font-weight: 600;
+  color: #667eea;
+}
+</style>
+  
+
+document.getElementById('addGoalBtn').addEventListener('click', addGoal);
+
+renderGoals();
+</script>
+<section id="clubs">
+  <h2>🇩🇪 German Tennis Clubs</h2>
+  <input type="text" id="cityInput" placeholder="Enter city (e.g., Berlin)" style="margin-bottom:1rem;">
+  <button id="searchClubsBtn">Search Nearby Clubs</button>
+  <div id="map" style="height:400px;border-radius:20px;"></div>
+</section>
+
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<script>
+// 初始化地图
+const map = L.map('map').setView([51.1657, 10.4518], 6); // 德国中心
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution:'© OpenStreetMap contributors'
+}).addTo(map);
+
+document.getElementById('searchClubsBtn').addEventListener('click', () => {
+  const city = document.getElementById('cityInput').value.trim();
+  if (!city) return alert("请输入城市");
+  // 使用 Nominatim API 进行地理编码
+  fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(city + ', Germany')}`)
+    .then(r=>r.json())
+    .then(results => {
+      if (results.length === 0) return alert("未找到该城市");
+      const loc = results[0];
+      const lat = parseFloat(loc.lat), lon = parseFloat(loc.lon);
+      map.setView([lat, lon], 13);
+      // 清除旧标记
+      // 你可在这里调用俱乐部数据 API 或自己预置一些俱乐部
+      // 示例：标记一个固定俱乐部
+      L.marker([lat, lon]).addTo(map).bindPopup(`${city} Tennis Club`).openPopup();
+    });
+});
+</script>

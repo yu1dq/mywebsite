@@ -1,29 +1,115 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
   <title>My Dance Video</title>
   <style>
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
+
+    * {
+      box-sizing: border-box;
+    }
+
     body {
+      margin: 0;
+      height: 100vh;
       display: flex;
+      flex-direction: column;
       justify-content: center;
       align-items: center;
-      height: 100vh;
-      background-color: black;
+      background: radial-gradient(circle at top, #0f0f0f 0%, #000 80%);
+      color: white;
+      font-family: 'Montserrat', sans-serif;
+      overflow: hidden;
     }
+
+    h1 {
+      font-size: 2.5rem;
+      background: linear-gradient(45deg, #ff5f6d, #ffc371);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      text-transform: uppercase;
+      letter-spacing: 3px;
+      margin-bottom: 20px;
+      animation: fadeIn 1.2s ease-out forwards;
+    }
+
     iframe {
+      width: 80%;
+      max-width: 800px;
+      aspect-ratio: 16/9;
       border: none;
       border-radius: 20px;
-      box-shadow: 0 0 30px rgba(255,255,255,0.2);
+      box-shadow: 0 0 40px rgba(255,255,255,0.15);
+      animation: float 4s ease-in-out infinite alternate;
+    }
+
+    p {
+      margin-top: 20px;
+      color: #ccc;
+      font-size: 0.9rem;
+      letter-spacing: 1px;
+      animation: fadeIn 2s ease-out forwards;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes float {
+      from { transform: translateY(0px); }
+      to { transform: translateY(-8px); }
+    }
+
+    /* 粒子光效（纯装饰） */
+    .bg {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      overflow: hidden;
+      top: 0;
+      left: 0;
+      z-index: -1;
+    }
+
+    .circle {
+      position: absolute;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255,255,255,0.4), transparent);
+      animation: move 10s infinite ease-in-out alternate;
+    }
+
+    .circle:nth-child(1) { width: 150px; height: 150px; top: 20%; left: 10%; animation-delay: 0s; }
+    .circle:nth-child(2) { width: 100px; height: 100px; top: 70%; left: 80%; animation-delay: 2s; }
+    .circle:nth-child(3) { width: 200px; height: 200px; top: 50%; left: 40%; animation-delay: 4s; }
+
+    @keyframes move {
+      from { transform: translateY(0px) translateX(0px); }
+      to { transform: translateY(-40px) translateX(30px); opacity: 0.7; }
+    }
+
+    /* 手机端自适应 */
+    @media (max-width: 600px) {
+      h1 { font-size: 1.8rem; }
+      iframe { width: 90%; }
     }
   </style>
 </head>
 <body>
-  <iframe 
+  <div class="bg">
+    <div class="circle"></div>
+    <div class="circle"></div>
+    <div class="circle"></div>
+  </div>
+
+  <h1>My Dance Performance</h1>
+
+  <iframe
     src="https://drive.google.com/file/d/1RMqbjvUyEZH-lo5hC4As0XhOGhGyOhbV/preview"
-    width="800" height="450"
-    allow="autoplay">
+    allowfullscreen>
   </iframe>
+
+  <p>© 2025 Dongqian Yu — Dance, Rhythm, and Motion</p>
 </body>
 </html>

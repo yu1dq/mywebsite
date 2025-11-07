@@ -196,126 +196,142 @@
   </div>
 
   <!-- 引入 AES 加密库 -->
+ 
+
   <script src="https://cdnjs.cloudflare.com/ajax/libs/crypto-js/4.1.1/crypto-js.min.js"></script>
+<script>
+  const authSection = document.getElementById('authSection');
+  const calendarSection = document.getElementById('calendarSection');
+  const passwordInput = document.getElementById('passwordInput');
+  const confirmBtn = document.getElementById('confirmBtn');
+  const authTitle = document.getElementById('authTitle');
 
-  <script>
-    const authSection = document.getElementById('authSection');
-    const calendarSection = document.getElementById('calendarSection');
-    const passwordInput = document.getElementById('passwordInput');
-    const confirmBtn = document.getElementById('confirmBtn');
-    const authTitle = document.getElementById('authTitle');
+  const daysContainer = document.getElementById('days');
+  const monthYear = document.getElementById('monthYear');
+  const entryBox = document.getElementById('entryBox');
+  const entryDate = document.getElementById('entryDate');
+  const entryText = document.getElementById('entryText');
+  const saveBtn = document.getElementById('saveBtn');
+  const prevMonth = document.getElementById('prevMonth');
+  const nextMonth = document.getElementById('nextMonth');
 
-    const daysContainer = document.getElementById('days');
-    const monthYear = document.getElementById('monthYear');
-    const entryBox = document.getElementById('entryBox');
-    const entryDate = document.getElementById('entryDate');
-    const entryText = document.getElementById('entryText');
-    const saveBtn = document.getElementById('saveBtn');
-    const prevMonth = document.getElementById('prevMonth');
-    const nextMonth = document.getElementById('nextMonth');
+  let userKey = '';
+  let selectedDate = '';
+  let currentMonth = new Date().getMonth();
+  let currentYear = new Date().getFullYear();
 
-    let userKey = '';
-    let selectedDate = '';
-    let currentMonth = new Date().getMonth();
-    let currentYear = new Date().getFullYear();
+  const storedHash = localStorage.getItem('diary_password_hash');
+  if (storedHash) authTitle.textContent = "Enter your password to unlock diary 🔒";
 
-    const storedHash = localStorage.getItem('diary_password_hash');
+  confirmBtn.addEventListener('click', () => {
+    const pass = passwordInput.value.trim();
+    if (!pass) return alert("Please enter a password.");
 
-    if (storedHash) {
-      authTitle.textContent = "Enter your password to unlock diary 🔒";
-    }
-
-    confirmBtn.addEventListener('click', () => {
-      const pass = passwordInput.value.trim();
-      if (!pass) return alert("Please enter a password.");
-
-      if (!storedHash) {
-        const hash = CryptoJS.SHA256(pass).toString();
-        localStorage.setItem('diary_password_hash', hash);
-        alert('✅ Password set! You can now access your diary.');
+    if (!storedHash) {
+      const hash = CryptoJS.SHA256(pass).toString();
+      localStorage.setItem('diary_password_hash', hash);
+      alert('✅ Password set! You can now access your diary.');
+      userKey = pass;
+      unlockDiary();
+    } else {
+      const inputHash = CryptoJS.SHA256(pass).toString();
+      if (inputHash === storedHash) {
         userKey = pass;
         unlockDiary();
       } else {
-        const inputHash = CryptoJS.SHA256(pass).toString();
-        if (inputHash === storedHash) {
-          userKey = pass;
-          unlockDiary();
-        } else {
-          alert('❌ Wrong password.');
-        }
+        alert('❌ Wrong password.');
       }
+    }
+  });
+
+  function unlockDiary() {
+    authSection.style.display = 'none';
+    calendarSection.style.display = 'block';
+    renderCalendar(currentMonth, currentYear);
+  }
+
+  function renderCalendar(month, year) {
+    const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+    const weekdays = ['Mon','Tue','Wed','Thu','Fri','Sat','Sun']; // ← 周一开头
+    monthYear.textContent = `${monthNames[month]} ${year}`;
+    daysContainer.innerHTML = '';
+
+    // --- 插入星期标题 ---
+    weekdays.forEach(d => {
+      const wd = document.createElement('div');
+      wd.textContent = d;
+      wd.style.fontWeight = 'bold';
+      wd.style.color = '#667eea';
+      wd.style.padding = '0.5rem';
+      daysContainer.appendChild(wd);
     });
 
-    function unlockDiary() {
-      authSection.style.display = 'none';
-      calendarSection.style.display = 'block';
-      renderCalendar(currentMonth, currentYear);
+    // --- 计算月首偏移 (以周一为首日) ---
+    const firstDay = new Date(year, month, 1).getDay(); // 0=Sun
+    const offset = (firstDay + 6) % 7; // 把Sunday(0)变为6, Monday(1)->0
+
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+    // 空格填充
+    for (let i = 0; i < offset; i++) {
+      const empty = document.createElement('div');
+      empty.textContent = '';
+      daysContainer.appendChild(empty);
     }
 
-    function renderCalendar(month, year) {
-      const firstDay = new Date(year, month, 1).getDay();
-      const daysInMonth = new Date(year, month + 1, 0).getDate();
-      const monthNames = ['January','February','March','April','May','June','July','August','September','October','November','December'];
-      monthYear.textContent = `${monthNames[month]} ${year}`;
-      daysContainer.innerHTML = '';
-
-      for (let i = 0; i < firstDay; i++) daysContainer.appendChild(document.createElement('div'));
-
-      for (let d = 1; d <= daysInMonth; d++) {
-        const div = document.createElement('div');
-        const key = `${year}-${month+1}-${d}`;
-        const enc = localStorage.getItem(`entry_${key}`);
-        if (enc) div.classList.add('has-entry');
-        const today = new Date();
-        if (d === today.getDate() && month === today.getMonth() && year === today.getFullYear()) {
-          div.classList.add('today');
-        }
-        div.textContent = d;
-        div.onclick = () => openEntry(key);
-        daysContainer.appendChild(div);
-      }
-    }
-
-    prevMonth.onclick = () => {
-      currentMonth--;
-      if (currentMonth < 0) {
-        currentMonth = 11;
-        currentYear--;
-      }
-      renderCalendar(currentMonth, currentYear);
-    };
-
-    nextMonth.onclick = () => {
-      currentMonth++;
-      if (currentMonth > 11) {
-        currentMonth = 0;
-        currentYear++;
-      }
-      renderCalendar(currentMonth, currentYear);
-    };
-
-    function openEntry(key) {
-      selectedDate = key;
-      entryBox.style.display = 'block';
-      entryDate.textContent = `📅 ${key}`;
+    for (let d = 1; d <= daysInMonth; d++) {
+      const div = document.createElement('div');
+      const key = `${year}-${month+1}-${d}`;
       const enc = localStorage.getItem(`entry_${key}`);
-      if (enc) {
-        try {
-          const bytes = CryptoJS.AES.decrypt(enc, userKey);
-          entryText.value = bytes.toString(CryptoJS.enc.Utf8);
-        } catch {
-          entryText.value = '[Decryption failed — wrong key?]';
-        }
-      } else entryText.value = '';
+      if (enc) div.classList.add('has-entry');
+      const today = new Date();
+      if (d === today.getDate() && month === today.getMonth() && year === today.getFullYear()) {
+        div.classList.add('today');
+      }
+      div.textContent = d;
+      div.onclick = () => openEntry(key);
+      daysContainer.appendChild(div);
     }
+  }
 
-    saveBtn.addEventListener('click', () => {
-      if (!selectedDate) return;
-      const ciphertext = CryptoJS.AES.encrypt(entryText.value, userKey).toString();
-      localStorage.setItem(`entry_${selectedDate}`, ciphertext);
-      alert('✅ Entry saved securely.');
-      renderCalendar(currentMonth, currentYear);
-    });
-  </script>
-</body>
-</html>
+  prevMonth.onclick = () => {
+    currentMonth--;
+    if (currentMonth < 0) {
+      currentMonth = 11;
+      currentYear--;
+    }
+    renderCalendar(currentMonth, currentYear);
+  };
+
+  nextMonth.onclick = () => {
+    currentMonth++;
+    if (currentMonth > 11) {
+      currentMonth = 0;
+      currentYear++;
+    }
+    renderCalendar(currentMonth, currentYear);
+  };
+
+  function openEntry(key) {
+    selectedDate = key;
+    entryBox.style.display = 'block';
+    entryDate.textContent = `📅 ${key}`;
+    const enc = localStorage.getItem(`entry_${key}`);
+    if (enc) {
+      try {
+        const bytes = CryptoJS.AES.decrypt(enc, userKey);
+        entryText.value = bytes.toString(CryptoJS.enc.Utf8);
+      } catch {
+        entryText.value = '[Decryption failed — wrong key?]';
+      }
+    } else entryText.value = '';
+  }
+
+  saveBtn.addEventListener('click', () => {
+    if (!selectedDate) return;
+    const ciphertext = CryptoJS.AES.encrypt(entryText.value, userKey).toString();
+    localStorage.setItem(`entry_${selectedDate}`, ciphertext);
+    alert('✅ Entry saved securely.');
+    renderCalendar(currentMonth, currentYear);
+  });
+</script>

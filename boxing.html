@@ -1,0 +1,300 @@
+import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
+import { ArrowLeft, Target, Zap, Heart, Brain } from "lucide-react";
+
+const Boxing = () => {
+  const navigate = useNavigate();
+
+  return (
+    <div className="min-h-screen bg-background">
+      {/* Hero Section */}
+      <section className="relative h-screen overflow-hidden bg-gradient-to-br from-primary via-accent to-primary">
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?w=1600')] bg-cover bg-center opacity-20" />
+        
+        <nav className="absolute top-0 z-50 w-full border-b border-white/10 bg-black/20 backdrop-blur-sm">
+          <div className="container mx-auto flex items-center justify-between px-6 py-4">
+            <Button 
+              variant="ghost" 
+              onClick={() => navigate("/")}
+              className="text-white hover:bg-white/10"
+            >
+              <ArrowLeft className="mr-2 h-4 w-4" />
+              Home
+            </Button>
+          </div>
+        </nav>
+
+        <div className="relative flex h-full items-center justify-center px-6 text-center">
+          <div className="animate-fade-in">
+            <div className="mb-8 text-9xl">🥊</div>
+            <h1 className="mb-6 text-6xl font-bold text-white md:text-7xl">
+              My Boxing Journey
+            </h1>
+            <p className="mb-8 text-2xl text-white/90 md:text-3xl">
+              训练 · 成长 · 突破
+            </p>
+            <div className="flex flex-wrap justify-center gap-4 text-lg text-white/80">
+              <span>💪 力量训练</span>
+              <span>🥋 技术提升</span>
+              <span>🧠 战术思维</span>
+              <span>❤️ 意志磨练</span>
+            </div>
+          </div>
+        </div>
+
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
+          <div className="text-4xl text-white/60">↓</div>
+        </div>
+      </section>
+
+      {/* About Section */}
+      <section className="py-20 px-6">
+        <div className="container mx-auto max-w-4xl">
+          <div className="mb-16 text-center">
+            <h2 className="mb-4 text-4xl font-bold text-foreground">为什么选择拳击</h2>
+            <p className="text-xl text-muted-foreground">
+              拳击不仅是一项运动，更是一种生活态度
+            </p>
+          </div>
+
+          <div className="grid gap-8 md:grid-cols-2">
+            <div className="group rounded-3xl bg-card p-8 shadow-[var(--shadow-card)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[var(--shadow-card-hover)]">
+              <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-accent">
+                <Zap className="h-8 w-8 text-white" />
+              </div>
+              <h3 className="mb-4 text-2xl font-bold text-foreground">身体强化</h3>
+              <p className="leading-relaxed text-muted-foreground">
+                全身性的力量训练，提升爆发力、耐力和协调性。每一次挥拳都在雕刻更强的自己。
+              </p>
+            </div>
+
+            <div className="group rounded-3xl bg-card p-8 shadow-[var(--shadow-card)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[var(--shadow-card-hover)]">
+              <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-accent">
+                <Brain className="h-8 w-8 text-white" />
+              </div>
+              <h3 className="mb-4 text-2xl font-bold text-foreground">心理韧性</h3>
+              <p className="leading-relaxed text-muted-foreground">
+                在擂台上学会面对压力和挑战，培养永不放弃的精神。拳击磨练的不仅是身体，更是意志。
+              </p>
+            </div>
+
+            <div className="group rounded-3xl bg-card p-8 shadow-[var(--shadow-card)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[var(--shadow-card-hover)]">
+              <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-accent">
+                <Target className="h-8 w-8 text-white" />
+              </div>
+              <h3 className="mb-4 text-2xl font-bold text-foreground">专注力</h3>
+              <p className="leading-relaxed text-muted-foreground">
+                训练中需要高度集中，观察对手、预判动作、瞬间反应。这种专注力会延伸到生活的方方面面。
+              </p>
+            </div>
+
+            <div className="group rounded-3xl bg-card p-8 shadow-[var(--shadow-card)] transition-all duration-300 hover:-translate-y-2 hover:shadow-[var(--shadow-card-hover)]">
+              <div className="mb-6 flex h-16 w-16 items-center justify-center rounded-2xl bg-gradient-to-br from-primary to-accent">
+                <Heart className="h-8 w-8 text-white" />
+              </div>
+              <h3 className="mb-4 text-2xl font-bold text-foreground">情绪管理</h3>
+              <p className="leading-relaxed text-muted-foreground">
+                通过拳击释放压力，学会控制情绪。在沙袋前挥洒汗水，让内心回归平静。
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Training Content */}
+      <section className="bg-muted/30 py-20 px-6">
+        <div className="container mx-auto max-w-4xl">
+          <div className="mb-16 text-center">
+            <h2 className="mb-4 text-4xl font-bold text-foreground">训练内容</h2>
+            <p className="text-xl text-muted-foreground">
+              系统化的训练计划，循序渐进
+            </p>
+          </div>
+
+          <div className="space-y-6">
+            <div className="rounded-2xl bg-card p-8 shadow-[var(--shadow-card)]">
+              <div className="mb-4 flex items-start gap-4">
+                <div className="text-5xl">👊</div>
+                <div className="flex-1">
+                  <h3 className="mb-3 text-2xl font-bold text-primary">基础技术</h3>
+                  <p className="mb-4 leading-relaxed text-muted-foreground">
+                    刺拳（Jab）、直拳（Cross）、勾拳（Hook）、上勾拳（Uppercut）的标准动作与组合练习
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    <span className="rounded-full bg-primary/10 px-4 py-1 text-sm text-primary">步法练习</span>
+                    <span className="rounded-full bg-primary/10 px-4 py-1 text-sm text-primary">拳法组合</span>
+                    <span className="rounded-full bg-primary/10 px-4 py-1 text-sm text-primary">防守技巧</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="rounded-2xl bg-card p-8 shadow-[var(--shadow-card)]">
+              <div className="mb-4 flex items-start gap-4">
+                <div className="text-5xl">💪</div>
+                <div className="flex-1">
+                  <h3 className="mb-3 text-2xl font-bold text-primary">体能训练</h3>
+                  <p className="mb-4 leading-relaxed text-muted-foreground">
+                    力量、速度、耐力的全面提升，为技术训练打下坚实基础
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    <span className="rounded-full bg-accent/10 px-4 py-1 text-sm text-accent">跳绳训练</span>
+                    <span className="rounded-full bg-accent/10 px-4 py-1 text-sm text-accent">沙袋练习</span>
+                    <span className="rounded-full bg-accent/10 px-4 py-1 text-sm text-accent">核心力量</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div className="rounded-2xl bg-card p-8 shadow-[var(--shadow-card)]">
+              <div className="mb-4 flex items-start gap-4">
+                <div className="text-5xl">🎯</div>
+                <div className="flex-1">
+                  <h3 className="mb-3 text-2xl font-bold text-primary">实战模拟</h3>
+                  <p className="mb-4 leading-relaxed text-muted-foreground">
+                    通过靶练习和实战对抗，将技术应用到实际场景中
+                  </p>
+                  <div className="flex flex-wrap gap-2">
+                    <span className="rounded-full bg-secondary/10 px-4 py-1 text-sm text-secondary">打靶训练</span>
+                    <span className="rounded-full bg-secondary/10 px-4 py-1 text-sm text-secondary">对抗练习</span>
+                    <span className="rounded-full bg-secondary/10 px-4 py-1 text-sm text-secondary">战术分析</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Training Schedule */}
+      <section className="py-20 px-6">
+        <div className="container mx-auto max-w-4xl">
+          <div className="mb-16 text-center">
+            <h2 className="mb-4 text-4xl font-bold text-foreground">训练计划</h2>
+            <p className="text-xl text-muted-foreground">
+              规律的训练，持续的进步
+            </p>
+          </div>
+
+          <div className="rounded-3xl bg-gradient-to-br from-primary/5 to-accent/5 p-8 backdrop-blur-sm">
+            <div className="space-y-8">
+              <div className="flex gap-6 border-l-4 border-primary pl-6">
+                <div className="flex-shrink-0">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-primary text-lg font-bold text-white">
+                    周
+                  </div>
+                </div>
+                <div>
+                  <h3 className="mb-2 text-xl font-bold text-primary">工作日训练</h3>
+                  <p className="text-muted-foreground">
+                    早晨6:30-7:30：基础技术训练 + 有氧运动
+                  </p>
+                  <p className="text-muted-foreground">
+                    傍晚19:00-20:30：体能强化 + 沙袋练习
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex gap-6 border-l-4 border-accent pl-6">
+                <div className="flex-shrink-0">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-accent text-lg font-bold text-white">
+                    末
+                  </div>
+                </div>
+                <div>
+                  <h3 className="mb-2 text-xl font-bold text-accent">周末训练</h3>
+                  <p className="text-muted-foreground">
+                    上午9:00-11:00：实战对抗 + 战术训练
+                  </p>
+                  <p className="text-muted-foreground">
+                    下午15:00-16:30：技术精进 + 录像分析
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex gap-6 border-l-4 border-secondary pl-6">
+                <div className="flex-shrink-0">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-full bg-secondary text-lg font-bold text-white">
+                    恢
+                  </div>
+                </div>
+                <div>
+                  <h3 className="mb-2 text-xl font-bold text-secondary">恢复日</h3>
+                  <p className="text-muted-foreground">
+                    轻度拉伸、按摩放松、营养补充
+                  </p>
+                  <p className="text-muted-foreground">
+                    观看比赛录像、学习新技术、心理调整
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Progress Section */}
+      <section className="bg-muted/30 py-20 px-6">
+        <div className="container mx-auto max-w-4xl">
+          <div className="mb-16 text-center">
+            <h2 className="mb-4 text-4xl font-bold text-foreground">我的进步</h2>
+            <p className="text-xl text-muted-foreground">
+              记录每一次突破与成长
+            </p>
+          </div>
+
+          <div className="rounded-3xl bg-card p-8 shadow-[var(--shadow-card)] md:p-12">
+            <div className="space-y-8">
+              <div className="flex items-start gap-4">
+                <div className="text-3xl">📊</div>
+                <div className="flex-1">
+                  <h3 className="mb-2 text-xl font-bold text-primary">当前水平</h3>
+                  <p className="leading-relaxed text-muted-foreground">
+                    中级拳击手，掌握了基础技术和常用组合拳，正在提升实战能力和战术思维
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-4">
+                <div className="text-3xl">🎯</div>
+                <div className="flex-1">
+                  <h3 className="mb-2 text-xl font-bold text-primary">近期目标</h3>
+                  <p className="leading-relaxed text-muted-foreground">
+                    完善防守反击技术，提升步法灵活性，增强核心力量和出拳速度
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-4">
+                <div className="text-3xl">🏆</div>
+                <div className="flex-1">
+                  <h3 className="mb-2 text-xl font-bold text-primary">长期愿景</h3>
+                  <p className="leading-relaxed text-muted-foreground">
+                    参加业余比赛积累经验，全面掌握拳击技术体系，培养坚韧不拔的意志品质
+                  </p>
+                </div>
+              </div>
+
+              <div className="flex items-start gap-4">
+                <div className="text-3xl">💭</div>
+                <div className="flex-1">
+                  <h3 className="mb-2 text-xl font-bold text-primary">训练感悟</h3>
+                  <p className="leading-relaxed text-muted-foreground">
+                    拳击教会我的不仅是技术，更是面对困难时的勇气和韧性。每一次训练都是对自我的超越，每一滴汗水都在浇灌成长。
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Footer */}
+      <footer className="border-t border-border bg-card py-12 text-center">
+        <p className="text-muted-foreground">© 2024 Yu. Growing every day 🌱</p>
+      </footer>
+    </div>
+  );
+};
+
+export default Boxing;

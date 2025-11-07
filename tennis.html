@@ -3,210 +3,1385 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>🎾 Yu – Tennis Hub</title>
+<title>🎾 Yu Tennis Academy - Professional Training System</title>
 <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{
-  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;
-  background:linear-gradient(135deg,#00c6ff 0%,#0072ff 100%);
-  background-size:400% 400%;
-  animation:gradientShift 15s ease infinite;
-  color:#333;overflow-x:hidden;
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
-@keyframes gradientShift{
-  0%{background-position:0% 50%;}
-  50%{background-position:100% 50%;}
-  100%{background-position:0% 50%;}
+
+:root {
+  --primary: #1a1a2e;
+  --secondary: #16213e;
+  --accent: #f39c12;
+  --success: #27ae60;
+  --danger: #e74c3c;
+  --light: #ecf0f1;
+  --dark: #2c3e50;
+  --text: #34495e;
+  --border: #bdc3c7;
+  --shadow: 0 5px 15px rgba(0,0,0,0.08);
+  --shadow-lg: 0 10px 30px rgba(0,0,0,0.12);
 }
-nav{
-  position:fixed;top:0;left:0;width:100%;
-  background:rgba(255,255,255,0.1);
-  backdrop-filter:blur(10px);
-  padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center;
-  z-index:100;color:white;
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background-color: #f8f9fa;
+  color: var(--text);
+  line-height: 1.6;
+  overflow-x: hidden;
 }
-nav a{color:white;text-decoration:none;font-weight:600;}
-.lang-switcher button{
-  margin-left:.5rem;border:none;border-radius:20px;padding:.3rem .8rem;
-  background:rgba(255,255,255,0.3);color:white;font-weight:600;cursor:pointer;
+
+/* Modern Geometric Background */
+.bg-pattern {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1;
+  opacity: 0.03;
+  background-image: 
+    repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(243, 156, 18, 0.1) 35px, rgba(243, 156, 18, 0.1) 70px);
 }
-section{
-  background:white;border-radius:20px;padding:2rem;margin:6rem auto 2rem;
-  max-width:900px;box-shadow:0 10px 30px rgba(0,0,0,0.1);
+
+/* Navigation */
+nav {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  transition: all 0.3s ease;
 }
-h2{color:#0072ff;margin-bottom:1rem;text-align:center;}
-h3{color:#0072ff;margin-bottom:.5rem;}
-button{
-  background:#0072ff;color:white;border:none;border-radius:10px;
-  padding:.5rem 1rem;cursor:pointer;font-weight:600;
+
+.nav-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
-button:hover{background:#005fcc;}
-progress{width:50%;height:10px;border-radius:5px;}
-.brand-grid{
-  display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));
-  gap:1.5rem;justify-items:center;text-align:center;
+
+.nav-brand {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: var(--primary);
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
 }
-.brand-grid img{height:80px;transition:transform .3s;}
-.brand-grid img:hover{transform:scale(1.1);}
-#map{height:400px;border-radius:15px;margin-top:1rem;}
-.tech-card{margin-bottom:2rem;text-align:center;}
-.tech-card img{max-width:100%;border-radius:15px;margin-bottom:1rem;}
-iframe{max-width:100%;border-radius:15px;}
-.goal{margin-bottom:.5rem;}
+
+.nav-brand i {
+  color: var(--accent);
+}
+
+.nav-links {
+  display: flex;
+  gap: 2rem;
+  align-items: center;
+}
+
+.nav-links a {
+  color: var(--text);
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+  position: relative;
+}
+
+.nav-links a::after {
+  content: '';
+  position: absolute;
+  bottom: -5px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--accent);
+  transition: width 0.3s ease;
+}
+
+.nav-links a:hover::after {
+  width: 100%;
+}
+
+.nav-links a:hover {
+  color: var(--accent);
+}
+
+/* Hero Section */
+.hero {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+  color: white;
+  padding: 5rem 2rem;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -50%;
+  width: 200%;
+  height: 100%;
+  background: repeating-linear-gradient(
+    90deg,
+    transparent,
+    transparent 100px,
+    rgba(255,255,255,0.05) 100px,
+    rgba(255,255,255,0.05) 200px
+  );
+  animation: slide 20s linear infinite;
+}
+
+@keyframes slide {
+  to { transform: translateX(50%); }
+}
+
+.hero h1 {
+  font-size: 3.5rem;
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 1;
+}
+
+.hero p {
+  font-size: 1.2rem;
+  opacity: 0.9;
+  position: relative;
+  z-index: 1;
+}
+
+/* Container */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+/* Section Styling */
+.section {
+  padding: 4rem 0;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 2.5rem;
+  color: var(--primary);
+  margin-bottom: 3rem;
+  position: relative;
+}
+
+.section-title::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 4px;
+  background: var(--accent);
+  border-radius: 2px;
+}
+
+/* Training Plan Section */
+.training-plan-section {
+  background: white;
+  border-radius: 20px;
+  padding: 3rem;
+  margin: 2rem 0;
+  box-shadow: var(--shadow-lg);
+}
+
+.plan-header {
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.plan-level-selector {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.level-btn {
+  padding: 1rem 2rem;
+  border: 2px solid var(--border);
+  background: white;
+  border-radius: 10px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.level-btn:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+}
+
+.level-btn.active {
+  background: var(--accent);
+  color: white;
+  border-color: var(--accent);
+}
+
+.training-phases {
+  display: grid;
+  gap: 2rem;
+  margin-top: 3rem;
+}
+
+.phase-card {
+  background: linear-gradient(to right, #f8f9fa, white);
+  border-radius: 16px;
+  padding: 2rem;
+  border-left: 5px solid var(--accent);
+  position: relative;
+  transition: all 0.3s ease;
+}
+
+.phase-card:hover {
+  transform: translateX(10px);
+  box-shadow: var(--shadow-lg);
+}
+
+.phase-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.phase-number {
+  width: 50px;
+  height: 50px;
+  background: var(--accent);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.phase-title {
+  flex: 1;
+  margin-left: 1rem;
+}
+
+.phase-title h3 {
+  margin: 0;
+  color: var(--primary);
+  font-size: 1.4rem;
+}
+
+.phase-duration {
+  color: var(--text);
+  font-size: 0.9rem;
+  margin-top: 0.3rem;
+}
+
+.phase-goals {
+  display: grid;
+  gap: 1rem;
+}
+
+.goal-item {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: 1rem;
+  align-items: center;
+  padding: 1rem;
+  background: white;
+  border-radius: 10px;
+  box-shadow: var(--shadow);
+  transition: all 0.3s ease;
+}
+
+.goal-item:hover {
+  transform: scale(1.02);
+  box-shadow: var(--shadow-lg);
+}
+
+.goal-icon {
+  width: 40px;
+  height: 40px;
+  background: var(--light);
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+}
+
+.goal-icon.serve { background: #e8daff; color: #6c5ce7; }
+.goal-icon.fitness { background: #ffeaa7; color: #fdcb6e; }
+.goal-icon.mental { background: #dfe6e9; color: #636e72; }
+.goal-icon.technique { background: #fab1a0; color: #e17055; }
+
+.goal-content h4 {
+  margin: 0 0 0.3rem 0;
+  color: var(--primary);
+  font-size: 1.1rem;
+}
+
+.goal-content p {
+  margin: 0;
+  color: var(--text);
+  font-size: 0.9rem;
+}
+
+.goal-status {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.progress-ring {
+  width: 50px;
+  height: 50px;
+  transform: rotate(-90deg);
+}
+
+.progress-ring circle {
+  fill: none;
+  stroke-width: 4;
+}
+
+.progress-bg {
+  stroke: var(--light);
+}
+
+.progress-fill {
+  stroke: var(--success);
+  stroke-dasharray: 126;
+  stroke-dashoffset: 126;
+  transition: stroke-dashoffset 1s ease;
+}
+
+.progress-text {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text);
+}
+
+/* ATP Ranking */
+.ranking-grid {
+  display: grid;
+  gap: 1rem;
+}
+
+.rank-card {
+  display: grid;
+  grid-template-columns: 60px 1fr auto;
+  gap: 1rem;
+  align-items: center;
+  padding: 1.5rem;
+  background: white;
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.rank-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 4px;
+  background: var(--accent);
+  transform: scaleX(0);
+  transition: transform 0.3s ease;
+}
+
+.rank-card:hover::before {
+  transform: scaleX(1);
+}
+
+.rank-card:hover {
+  transform: translateX(10px);
+}
+
+.rank-number {
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--accent);
+  text-align: center;
+}
+
+.player-info h4 {
+  margin: 0;
+  color: var(--primary);
+  font-size: 1.2rem;
+}
+
+.player-details {
+  display: flex;
+  gap: 1rem;
+  margin-top: 0.5rem;
+  font-size: 0.9rem;
+  color: var(--text);
+}
+
+.player-flag {
+  width: 24px;
+  height: 16px;
+  object-fit: cover;
+  border-radius: 2px;
+}
+
+.player-stats {
+  text-align: right;
+}
+
+.points {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--primary);
+}
+
+.trend {
+  font-size: 0.9rem;
+  margin-top: 0.3rem;
+}
+
+.trend.up { color: var(--success); }
+.trend.down { color: var(--danger); }
+
+/* Technique Tips */
+.tips-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+}
+
+.tip-card {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: var(--shadow);
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.tip-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+}
+
+.tip-icon {
+  width: 80px;
+  height: 80px;
+  background: linear-gradient(135deg, var(--accent), #e67e22);
+  border-radius: 50%;
+  margin: 0 auto 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  color: white;
+}
+
+.tip-card h3 {
+  color: var(--primary);
+  margin-bottom: 1rem;
+}
+
+.tip-card p {
+  color: var(--text);
+  line-height: 1.8;
+}
+
+/* Equipment Section */
+.equipment-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+}
+
+.equipment-card {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: var(--shadow);
+  transition: all 0.3s ease;
+  text-decoration: none;
+  color: var(--text);
+}
+
+.equipment-card:hover {
+  transform: translateY(-5px) scale(1.02);
+  box-shadow: var(--shadow-lg);
+}
+
+.equipment-icon {
+  width: 100px;
+  height: 100px;
+  background: var(--light);
+  border-radius: 50%;
+  margin: 0 auto 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 3rem;
+  color: var(--accent);
+  transition: all 0.3s ease;
+}
+
+.equipment-card:hover .equipment-icon {
+  background: var(--accent);
+  color: white;
+}
+
+/* Map Section */
+.map-container {
+  background: white;
+  border-radius: 16px;
+  padding: 2rem;
+  box-shadow: var(--shadow);
+}
+
+.map-controls {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.map-input {
+  flex: 1;
+  padding: 0.8rem 1rem;
+  border: 2px solid var(--border);
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
+.map-btn {
+  background: var(--accent);
+  color: white;
+  border: none;
+  padding: 0.8rem 1.5rem;
+  border-radius: 8px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.map-btn:hover {
+  background: #e67e22;
+}
+
+#map {
+  height: 500px;
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* Footer */
+footer {
+  background: var(--primary);
+  color: white;
+  padding: 3rem 0;
+  margin-top: 4rem;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+  text-align: center;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.social-links a {
+  color: white;
+  font-size: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+  color: var(--accent);
+  transform: translateY(-3px);
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+  
+  .nav-links {
+    display: none;
+  }
+  
+  .level-btn {
+    padding: 0.8rem 1.2rem;
+    font-size: 0.9rem;
+  }
+  
+  .tips-grid, .equipment-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .rank-card {
+    grid-template-columns: 50px 1fr;
+  }
+  
+  .player-stats {
+    display: none;
+  }
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-in {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+/* Loading State */
+.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* Toast Notification */
+.toast {
+  position: fixed;
+  bottom: 2rem;
+  right: 2rem;
+  background: var(--success);
+  color: white;
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  box-shadow: var(--shadow-lg);
+  transform: translateX(400px);
+  transition: transform 0.3s ease;
+  z-index: 2000;
+}
+
+.toast.show {
+  transform: translateX(0);
+}
 </style>
 </head>
 <body>
+<div class="bg-pattern"></div>
+
 <nav>
-  <a href="life.html">← Back to Life</a>
-  <div class="lang-switcher">
-    <button data-lang="en" class="active">EN</button>
-    <button data-lang="zh">中文</button>
-    <button data-lang="de">DE</button>
+  <div class="nav-container">
+    <a href="#" class="nav-brand">
+      <i class="fas fa-table-tennis"></i>
+      Yu Tennis Academy
+    </a>
+    <div class="nav-links">
+      <a href="#training">Training Plan</a>
+      <a href="#ranking">ATP Rankings</a>
+      <a href="#technique">Technique</a>
+      <a href="#clubs">Find Clubs</a>
+    </div>
   </div>
 </nav>
 
-<section id="training">
-  <h2 id="train-title">🎯 Training Goals</h2>
-  <div style="text-align:center;margin-bottom:1rem;">
-    <select id="goalCategory">
-      <option value="serve">Serve</option>
-      <option value="fitness">Fitness</option>
-      <option value="mental">Mental</option>
-    </select>
-    <input id="newGoalText" placeholder="Add new goal...">
-    <button id="addGoalBtn">Add</button>
-  </div>
-  <div id="goalsContainer"></div>
-</section>
+<div class="hero">
+  <h1>Professional Tennis Training</h1>
+  <p>Systematic approach to elevate your game to the next level</p>
+</div>
 
-<section id="ranking">
-  <h2 id="rank-title">🌍 ATP Ranking (Live)</h2>
-  <ul id="atpList" style="list-style:none;text-align:center;">Loading…</ul>
-</section>
+<div class="container">
+  <!-- Training Plan Section -->
+  <section id="training" class="section">
+    <h2 class="section-title">Personalized Training Plan</h2>
+    <div class="training-plan-section">
+      <div class="plan-header">
+        <h3>Select Your Level</h3>
+        <div class="plan-level-selector">
+          <button class="level-btn active" data-level="beginner">Beginner</button>
+          <button class="level-btn" data-level="intermediate">Intermediate</button>
+          <button class="level-btn" data-level="advanced">Advanced</button>
+          <button class="level-btn" data-level="competitive">Competitive</button>
+        </div>
+      </div>
+      
+      <div class="training-phases" id="trainingPhases">
+        <!-- Phases will be dynamically generated -->
+      </div>
+    </div>
+  </section>
 
-<section id="tech">
-  <h2 id="tech-title">🎾 Technical Analysis</h2>
-  <div class="tech-card">
-    <h3>Serve Mechanics</h3>
-    <img src="https://media.giphy.com/media/26tPoyDhjiJ2g7rEs/giphy.gif" alt="Serve mechanics">
-    <p>Power flow: legs → hips → shoulders → racket head → follow-through.</p>
-    <iframe src="https://www.youtube.com/embed/ycwR6CzUe6E" title="Serve tutorial" frameborder="0" allowfullscreen></iframe>
-  </div>
-  <div class="tech-card">
-    <h3>Backhand Slice</h3>
-    <img src="https://media.giphy.com/media/l0MYt5jPR6QX5pnqM/giphy.gif" alt="Backhand slice">
-    <p>Open racket face, cut down slightly under the ball, maintain balance.</p>
-    <iframe src="https://www.youtube.com/embed/zK9uXrNEn4Q" title="Backhand slice tutorial" frameborder="0" allowfullscreen></iframe>
-  </div>
-</section>
+  <!-- ATP Rankings -->
+  <section id="ranking" class="section">
+    <h2 class="section-title">ATP World Rankings</h2>
+    <div class="ranking-grid" id="rankingGrid">
+      <div class="rank-card skeleton" style="height: 100px;"></div>
+      <div class="rank-card skeleton" style="height: 100px;"></div>
+      <div class="rank-card skeleton" style="height: 100px;"></div>
+    </div>
+  </section>
 
-<section id="brands">
-  <h2 id="brand-title">🏷️ Tennis Brands</h2>
-  <div class="brand-grid">
-    <a href="https://www.wilson.com/de-de" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/2/24/Wilson_logo.svg"><p>Wilson</p></a>
-    <a href="https://www.head.com/de_DE" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/8/8f/Head_logo.svg"><p>Head</p></a>
-    <a href="https://www.babolat.com/de" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Babolat_logo.svg"><p>Babolat</p></a>
-    <a href="https://www.yonex.com/" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/7/7a/Yonex_logo.svg"><p>Yonex</p></a>
-  </div>
-</section>
+  <!-- Technique Tips -->
+  <section id="technique" class="section">
+    <h2 class="section-title">Professional Technique Tips</h2>
+    <div class="tips-grid">
+      <div class="tip-card animate-in">
+        <div class="tip-icon">
+          <i class="fas fa-serve"></i>
+        </div>
+        <h3>Power Serve</h3>
+        <p>Focus on the kinetic chain: start with your legs, rotate your hips, then shoulders. The power comes from your whole body, not just your arm. Practice trophy position daily.</p>
+      </div>
+      
+      <div class="tip-card animate-in">
+        <div class="tip-icon">
+          <i class="fas fa-arrows-alt-h"></i>
+        </div>
+        <h3>Footwork Patterns</h3>
+        <p>Master the split step timing. Land on the balls of your feet as your opponent makes contact. Practice ladder drills and cone exercises for explosive first steps.</p>
+      </div>
+      
+      <div class="tip-card animate-in">
+        <div class="tip-icon">
+          <i class="fas fa-brain"></i>
+        </div>
+        <h3>Mental Toughness</h3>
+        <p>Develop pre-point rituals. Take deep breaths between points. Focus on the process, not the score. Visualize successful shots during changeovers.</p>
+      </div>
+    </div>
+  </section>
 
-<section id="clubs">
-  <h2 id="club-title">🇩🇪 German Tennis Clubs</h2>
-  <div style="text-align:center;margin-bottom:1rem;">
-    <input type="text" id="cityInput" placeholder="Enter city (e.g. Berlin)">
-    <button id="searchClubsBtn">Search</button>
-  </div>
-  <div id="map"></div>
-</section>
+  <!-- Equipment Partners -->
+  <section id="equipment" class="section">
+    <h2 class="section-title">Equipment Partners</h2>
+    <div class="equipment-grid">
+      <a href="https://www.wilson.com" target="_blank" class="equipment-card">
+        <div class="equipment-icon">W</div>
+        <h4>Wilson</h4>
+        <p>Professional racquets and strings</p>
+      </a>
+      <a href="https://www.head.com" target="_blank" class="equipment-card">
+        <div class="equipment-icon">H</div>
+        <h4>Head</h4>
+        <p>Innovation in tennis technology</p>
+      </a>
+      <a href="https://www.babolat.com" target="_blank" class="equipment-card">
+        <div class="equipment-icon">B</div>
+        <h4>Babolat</h4>
+        <p>French tennis expertise</p>
+      </a>
+      <a href="https://www.yonex.com" target="_blank" class="equipment-card">
+        <div class="equipment-icon">Y</div>
+        <h4>Yonex</h4>
+        <p>Precision engineering</p>
+      </a>
+    </div>
+  </section>
 
-<footer style="text-align:center;color:white;padding:2rem;">© 2025 Yu – Tennis Hub</footer>
+  <!-- Map Section -->
+  <section id="clubs" class="section">
+    <h2 class="section-title">Find Tennis Clubs</h2>
+    <div class="map-container">
+      <div class="map-controls">
+        <input type="text" class="map-input" id="cityInput" placeholder="Enter city name...">
+        <button class="map-btn" id="searchBtn"><i class="fas fa-search"></i> Search</button>
+        <button class="map-btn" id="locateBtn"><i class="fas fa-map-marker-alt"></i> My Location</button>
+      </div>
+      <div id="map"></div>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="footer-content">
+    <div class="social-links">
+      <a href="#"><i class="fab fa-facebook"></i></a>
+      <a href="#"><i class="fab fa-instagram"></i></a>
+      <a href="#"><i class="fab fa-twitter"></i></a>
+      <a href="#"><i class="fab fa-youtube"></i></a>
+    </div>
+    <p>&copy; 2025 Yu Tennis Academy. Excellence in every match.</p>
+  </div>
+</footer>
+
+<div class="toast" id="toast">
+  <i class="fas fa-check-circle"></i> <span id="toastMessage">Success!</span>
+</div>
 
 <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
 <script>
-/* === 1. Training Goals === */
-const catNames={serve:"Serve",fitness:"Fitness",mental:"Mental"};
-let goals=JSON.parse(localStorage.getItem('tennis_goals')||'[]');
-const gc=document.getElementById('goalsContainer');
-function saveGoals(){localStorage.setItem('tennis_goals',JSON.stringify(goals));}
-function renderGoals(){
-  gc.innerHTML='';
-  goals.forEach((g,i)=>{
-    gc.innerHTML+=`
-    <div class="goal">
-      <strong>[${catNames[g.category]}]</strong> ${g.text}<br>
-      <progress value="${g.progress}" max="100"></progress> ${g.progress}%
-      <button onclick="inc(${i})">+10%</button>
-      <button onclick="del(${i})">🗑️</button>
-    </div>`;
-  });
-}
-function inc(i){goals[i].progress=Math.min(100,goals[i].progress+10);saveGoals();renderGoals();}
-function del(i){goals.splice(i,1);saveGoals();renderGoals();}
-document.getElementById('addGoalBtn').onclick=()=>{
-  const t=document.getElementById('newGoalText').value.trim();
-  const c=document.getElementById('goalCategory').value;
-  if(!t)return;goals.push({text:t,category:c,progress:0});saveGoals();renderGoals();
-  document.getElementById('newGoalText').value='';
+// Training Plans Data
+const trainingPlans = {
+  beginner: {
+    name: "Beginner Program",
+    phases: [
+      {
+        phase: 1,
+        title: "Foundation Building",
+        duration: "Weeks 1-4",
+        goals: [
+          {
+            type: "technique",
+            icon: "🎾",
+            title: "Basic Grip & Stance",
+            description: "Master continental and eastern grips, ready position",
+            progress: 0
+          },
+          {
+            type: "fitness",
+            icon: "💪",
+            title: "Baseline Fitness",
+            description: "30min cardio 3x/week, basic strength training",
+            progress: 0
+          },
+          {
+            type: "mental",
+            icon: "🧠",
+            title: "Court Awareness",
+            description: "Learn scoring system, basic rules and etiquette",
+            progress: 0
+          }
+        ]
+      },
+      {
+        phase: 2,
+        title: "Skill Development",
+        duration: "Weeks 5-8",
+        goals: [
+          {
+            type: "serve",
+            icon: "🎯",
+            title: "Basic Serve Motion",
+            description: "Consistent toss, continental grip, 60% first serve",
+            progress: 0
+          },
+          {
+            type: "technique",
+            icon: "🎾",
+            title: "Groundstroke Consistency",
+            description: "Rally 10+ shots cross-court with control",
+            progress: 0
+          },
+          {
+            type: "fitness",
+            icon: "💪",
+            title: "Agility Training",
+            description: "Ladder drills, cone exercises 2x/week",
+            progress: 0
+          }
+        ]
+      },
+      {
+        phase: 3,
+        title: "Match Preparation",
+        duration: "Weeks 9-12",
+        goals: [
+          {
+            type: "technique",
+            icon: "🎾",
+            title: "All-Court Play",
+            description: "Volleys, overheads, approach shots",
+            progress: 0
+          },
+          {
+            type: "mental",
+            icon: "🧠",
+            title: "Match Strategy",
+            description: "Basic patterns, shot selection, point construction",
+            progress: 0
+          },
+          {
+            type: "serve",
+            icon: "🎯",
+            title: "Second Serve Development",
+            description: "Reliable second serve with spin",
+            progress: 0
+          }
+        ]
+      }
+    ]
+  },
+  intermediate: {
+    name: "Intermediate Program",
+    phases: [
+      {
+        phase: 1,
+        title: "Technical Refinement",
+        duration: "Weeks 1-4",
+        goals: [
+          {
+            type: "technique",
+            icon: "🎾",
+            title: "Spin Mastery",
+            description: "Consistent topspin and slice on both wings",
+            progress: 0
+          },
+          {
+            type: "serve",
+            icon: "🎯",
+            title: "Serve Variety",
+            description: "Flat, slice, and kick serves to all boxes",
+            progress: 0
+          },
+          {
+            type: "fitness",
+            icon: "💪",
+            title: "Power Development",
+            description: "Plyometric training, medicine ball exercises",
+            progress: 0
+          }
+        ]
+      },
+      {
+        phase: 2,
+        title: "Tactical Development",
+        duration: "Weeks 5-8",
+        goals: [
+          {
+            type: "mental",
+            icon: "🧠",
+            title: "Pattern Recognition",
+            description: "Identify opponent weaknesses, adjust strategy",
+            progress: 0
+          },
+          {
+            type: "technique",
+            icon: "🎾",
+            title: "Transition Game",
+            description: "Approach shots, split-step timing, net play",
+            progress: 0
+          },
+          {
+            type: "fitness",
+            icon: "💪",
+            title: "Match Endurance",
+            description: "90min+ practice sessions, interval training",
+            progress: 0
+          }
+        ]
+      },
+      {
+        phase: 3,
+        title: "Competition Focus",
+        duration: "Weeks 9-12",
+        goals: [
+          {
+            type: "serve",
+            icon: "🎯",
+            title: "Serve Percentage",
+            description: "70%+ first serve, 85%+ second serve",
+            progress: 0
+          },
+          {
+            type: "mental",
+            icon: "🧠",
+            title: "Mental Resilience",
+            description: "Comeback scenarios, pressure situations",
+            progress: 0
+          },
+          {
+            type: "technique",
+            icon: "🎾",
+            title: "Specialty Shots",
+            description: "Drop shots, lobs, passing shots",
+            progress: 0
+          }
+        ]
+      }
+    ]
+  },
+  advanced: {
+    name: "Advanced Program",
+    phases: [
+      {
+        phase: 1,
+        title: "Elite Performance",
+        duration: "Weeks 1-4",
+        goals: [
+          {
+            type: "serve",
+            icon: "🎯",
+            title: "Serve Domination",
+            description: "120+ mph first serve, precise placement",
+            progress: 0
+          },
+          {
+            type: "fitness",
+            icon: "💪",
+            title: "Peak Conditioning",
+            description: "Sport-specific training, recovery protocols",
+            progress: 0
+          },
+          {
+            type: "technique",
+            icon: "🎾",
+            title: "Weapon Development",
+            description: "Maximize your strongest shot patterns",
+            progress: 0
+          }
+        ]
+      },
+      {
+        phase: 2,
+        title: "Strategic Mastery",
+        duration: "Weeks 5-8",
+        goals: [
+          {
+            type: "mental",
+            icon: "🧠",
+            title: "Match Analysis",
+            description: "Video review, opponent scouting, game plans",
+            progress: 0
+          },
+          {
+            type: "technique",
+            icon: "🎾",
+            title: "All-Surface Adaptation",
+            description: "Clay, grass, hard court specific strategies",
+            progress: 0
+          },
+          {
+            type: "serve",
+            icon: "🎯",
+            title: "Clutch Serving",
+            description: "Break points, game points execution",
+            progress: 0
+          }
+        ]
+      },
+      {
+        phase: 3,
+        title: "Tournament Preparation",
+        duration: "Weeks 9-12",
+        goals: [
+          {
+            type: "mental",
+            icon: "🧠",
+            title: "Championship Mindset",
+            description: "Visualization, routine optimization",
+            progress: 0
+          },
+          {
+            type: "fitness",
+            icon: "💪",
+            title: "Tournament Readiness",
+            description: "Multiple match days, quick recovery",
+            progress: 0
+          },
+          {
+            type: "technique",
+            icon: "🎾",
+            title: "Pressure Execution",
+            description: "Tie-breaks, third sets, crucial points",
+            progress: 0
+          }
+        ]
+      }
+    ]
+  },
+  competitive: {
+    name: "Competitive Program",
+    phases: [
+      {
+        phase: 1,
+        title: "Professional Standards",
+        duration: "Weeks 1-4",
+        goals: [
+          {
+            type: "serve",
+            icon: "🎯",
+            title: "ATP-Level Serving",
+            description: "130+ mph serves, 75%+ first serve percentage",
+            progress: 0
+          },
+          {
+            type: "fitness",
+            icon: "💪",
+            title: "Elite Athletics",
+            description: "Professional fitness testing standards",
+            progress: 0
+          },
+          {
+            type: "mental",
+            icon: "🧠",
+            title: "Professional Habits",
+            description: "Nutrition, sleep, recovery optimization",
+            progress: 0
+          }
+        ]
+      },
+      {
+        phase: 2,
+        title: "High-Performance Training",
+        duration: "Weeks 5-8",
+        goals: [
+          {
+            type: "technique",
+            icon: "🎾",
+            title: "Technical Innovation",
+            description: "Develop unique playing style and patterns",
+            progress: 0
+          },
+          {
+            type: "mental",
+            icon: "🧠",
+            title: "Mental Coach Work",
+            description: "Sports psychology, performance routines",
+            progress: 0
+          },
+          {
+            type: "fitness",
+            icon: "💪",
+            title: "Injury Prevention",
+            description: "Prehab, mobility, strength balance",
+            progress: 0
+          }
+        ]
+      },
+      {
+        phase: 3,
+        title: "Competition Circuit",
+        duration: "Weeks 9-12",
+        goals: [
+          {
+            type: "serve",
+            icon: "🎯",
+            title: "Match Statistics",
+            description: "Top 20% in serve stats for your level",
+            progress: 0
+          },
+          {
+            type: "technique",
+            icon: "🎾",
+            title: "Live Ball Training",
+            description: "Point play 80% of practice time",
+            progress: 0
+          },
+          {
+            type: "mental",
+            icon: "🧠",
+            title: "Tournament Management",
+            description: "Travel, scheduling, peak performance timing",
+            progress: 0
+          }
+        ]
+      }
+    ]
+  }
 };
-renderGoals();
 
-/* === 2. ATP Ranking === */
-const atpList=document.getElementById('atpList');
-const fallback=[
- {rank:1,name:"Novak Djokovic",country:"SRB",points:9960},
- {rank:2,name:"Jannik Sinner",country:"ITA",points:8800},
- {rank:3,name:"Carlos Alcaraz",country:"ESP",points:8400}
+// Current selected level
+let currentLevel = 'beginner';
+
+// Show toast notification
+function showToast(message) {
+  const toast = document.getElementById('toast');
+  document.getElementById('toastMessage').textContent = message;
+  toast.classList.add('show');
+  setTimeout(() => {
+    toast.classList.remove('show');
+  }, 3000);
+}
+
+// Render training phases
+function renderTrainingPhases() {
+  const container = document.getElementById('trainingPhases');
+  const plan = trainingPlans[currentLevel];
+  
+  container.innerHTML = plan.phases.map((phase, phaseIndex) => `
+    <div class="phase-card animate-in" style="animation-delay: ${phaseIndex * 0.1}s">
+      <div class="phase-header">
+        <div class="phase-number">${phase.phase}</div>
+        <div class="phase-title">
+          <h3>${phase.title}</h3>
+          <div class="phase-duration">${phase.duration}</div>
+        </div>
+      </div>
+      <div class="phase-goals">
+        ${phase.goals.map((goal, goalIndex) => `
+          <div class="goal-item">
+            <div class="goal-icon ${goal.type}">${goal.icon}</div>
+            <div class="goal-content">
+              <h4>${goal.title}</h4>
+              <p>${goal.description}</p>
+            </div>
+            <div class="goal-status">
+              <svg class="progress-ring" viewBox="0 0 44 44">
+                <circle class="progress-bg" cx="22" cy="22" r="20" stroke-width="4"></circle>
+                <circle class="progress-fill" cx="22" cy="22" r="20" stroke-width="4"
+                        style="stroke-dashoffset: ${126 - (goal.progress / 100) * 126}"></circle>
+              </svg>
+              <span class="progress-text">${goal.progress}%</span>
+            </div>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `).join('');
+}
+
+// Level selector
+document.querySelectorAll('.level-btn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    document.querySelectorAll('.level-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    currentLevel = btn.dataset.level;
+    renderTrainingPhases();
+    showToast(`Switched to ${trainingPlans[currentLevel].name}`);
+  });
+});
+
+// ATP Rankings
+const rankings = [
+  { rank: 1, name: "Jannik Sinner", country: "ITA", points: 11830, trend: "up" },
+  { rank: 2, name: "Carlos Alcaraz", country: "ESP", points: 8855, trend: "up" },
+  { rank: 3, name: "Alexander Zverev", country: "GER", points: 7915, trend: "same" },
+  { rank: 4, name: "Daniil Medvedev", country: "RUS", points: 6520, trend: "down" },
+  { rank: 5, name: "Andrey Rublev", country: "RUS", points: 5200, trend: "up" },
+  { rank: 6, name: "Taylor Fritz", country: "USA", points: 4300, trend: "up" },
+  { rank: 7, name: "Casper Ruud", country: "NOR", points: 4100, trend: "down" },
+  { rank: 8, name: "Hubert Hurkacz", country: "POL", points: 3995, trend: "same" }
 ];
-function showRank(list){
-  atpList.innerHTML='';
-  list.forEach(p=>{
-    const li=document.createElement('li');
-    li.textContent=`${p.rank}. ${p.name} (${p.country}) — ${p.points} pts`;
-    atpList.appendChild(li);
-  });
+
+function renderRankings() {
+  const container = document.getElementById('rankingGrid');
+  
+  setTimeout(() => {
+    container.innerHTML = rankings.map((player, index) => `
+      <div class="rank-card animate-in" style="animation-delay: ${index * 0.1}s">
+        <div class="rank-number">${player.rank}</div>
+        <div class="player-info">
+          <h4>${player.name}</h4>
+          <div class="player-details">
+            <img src="https://flagcdn.com/24x16/${player.country.toLowerCase().slice(0,2)}.png" 
+                 alt="${player.country}" class="player-flag"
+                 onerror="this.style.display='none'">
+            <span>${player.country}</span>
+          </div>
+        </div>
+        <div class="player-stats">
+          <div class="points">${player.points.toLocaleString()}</div>
+          <div class="trend ${player.trend}">
+            ${player.trend === 'up' ? '↑ Rising' : player.trend === 'down' ? '↓ Falling' : '→ Stable'}
+          </div>
+        </div>
+      </div>
+    `).join('');
+  }, 500);
 }
-fetch("https://api-tennis.com/rankings?key=YOUR_API_KEY")
- .then(r=>r.ok?r.json():Promise.reject())
- .then(d=>{
-   const list=d?.data?.atp?.slice(0,10)||fallback;
-   showRank(list);
- })
- .catch(()=>showRank(fallback));
 
-/* === 3. Map === */
-const map=L.map('map').setView([51.1657,10.4518],6);
-L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
- {attribution:'© OpenStreetMap'}).addTo(map);
-document.getElementById('searchClubsBtn').onclick=()=>{
-  const city=document.getElementById('cityInput').value.trim();
-  if(!city)return alert("Enter city");
-  fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(city+', Germany')}`)
-   .then(r=>r.json()).then(res=>{
-     if(!res.length)return alert("City not found");
-     const {lat,lon}=res[0];
-     map.setView([lat,lon],13);
-     L.marker([lat,lon]).addTo(map).bindPopup(`${city} Tennis Club`).openPopup();
-   });
-};
+// Map initialization
+const map = L.map('map').setView([51.1657, 10.4518], 6);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '© OpenStreetMap contributors'
+}).addTo(map);
 
-/* === 4. Language Switch === */
-const dict={
- en:{train:"🎯 Training Goals",rank:"🌍 ATP Ranking (Live)",tech:"🎾 Technical Analysis",brand:"🏷️ Tennis Brands",club:"🇩🇪 German Tennis Clubs"},
- zh:{train:"🎯 训练目标",rank:"🌍 ATP 实时排名",tech:"🎾 技术分析",brand:"🏷️ 网球品牌",club:"🇩🇪 德国网球俱乐部"},
- de:{train:"🎯 Trainingsziele",rank:"🌍 ATP-Rangliste (Live)",tech:"🎾 Technikanalyse",brand:"🏷️ Tennis-Marken",club:"🇩🇪 Deutsche Tennisclubs"}
-};
-document.querySelectorAll('.lang-switcher button').forEach(b=>{
-  b.onclick=()=>{
-    document.querySelectorAll('.lang-switcher button').forEach(x=>x.classList.remove('active'));
-    b.classList.add('active');
-    const l=b.dataset.lang;const t=dict[l];
-    document.getElementById('train-title').textContent=t.train;
-    document.getElementById('rank-title').textContent=t.rank;
-    document.getElementById('tech-title').textContent=t.tech;
-    document.getElementById('brand-title').textContent=t.brand;
-    document.getElementById('club-title').textContent=t.club;
-  };
+// Custom marker
+const tennisIcon = L.divIcon({
+  html: '<i class="fas fa-map-marker-alt" style="color: #f39c12; font-size: 2rem;"></i>',
+  iconSize: [30, 30],
+  className: 'tennis-marker'
+});
+
+// Search functionality
+document.getElementById('searchBtn').addEventListener('click', searchCity);
+document.getElementById('cityInput').addEventListener('keypress', (e) => {
+  if (e.key === 'Enter') searchCity();
+});
+
+function searchCity() {
+  const city = document.getElementById('cityInput').value.trim();
+  if (!city) return;
+  
+  fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(city + ', Germany')}`)
+    .then(res => res.json())
+    .then(results => {
+      if (results.length > 0) {
+        const { lat, lon } = results[0];
+        map.setView([lat, lon], 13);
+        L.marker([lat, lon], { icon: tennisIcon })
+          .addTo(map)
+          .bindPopup(`<strong>Tennis clubs in ${city}</strong>`)
+          .openPopup();
+        showToast(`Found tennis clubs near ${city}`);
+      } else {
+        showToast('City not found. Please try another search.');
+      }
+    })
+    .catch(err => showToast('Error searching. Please try again.'));
+}
+
+// Geolocation
+document.getElementById('locateBtn').addEventListener('click', () => {
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const { latitude, longitude } = position.coords;
+        map.setView([latitude, longitude], 13);
+        L.marker([latitude, longitude], { icon: tennisIcon })
+          .addTo(map)
+          .bindPopup('<strong>Your Location</strong>')
+          .openPopup();
+        showToast('Showing tennis clubs near your location');
+      },
+      () => showToast('Unable to get your location.')
+    );
+  } else {
+    showToast('Geolocation is not supported by your browser.');
+  }
+});
+
+// Initialize
+renderTrainingPhases();
+renderRankings();
+
+// Intersection observer for animations
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('animate-in');
+    }
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('.tip-card, .equipment-card').forEach(el => {
+  observer.observe(el);
 });
 </script>
 </body>

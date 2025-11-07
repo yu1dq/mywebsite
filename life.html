@@ -1,142 +1,114 @@
 <!DOCTYPE html>
-<html lang="zh-CN"> <head>
+<html lang="zh-CN">
+<head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Yu - Life Journal</title>
   <style>
-    /* --- 全局与字体 --- */
     :root {
-      /* 优化：定义颜色变量，方便统一修改 */
       --primary-color: #667eea;
       --secondary-color: #764ba2;
       --light-bg: #f5f6fa;
       --text-color: #333;
       --card-bg: #ffffff;
     }
-
-    /* 优化：平滑滚动 */
-    html {
-      scroll-behavior: smooth;
-    }
-
+    html { scroll-behavior: smooth; }
     body {
       font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
       margin: 0;
       padding: 0;
       background: var(--light-bg);
       color: var(--text-color);
-      line-height: 1.6; /* 优化：设置全局行高 */
+      line-height: 1.6;
     }
-
-    /* --- 头部 Header --- */
     header {
       background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
       color: white;
       text-align: center;
-      padding: 4rem 1rem; /* 优化：增加内边距使其更大气 */
+      padding: 4rem 1rem;
     }
-
     header h1 {
       margin: 0;
-      font-size: 2.8rem; /* 优化：稍稍增大 */
+      font-size: 2.8rem;
       font-weight: 700;
-      text-shadow: 0 2px 5px rgba(0,0,0,0.2); /* 优化：增加文字阴影 */
+      text-shadow: 0 2px 5px rgba(0,0,0,0.2);
     }
-
-    /* 优化：为头部添加副标题 */
     header p {
       font-size: 1.1rem;
       opacity: 0.9;
       margin-top: 0.5rem;
     }
-
-    /* --- 导航栏 Nav --- */
     nav {
       background: var(--card-bg);
-      box-shadow: 0 4px 12px rgba(0,0,0,0.08); /* 优化：阴影更柔和 */
+      box-shadow: 0 4px 12px rgba(0,0,0,0.08);
       display: flex;
       justify-content: center;
-      flex-wrap: wrap; /* 优化：允许换行以适应小屏幕 */
-      gap: 1rem 2rem; /* 优化：调整间距 */
+      flex-wrap: wrap;
+      gap: 1rem 2rem;
       padding: 1rem;
       position: sticky;
       top: 0;
       z-index: 100;
-      border-bottom: 1px solid #eee; /* 优化：增加细微边界 */
+      border-bottom: 1px solid #eee;
     }
-
     nav a {
       text-decoration: none;
       color: var(--primary-color);
       font-weight: 600;
-      padding: 0.5rem 1rem; /* 优化：增加点击区域 */
-      border-radius: 20px; /* 优化：圆角 */
+      padding: 0.5rem 1rem;
+      border-radius: 20px;
       transition: all 0.3s ease;
     }
-
     nav a:hover, nav a:focus {
       color: var(--secondary-color);
-      background-color: #f0f2f8; /* 优化：增加悬停背景色 */
+      background-color: #f0f2f8;
     }
-
-    /* --- 内容区块 Section --- */
     section {
-      padding: 4rem 2rem; /* 优化：调整内边距 */
+      padding: 4rem 2rem;
       max-width: 1000px;
       margin: 0 auto;
     }
-
     h2 {
       text-align: center;
       color: var(--primary-color);
-      font-size: 2.2rem; /* 优化：增大 */
-      margin-bottom: 3rem; /* 优化：增加与下方内容的间距 */
+      font-size: 2.2rem;
+      margin-bottom: 3rem;
     }
-
-    /* --- 卡片 Card --- */
     .card {
-      background: var(--card-bg); /* 优化：修复 - 必须有背景色才能显示阴影 */
+      background: var(--card-bg);
       border-radius: 15px;
-      box-shadow: 0 5px 20px rgba(0,0,0,0.08); /* 优化：柔和阴影 */
+      box-shadow: 0 5px 20px rgba(0,0,0,0.08);
       padding: 2rem;
       margin-bottom: 2rem;
       line-height: 1.8;
-      transition: all 0.3s ease; /* 优化：为悬停添加过渡 */
+      transition: all 0.3s ease;
     }
-
-    /* 优化：为普通卡片添加悬停效果 */
     .card:hover {
       transform: translateY(-5px);
       box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     }
-
-    /* --- 按钮样式 (CTA Button) --- */
     .cta-btn {
       display: inline-block;
       margin-top: 1rem;
-      padding: 0.8rem 2.2rem; /* 优化：调整内边距 */
+      padding: 0.8rem 2.2rem;
       background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
-      color: white; /* 优化：修复 - pink 颜色对比度低且不搭 */
+      color: white;
       text-decoration: none;
       border-radius: 30px;
       font-weight: 600;
       transition: all 0.3s ease;
     }
-
     .cta-btn:hover {
       background: linear-gradient(135deg, var(--secondary-color), #f093fb);
-      transform: translateY(-3px); /* 优化：悬停上浮 */
+      transform: translateY(-3px);
       box-shadow: 0 5px 15px rgba(118, 75, 162, 0.3);
     }
-    
-    /* --- Sports Section --- */
     .sports-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
       gap: 2rem;
       margin-top: 2rem;
     }
-
     .sport-card {
       background: var(--card-bg);
       border-radius: 20px;
@@ -144,146 +116,89 @@
       text-align: center;
       padding: 2rem 1rem;
       cursor: pointer;
-      transition: all 0.3s ease; /* 优化：规范过渡 */
+      transition: all 0.3s ease;
     }
-
     .sport-card:hover {
       transform: scale(1.07);
       box-shadow: 0 10px 30px rgba(102,126,234,0.3);
     }
-
     .sport-card .emoji {
       font-size: 3rem;
       margin-bottom: 1rem;
-      transition: transform 0.3s ease; /* 优化：为 emoji 增加过渡 */
+      transition: transform 0.3s ease;
     }
     .sport-card:hover .emoji {
-      transform: scale(1.2) rotate(5deg); /* 优化：悬停时 emoji 动效 */
+      transform: scale(1.2) rotate(5deg);
     }
-
     .sport-card h3 {
       color: var(--primary-color);
       font-weight: 700;
       font-size: 1.3rem;
       margin: 0;
     }
-
-    /* --- Music Section --- */
     .music-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 2rem;
       margin-top: 2rem;
     }
-
     .music-card {
       background: var(--card-bg);
       border-radius: 15px;
       box-shadow: 0 5px 20px rgba(0,0,0,0.08);
-      overflow: hidden; /* 确保图片圆角生效 */
+      overflow: hidden;
       transition: all 0.3s ease;
     }
-
     .music-card:hover {
       transform: translateY(-5px);
       box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     }
-
     .music-card img {
       width: 100%;
       height: auto;
       display: block;
-      /* 优化：如果图片比例不一，可以取消注释下面两行来裁剪 */
-      /* height: 220px; */
-      /* object-fit: cover; */
     }
-
     .music-card h3 {
       font-size: 1.2rem;
       color: var(--primary-color);
       margin: 1rem 1.5rem 0.2rem;
     }
-    
     .music-card p {
       font-size: 0.9rem;
       color: #777;
       margin: 0 1.5rem 1.5rem;
     }
-
-    /* --- 页脚 Footer --- */
-    /* 优化：添加页脚样式 */
     footer {
       text-align: center;
       padding: 3rem 1rem;
       margin-top: 3rem;
-      background: #eef1f5; /* 优化：使用稍暗的背景 */
+      background: #eef1f5;
       color: #888;
       border-top: 1px solid #ddd;
     }
-
-    /* --- 动画效果 --- */
-    /* 优化：为卡片添加入场动画 */
     @keyframes fadeIn {
       from { opacity: 0; transform: translateY(20px); }
       to { opacity: 1; transform: translateY(0); }
     }
-
-    /* 将动画应用到卡片和网格 */
-    .card, .sports-grid, .music-grid { /* 将 .music-grid 也加入动画 */
+    .card, .sports-grid, .music-grid {
       animation: fadeIn 0.6s ease-out forwards;
-      /* 保持动画结束状态 */
     }
-    
-    /* --- 响应式设计 --- */
     @media (max-width: 768px) {
       header { padding: 3rem 1rem; }
       header h1 { font-size: 2.2rem; }
       header p { font-size: 1rem; }
-      
-      nav {
-        gap: 0.5rem 1rem; /* 缩小导航间距 */
-        padding: 1rem 0.5rem;
-      }
-      nav a {
-        padding: 0.5rem 0.8rem;
-      }
-
-      section {
-        padding: 3rem 1rem; /* 减少手机端边距 */
-      }
-
-      h2 {
-        font-size: 1.8rem;
-      }
-
-      /* 优化：在手机上，体育卡片可以设置2列 */
-      .sports-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 1rem;
-      }
-      .sport-card {
-        padding: 1.5rem 0.5rem;
-      }
-      .sport-card .emoji {
-        font-size: 2.5rem;
-      }
-      .sport-card h3 {
-        font-size: 1.1rem;
-      }
-
-      /* 优化：音乐卡片在手机上也设置2列 */
-      .music-grid {
-        grid-template-columns: 1fr 1fr;
-        gap: 1rem;
-      }
-      .music-card h3 {
-        font-size: 1rem;
-      }
-      .music-card p {
-        font-size: 0.8rem;
-      }
+      nav { gap: 0.5rem 1rem; padding: 1rem 0.5rem; }
+      nav a { padding: 0.5rem 0.8rem; }
+      section { padding: 3rem 1rem; }
+      h2 { font-size: 1.8rem; }
+      .sports-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+      .sport-card { padding: 1.5rem 0.5rem; }
+      .sport-card .emoji { font-size: 2.5rem; }
+      .sport-card h3 { font-size: 1.1rem; }
+      .music-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+      .music-card h3 { font-size: 1rem; }
+      .music-card p { font-size: 0.8rem; }
     }
-
   </style>
 </head>
 <body>
@@ -298,6 +213,7 @@
     <a href="#sports">Sports</a>
     <a href="#music">Music</a>
     <a href="#health">Health</a>
+    <a href="#fashion">Fashion</a>
     <a href="#diary">Diary</a>
   </nav>
 
@@ -308,9 +224,8 @@
     </div>
   </section>
 
-   <section id="sports">
+  <section id="sports">
     <h2>🎾 Sports</h2>
-      
     <div class="sports-grid">
       <div class="sport-card" onclick="window.open('tennis.html', '_blank')">
         <div class="emoji">🎾</div>
@@ -332,7 +247,6 @@
     <div class="card">
       <p>Music creation, appreciation, and practice logs. Currently listening to...</p>
     </div>
-    
     <div class="music-grid">
       <div class="music-card">
         <img src="https://via.placeholder.com/300x300/667eea/ffffff?text=Album+Art+1" alt="Album Art 1">
@@ -351,6 +265,7 @@
       </div>
     </div>
   </section>
+
   <section id="health">
     <h2>🥗 Health</h2>
     <div class="card">
@@ -358,10 +273,19 @@
     </div>
   </section>
 
+  <!-- 👗 新增 Fashion Section -->
+  <section id="fashion">
+    <h2>👗 Fashion</h2>
+    <div class="card">
+      <p>Explore interactive outfit layers — from elegant outerwear to delicate innerwear. Hover and slide to reveal each look.</p>
+      <a href="fashion.html" target="_blank" class="cta-btn">Open Fashion Showcase</a>
+    </div>
+  </section>
+
   <section id="diary">
     <h2>📖 Diary</h2>
     <div class="card">
-       <p>A private calendar to organize thoughts and track milestones.</p>
+      <p>A private calendar to organize thoughts and track milestones.</p>
       <a href="diary.html" class="cta-btn">Open My Calendar</a>
     </div>
   </section>
@@ -369,6 +293,5 @@
   <footer>
     <p>© 2024 Yu. Growing every day 🌱</p>
   </footer>
-
 </body>
 </html>

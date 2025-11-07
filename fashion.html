@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Fashion Layers</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #f9f4f4, #ececec);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      font-family: "Helvetica Neue", sans-serif;
+    }
+
+    .model-container {
+      position: relative;
+      width: 420px;
+      height: 600px;
+      overflow: hidden;
+      border-radius: 12px;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+    }
+
+    .layer {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .layer.active {
+      opacity: 1;
+    }
+
+    .hotspot {
+      position: absolute;
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      background-color: rgba(255, 255, 255, 0.8);
+      border: 2px solid #ff0077;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+    }
+
+    .hotspot:hover {
+      transform: scale(1.2);
+    }
+
+    .tooltip {
+      position: fixed;
+      background: rgba(0,0,0,0.8);
+      color: #fff;
+      padding: 6px 10px;
+      border-radius: 6px;
+      font-size: 14px;
+      pointer-events: none;
+      white-space: nowrap;
+      transform: translate(-50%, -130%);
+      opacity: 0;
+      animation: fadeIn 0.2s forwards;
+    }
+
+    @keyframes fadeIn {
+      to { opacity: 1; }
+    }
+
+    .title {
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: white;
+      background: rgba(0,0,0,0.4);
+      padding: 8px 18px;
+      border-radius: 8px;
+      font-weight: 500;
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="model-container" id="model">
+    <!-- 模特三层图（示意图占位） -->
+    <img src="https://images.unsplash.com/photo-1520975940934-56e8a8399d2d?w=800" class="layer active">
+    <img src="https://images.unsplash.com/photo-1520975733020-6da1a6b0c6e0?w=800" class="layer">
+    <img src="https://images.unsplash.com/photo-1520975914584-0119d7f1f90d?w=800" class="layer">
+
+    <!-- 热点标签 -->
+    <div class="hotspot" style="top:30%;left:60%;" data-brand="Chanel Blazer" data-price="€890"></div>
+    <div class="hotspot" style="top:55%;left:45%;" data-brand="Dior Dress" data-price="€1290"></div>
+    <div class="hotspot" style="top:80%;left:50%;" data-brand="Victoria’s Secret" data-price="€150"></div>
+
+    <div class="title">Explore Layers of Style</div>
+  </div>
+
+  <script>
+    const container = document.getElementById('model');
+    const layers = container.querySelectorAll('.layer');
+
+    // 鼠标左右滑动切换层级
+    container.addEventListener('mousemove', (e) => {
+      const ratio = e.offsetX / container.offsetWidth;
+      const index = Math.min(layers.length - 1, Math.floor(ratio * layers.length));
+      layers.forEach((layer, i) => layer.classList.toggle('active', i === index));
+    });
+
+    // Hover 显示品牌与价格
+    const hotspots = document.querySelectorAll('.hotspot');
+    let tooltip;
+
+    hotspots.forEach(h => {
+      h.addEventListener('mouseenter', () => {
+        tooltip = document.createElement('div');
+        tooltip.className = 'tooltip';
+        tooltip.textContent = `${h.dataset.brand} - ${h.dataset.price}`;
+        document.body.appendChild(tooltip);
+        const rect = h.getBoundingClientRect();
+        tooltip.style.left = rect.left + rect.width/2 + 'px';
+        tooltip.style.top = rect.top + 'px';
+      });
+
+      h.addEventListener('mouseleave', () => {
+        tooltip?.remove();
+      });
+    });
+  </script>
+</body>
+</html>

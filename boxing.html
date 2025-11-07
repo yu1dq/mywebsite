@@ -3,64 +3,671 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>🥊 Yu – Boxing Journey</title>
+<title>🥊 Yu Boxing Academy - Champion's Journey</title>
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
-body{
-  font-family:-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,Arial,sans-serif;
-  background:linear-gradient(135deg,#ff4e50,#f9d423);
-  background-size:400% 400%;
-  animation:gradientShift 15s ease infinite;
-  color:#333;overflow-x:hidden;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
-@keyframes gradientShift{0%{background-position:0% 50%;}50%{background-position:100% 50%;}100%{background-position:0% 50%;}}
-nav{
-  position:fixed;top:0;width:100%;
-  padding:1rem 2rem;
-  display:flex;justify-content:space-between;align-items:center;
-  background:rgba(0,0,0,0.3);
-  backdrop-filter:blur(10px);
-  z-index:100;
+
+:root {
+  --primary: #d63031;
+  --primary-dark: #b71c1c;
+  --secondary: #2d3436;
+  --accent: #fdcb6e;
+  --light: #dfe6e9;
+  --white: #ffffff;
+  --shadow: 0 10px 30px rgba(0,0,0,0.1);
+  --shadow-lg: 0 20px 60px rgba(0,0,0,0.15);
 }
-nav a{color:white;text-decoration:none;font-weight:600;}
-.lang-switcher button{
-  margin-left:.5rem;padding:.3rem .8rem;
-  border:none;border-radius:20px;
-  background:rgba(255,255,255,0.3);color:white;cursor:pointer;font-weight:600;
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+  background: var(--secondary);
+  color: var(--secondary);
+  overflow-x: hidden;
+  line-height: 1.6;
 }
-section{
-  background:white;border-radius:20px;padding:2rem;margin:6rem auto 2rem;
-  max-width:1000px;box-shadow:0 10px 30px rgba(0,0,0,0.1);
+
+/* Animated Background Pattern */
+.bg-pattern {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  opacity: 0.05;
+  background-image: 
+    repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(214, 48, 49, 0.1) 35px, rgba(214, 48, 49, 0.1) 70px);
+  animation: bgMove 20s linear infinite;
 }
-h1,h2,h3{text-align:center;color:#ff4e50;}
-h2{margin-bottom:1rem;}
-.hero{
-  position:relative;height:100vh;color:white;text-align:center;
-  display:flex;flex-direction:column;justify-content:center;
-  background:url('https://images.unsplash.com/photo-1549719386-74dfcbf7dbed?w=1600') center/cover no-repeat;
+
+@keyframes bgMove {
+  0% { transform: translate(0, 0); }
+  100% { transform: translate(35px, 35px); }
 }
-.hero::after{content:"";position:absolute;inset:0;background:rgba(0,0,0,0.5);}
-.hero-content{position:relative;z-index:1;}
-.hero-content h1{font-size:3rem;margin-bottom:1rem;}
-.hero-content p{font-size:1.5rem;opacity:.9;}
-.card-grid{display:grid;gap:1.5rem;margin-top:2rem;}
-@media(min-width:768px){.card-grid{grid-template-columns:repeat(2,1fr);}}
-.card{
-  background:#fff;border-radius:15px;padding:1.5rem;
-  box-shadow:0 4px 15px rgba(0,0,0,0.1);
-  transition:.3s;
+
+/* Navigation */
+nav {
+  position: fixed;
+  top: 0;
+  width: 100%;
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: rgba(45, 52, 54, 0.95);
+  backdrop-filter: blur(10px);
+  z-index: 1000;
+  box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+  transition: all 0.3s ease;
 }
-.card:hover{transform:translateY(-5px);}
-.badge{
-  display:inline-block;background:#ff4e50;color:white;border-radius:20px;
-  padding:.3rem .8rem;margin:.2rem;font-size:.9rem;
+
+nav.scrolled {
+  padding: 0.5rem 2rem;
+  background: rgba(45, 52, 54, 0.98);
 }
-footer{text-align:center;color:white;padding:2rem;}
+
+.nav-brand {
+  color: var(--white);
+  text-decoration: none;
+  font-size: 1.5rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: all 0.3s ease;
+}
+
+.nav-brand:hover {
+  transform: translateX(-5px);
+  color: var(--accent);
+}
+
+@keyframes punch {
+  0%, 100% { transform: rotate(0deg) scale(1); }
+  25% { transform: rotate(-10deg) scale(1.1); }
+  75% { transform: rotate(10deg) scale(1.1); }
+}
+
+.lang-switcher {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.lang-switcher button {
+  padding: 0.5rem 1rem;
+  border: 2px solid transparent;
+  border-radius: 25px;
+  background: rgba(255,255,255,0.1);
+  color: var(--white);
+  cursor: pointer;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.lang-switcher button::before {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 0;
+  height: 0;
+  background: var(--primary);
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  transition: width 0.6s, height 0.6s;
+}
+
+.lang-switcher button:hover::before {
+  width: 100px;
+  height: 100px;
+}
+
+.lang-switcher button:hover {
+  color: var(--white);
+  transform: translateY(-2px);
+  z-index: 1;
+}
+
+.lang-switcher button.active {
+  background: var(--primary);
+  color: var(--white);
+}
+
+/* Hero Section */
+.hero {
+  position: relative;
+  height: 100vh;
+  color: var(--white);
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.6)),
+              url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 800"><rect fill="%23b71c1c" width="1200" height="800"/><g fill-opacity="0.1"><circle fill="%23d63031" cx="600" cy="400" r="600"/><circle fill="%23d63031" cx="200" cy="200" r="300"/><circle fill="%23d63031" cx="1000" cy="600" r="400"/></g></svg>') center/cover;
+  overflow: hidden;
+}
+
+.hero-content {
+  position: relative;
+  z-index: 1;
+  animation: fadeInUp 1s ease-out;
+}
+
+.hero-gloves {
+  font-size: 6rem;
+  animation: float 3s ease-in-out infinite;
+  margin-bottom: 2rem;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-20px); }
+}
+
+.hero h1 {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  position: relative;
+}
+
+.hero h1::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 4px;
+  background: var(--accent);
+  border-radius: 2px;
+}
+
+.hero p {
+  font-size: 1.5rem;
+  opacity: 0.9;
+  margin-bottom: 1rem;
+}
+
+.hero-stats {
+  display: flex;
+  gap: 3rem;
+  margin-top: 2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-item i {
+  font-size: 2rem;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+
+.stat-item p {
+  font-size: 1rem;
+  opacity: 0.8;
+}
+
+/* Sections */
+section {
+  background: var(--white);
+  border-radius: 20px;
+  padding: 4rem 3rem;
+  margin: -50px auto 3rem;
+  max-width: 1200px;
+  box-shadow: var(--shadow-lg);
+  position: relative;
+  overflow: hidden;
+}
+
+section::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: -100px;
+  width: 200px;
+  height: 200px;
+  background: radial-gradient(circle, var(--primary) 0%, transparent 70%);
+  opacity: 0.05;
+  border-radius: 50%;
+}
+
+h2 {
+  text-align: center;
+  color: var(--secondary);
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+  position: relative;
+}
+
+h2::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 60px;
+  height: 4px;
+  background: var(--primary);
+  border-radius: 2px;
+}
+
+.section-desc {
+  text-align: center;
+  font-size: 1.2rem;
+  color: #636e72;
+  margin-bottom: 3rem;
+}
+
+/* Cards Grid */
+.card-grid {
+  display: grid;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+@media(min-width: 768px) {
+  .card-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.card {
+  background: #f8f9fa;
+  border-radius: 15px;
+  padding: 2rem;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(45deg, transparent, rgba(214, 48, 49, 0.1), transparent);
+  transform: rotate(45deg);
+  transition: all 0.5s ease;
+  opacity: 0;
+}
+
+.card:hover::before {
+  opacity: 1;
+  animation: shine 0.5s ease;
+}
+
+@keyframes shine {
+  0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+  100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+}
+
+.card:hover {
+  transform: translateY(-10px);
+  box-shadow: var(--shadow-lg);
+}
+
+.card-icon {
+  width: 60px;
+  height: 60px;
+  background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  color: var(--white);
+  margin-bottom: 1rem;
+}
+
+.card h3 {
+  color: var(--secondary);
+  margin-bottom: 1rem;
+  font-size: 1.5rem;
+  border-left: 4px solid var(--primary);
+  padding-left: 1rem;
+}
+
+.card p {
+  color: #636e72;
+  line-height: 1.8;
+}
+
+/* Training Cards */
+.training-card {
+  background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+  border-radius: 20px;
+  padding: 2.5rem;
+  margin-bottom: 2rem;
+  box-shadow: var(--shadow);
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.training-card:hover {
+  border-color: var(--primary);
+  transform: translateX(10px);
+}
+
+.training-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.training-icon {
+  font-size: 2.5rem;
+}
+
+.training-card h3 {
+  color: var(--secondary);
+  font-size: 1.8rem;
+  margin: 0;
+}
+
+.badges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 1rem;
+}
+
+.badge {
+  display: inline-block;
+  background: var(--primary);
+  color: var(--white);
+  border-radius: 20px;
+  padding: 0.5rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+}
+
+.badge:hover {
+  background: var(--primary-dark);
+  transform: scale(1.05);
+}
+
+/* Progress Section */
+.progress-grid {
+  display: grid;
+  gap: 2rem;
+  margin-top: 2rem;
+}
+
+@media(min-width: 768px) {
+  .progress-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.progress-card {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: var(--white);
+  border-radius: 20px;
+  padding: 2.5rem;
+  position: relative;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.progress-card::after {
+  content: '';
+  position: absolute;
+  bottom: -50px;
+  right: -50px;
+  width: 150px;
+  height: 150px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 50%;
+}
+
+.progress-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 20px 40px rgba(214, 48, 49, 0.3);
+}
+
+.progress-card h3 {
+  color: var(--white);
+  margin-bottom: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Schedule Timeline */
+.schedule-timeline {
+  position: relative;
+  padding-left: 2rem;
+}
+
+.schedule-timeline::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 3px;
+  background: linear-gradient(to bottom, var(--primary), var(--accent));
+  border-radius: 2px;
+}
+
+.schedule-item {
+  position: relative;
+  padding: 2rem;
+  background: #f8f9fa;
+  border-radius: 15px;
+  margin-bottom: 2rem;
+  transition: all 0.3s ease;
+}
+
+.schedule-item::before {
+  content: '';
+  position: absolute;
+  left: -2.65rem;
+  top: 2rem;
+  width: 20px;
+  height: 20px;
+  background: var(--primary);
+  border-radius: 50%;
+  border: 4px solid var(--white);
+  box-shadow: 0 0 0 3px var(--primary);
+}
+
+.schedule-item:hover {
+  transform: translateX(10px);
+  box-shadow: var(--shadow);
+}
+
+.schedule-time {
+  color: var(--primary);
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+/* Stats Counter */
+.stats-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 2rem;
+  margin: 3rem 0;
+}
+
+.stat-box {
+  text-align: center;
+  padding: 2rem;
+  background: linear-gradient(135deg, #f8f9fa 0%, #fff 100%);
+  border-radius: 15px;
+  box-shadow: var(--shadow);
+  transition: all 0.3s ease;
+}
+
+.stat-box:hover {
+  transform: translateY(-5px);
+}
+
+.stat-number {
+  font-size: 3rem;
+  font-weight: 700;
+  color: var(--primary);
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.stat-label {
+  color: #636e72;
+  font-size: 1.1rem;
+}
+
+/* CTA Section */
+.cta-section {
+  background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+  color: var(--white);
+  text-align: center;
+  padding: 4rem;
+  border-radius: 20px;
+  margin: 3rem 0;
+}
+
+.cta-section h3 {
+  color: var(--white);
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
+}
+
+.cta-button {
+  display: inline-block;
+  padding: 1rem 3rem;
+  background: var(--accent);
+  color: var(--secondary);
+  text-decoration: none;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 1.1rem;
+  transition: all 0.3s ease;
+  margin-top: 1rem;
+}
+
+.cta-button:hover {
+  background: #feca57;
+  transform: translateY(-3px);
+  box-shadow: 0 10px 30px rgba(253, 203, 110, 0.4);
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  color: var(--white);
+  padding: 3rem 1rem;
+  background: var(--secondary);
+  position: relative;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.social-links {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.social-links a {
+  color: var(--white);
+  font-size: 1.5rem;
+  transition: all 0.3s ease;
+}
+
+.social-links a:hover {
+  color: var(--primary);
+  transform: translateY(-3px);
+}
+
+/* Animations */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-in {
+  animation: fadeInUp 0.6s ease-out;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .hero h1 {
+    font-size: 2.5rem;
+  }
+  
+  .hero-stats {
+    gap: 1.5rem;
+  }
+  
+  section {
+    padding: 2rem 1.5rem;
+  }
+  
+  .nav-brand {
+    font-size: 1.2rem;
+  }
+  
+  .card-grid, .progress-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Loading Animation */
+.loader {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  display: none;
+}
+
+.gloves-loader {
+  font-size: 3rem;
+  animation: punch-loader 1s ease-in-out infinite;
+}
+
+@keyframes punch-loader {
+  0%, 100% { transform: scale(1) rotate(0deg); }
+  50% { transform: scale(1.2) rotate(180deg); }
+}
 </style>
 </head>
 <body>
-<nav>
-  <a href="life.html">← Back to Life</a>
+<div class="bg-pattern"></div>
+
+<nav id="navbar">
+  <a href="life.html" class="nav-brand">
+    ← Back to Life
+  </a>
   <div class="lang-switcher">
     <button data-lang="en" class="active">EN</button>
     <button data-lang="zh">中文</button>
@@ -70,18 +677,51 @@ footer{text-align:center;color:white;padding:2rem;}
 
 <section class="hero">
   <div class="hero-content">
-    <div style="font-size:5rem;">🥊</div>
-    <h1 id="hero-title">My Boxing Journey</h1>
+    <div class="hero-gloves">🥊</div>
+    <h1 id="hero-title">MY BOXING JOURNEY</h1>
     <p id="hero-subtitle">Training · Growth · Breakthrough</p>
-    <p style="margin-top:1rem;">💪 Strength · 🥋 Technique · 🧠 Strategy · ❤️ Will</p>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <p style="font-size: 1.2rem; font-weight: 700; margin: 0;">Strength</p>
+      </div>
+      <div class="stat-item">
+        <p style="font-size: 1.2rem; font-weight: 700; margin: 0;">Speed</p>
+      </div>
+      <div class="stat-item">
+        <p style="font-size: 1.2rem; font-weight: 700; margin: 0;">Strategy</p>
+      </div>
+      <div class="stat-item">
+        <p style="font-size: 1.2rem; font-weight: 700; margin: 0;">Heart</p>
+      </div>
+    </div>
   </div>
 </section>
 
-<section id="about">
+<section id="about" class="animate-in">
   <h2 id="about-title">Why I Choose Boxing</h2>
-  <p id="about-desc" style="text-align:center;font-size:1.1rem;">
-    Boxing is not just a sport — it’s a philosophy of perseverance and discipline.
+  <p class="section-desc" id="about-desc">
+    Boxing is not just a sport — it's a philosophy of perseverance and discipline.
   </p>
+  
+  <div class="stats-container">
+    <div class="stat-box">
+      <span class="stat-number" data-target="500">0</span>
+      <span class="stat-label">Training Hours</span>
+    </div>
+    <div class="stat-box">
+      <span class="stat-number" data-target="50">0</span>
+      <span class="stat-label">Techniques Mastered</span>
+    </div>
+    <div class="stat-box">
+      <span class="stat-number" data-target="100">0</span>
+      <span class="stat-label">Sparring Sessions</span>
+    </div>
+    <div class="stat-box">
+      <span class="stat-number" data-target="1000">0</span>
+      <span class="stat-label">Calories Burned Daily</span>
+    </div>
+  </div>
+  
   <div class="card-grid">
     <div class="card">
       <h3 id="card1-title">Physical Strength</h3>
@@ -92,7 +732,7 @@ footer{text-align:center;color:white;padding:2rem;}
       <p id="card2-text">Facing challenges builds resilience and confidence inside and outside the ring.</p>
     </div>
     <div class="card">
-      <h3 id="card3-title">Focus</h3>
+      <h3 id="card3-title">Focus & Precision</h3>
       <p id="card3-text">Sharp observation and instant reactions cultivate deep concentration.</p>
     </div>
     <div class="card">
@@ -102,100 +742,301 @@ footer{text-align:center;color:white;padding:2rem;}
   </div>
 </section>
 
-<section id="training">
-  <h2 id="train-title">Training Content</h2>
-  <p id="train-desc" style="text-align:center;margin-bottom:1rem;">Systematic training plans — step by step improvement.</p>
-
-  <div class="card">
-    <h3>👊 Basic Techniques</h3>
+<section id="training" class="animate-in">
+  <h2 id="train-title">Training Program</h2>
+  <p class="section-desc" id="train-desc">
+    Systematic training plans — step by step improvement.
+  </p>
+  
+  <div class="training-card">
+    <div class="training-header">
+      <span class="training-icon">👊</span>
+      <h3>Fundamental Techniques</h3>
+    </div>
     <p id="tech-basic">Master jabs, crosses, hooks, and uppercuts through combinations and drills.</p>
-    <div><span class="badge">Footwork</span><span class="badge">Combos</span><span class="badge">Defense</span></div>
+    <div class="badges">
+      <span class="badge">Footwork Drills</span>
+      <span class="badge">Combination Training</span>
+      <span class="badge">Defensive Moves</span>
+      <span class="badge">Shadow Boxing</span>
+    </div>
   </div>
-
-  <div class="card">
-    <h3>💪 Conditioning</h3>
+  
+  <div class="training-card">
+    <div class="training-header">
+      <span class="training-icon">💪</span>
+      <h3>Conditioning & Strength</h3>
+    </div>
     <p id="tech-fit">Improve strength, speed, and stamina to support higher-intensity boxing sessions.</p>
-    <div><span class="badge">Jump Rope</span><span class="badge">Heavy Bag</span><span class="badge">Core Power</span></div>
+    <div class="badges">
+      <span class="badge">Jump Rope</span>
+      <span class="badge">Heavy Bag Work</span>
+      <span class="badge">Core Power</span>
+      <span class="badge">Interval Training</span>
+    </div>
   </div>
-
-  <div class="card">
-    <h3>🎯 Sparring</h3>
-    <p id="tech-spar">Apply your techniques in real-time drills and live bouts.</p>
-    <div><span class="badge">Pad Work</span><span class="badge">Sparring</span><span class="badge">Tactics</span></div>
+  
+  <div class="training-card">
+    <div class="training-header">
+      <span class="training-icon">🎯</span>
+      <h3>Sparring & Application</h3>
+    </div>
+    <p id="tech-spar">Apply your techniques in real-time drills and controlled sparring sessions.</p>
+    <div class="badges">
+      <span class="badge">Mitt Work</span>
+      <span class="badge">Light Sparring</span>
+      <span class="badge">Ring Tactics</span>
+      <span class="badge">Fight IQ</span>
+    </div>
   </div>
 </section>
 
-<section id="schedule">
+<section id="schedule" class="animate-in">
   <h2 id="sched-title">Training Schedule</h2>
-  <p id="sched-desc" style="text-align:center;">Regular training — steady progress.</p>
-  <div class="card">
-    <h3>Weekdays</h3>
-    <p id="sched-week">Morning: 6:30–7:30 – Technique + Cardio<br>Evening: 19:00–20:30 – Strength + Bag Work</p>
-  </div>
-  <div class="card">
-    <h3>Weekends</h3>
-    <p id="sched-weekend">Morning: Sparring + Tactical Training<br>Afternoon: Technique Review + Video Analysis</p>
-  </div>
-  <div class="card">
-    <h3>Recovery</h3>
-    <p id="sched-recover">Stretching, nutrition, and mental reset through relaxation and learning.</p>
+  <p class="section-desc" id="sched-desc">
+    Regular training — steady progress.
+  </p>
+  
+  <div class="schedule-timeline">
+    <div class="schedule-item">
+      <div class="schedule-time">Monday - Wednesday - Friday</div>
+      <h3>Morning Session</h3>
+      <p id="sched-week-am">6:30–7:30 AM: Technique drills, footwork, shadow boxing</p>
+      <h3>Evening Session</h3>
+      <p id="sched-week-pm">7:00–8:30 PM: Strength training, heavy bag, core work</p>
+    </div>
+    
+    <div class="schedule-item">
+      <div class="schedule-time">Tuesday - Thursday</div>
+      <h3>Conditioning Focus</h3>
+      <p id="sched-condition">Cardio intervals, agility ladder, plyometric exercises</p>
+    </div>
+    
+    <div class="schedule-item">
+      <div class="schedule-time">Saturday</div>
+      <h3>Intensive Training</h3>
+      <p id="sched-weekend">Morning: Sparring sessions and tactical training<br>Afternoon: Technique review and video analysis</p>
+    </div>
+    
+    <div class="schedule-item">
+      <div class="schedule-time">Sunday</div>
+      <h3>Recovery Day</h3>
+      <p id="sched-recover">Active recovery: stretching, yoga, mental training, nutrition planning</p>
+    </div>
   </div>
 </section>
 
-<section id="progress">
+<section id="progress" class="animate-in">
   <h2 id="prog-title">My Progress</h2>
-  <p id="prog-desc" style="text-align:center;">Every drop of sweat writes my story.</p>
-  <div class="card">
-    <h3>📊 Current Level</h3>
-    <p id="prog-level">Intermediate boxer, improving tactical awareness and speed.</p>
-  </div>
-  <div class="card">
-    <h3>🎯 Short-Term Goals</h3>
-    <p id="prog-goal">Enhance footwork, defense, and punching speed.</p>
-  </div>
-  <div class="card">
-    <h3>🏆 Long-Term Vision</h3>
-    <p id="prog-vision">Compete in amateur events and master comprehensive boxing skills.</p>
-  </div>
-  <div class="card">
-    <h3>💭 Reflections</h3>
-    <p id="prog-thought">Boxing teaches courage and persistence — each session is self-discovery.</p>
+  <p class="section-desc" id="prog-desc">
+    Every drop of sweat writes my story.
+  </p>
+  
+  <div class="progress-grid">
+    <div class="progress-card">
+      <h3>Current Level</h3>
+      <p id="prog-level">Intermediate boxer with 2 years experience. Focused on improving tactical awareness and hand speed.</p>
+    </div>
+    <div class="progress-card">
+      <h3>Short-Term Goals</h3>
+      <p id="prog-goal">Perfect slip and counter techniques. Increase punch output by 20%. Master advanced footwork patterns.</p>
+    </div>
+    <div class="progress-card">
+      <h3>Long-Term Vision</h3>
+      <p id="prog-vision">Compete in regional amateur championships. Achieve comprehensive boxing mastery. Inspire others through the sport.</p>
+    </div>
+    <div class="progress-card">
+      <h3>Key Insights</h3>
+      <p id="prog-thought">Boxing teaches courage, discipline, and humility. Every training session is a journey of self-discovery and growth.</p>
+    </div>
   </div>
 </section>
 
-<footer>© 2025 Yu – Boxing Journey</footer>
+<section class="cta-section animate-in">
+  <h3>Ready to Start Your Boxing Journey?</h3>
+  <p>Join me in the pursuit of excellence through the sweet science of boxing.</p>
+  <a href="#" class="cta-button">Get Started Today</a>
+</section>
+
+<footer>
+  <div class="footer-content">
+    <p style="font-size: 1.1rem; font-weight: 500;">© 2025 Yu Boxing Academy - Champions are made in the gym</p>
+  </div>
+</footer>
+
+<div class="loader">
+  <div class="gloves-loader">🥊</div>
+</div>
 
 <script>
-const dict={
-  en:{
-    hero:"My Boxing Journey",sub:"Training · Growth · Breakthrough",
-    about:"Why I Choose Boxing",desc:"Boxing is not just a sport — it’s a philosophy of perseverance and discipline.",
-    train:"Training Content",sched:"Training Schedule",prog:"My Progress"
+// Language translations
+const translations = {
+  en: {
+    hero: "MY BOXING JOURNEY",
+    sub: "Training · Growth · Breakthrough",
+    about: "Why I Choose Boxing",
+    desc: "Boxing is not just a sport — it's a philosophy of perseverance and discipline.",
+    train: "Training Program",
+    trainDesc: "Systematic training plans — step by step improvement.",
+    sched: "Training Schedule",
+    schedDesc: "Regular training — steady progress.",
+    prog: "My Progress",
+    progDesc: "Every drop of sweat writes my story.",
+    card1Title: "Physical Strength",
+    card1Text: "Full-body power and endurance training shape a stronger self with every punch.",
+    card2Title: "Mental Toughness",
+    card2Text: "Facing challenges builds resilience and confidence inside and outside the ring.",
+    card3Title: "Focus & Precision",
+    card3Text: "Sharp observation and instant reactions cultivate deep concentration.",
+    card4Title: "Emotional Control",
+    card4Text: "Channel stress through movement and regain calm with each sweat drop."
   },
-  zh:{
-    hero:"我的拳击旅程",sub:"训练 · 成长 · 突破",
-    about:"为什么选择拳击",desc:"拳击不仅是一项运动，更是一种坚毅与自律的生活方式。",
-    train:"训练内容",sched:"训练计划",prog:"我的进步"
+  zh: {
+    hero: "我的拳击之旅",
+    sub: "训练 · 成长 · 突破",
+    about: "为什么选择拳击",
+    desc: "拳击不仅是一项运动，更是一种坚毅与自律的生活哲学。",
+    train: "训练计划",
+    trainDesc: "系统化训练方案 — 一步步提升。",
+    sched: "训练日程",
+    schedDesc: "规律训练 — 稳步进步。",
+    prog: "我的进步",
+    progDesc: "每一滴汗水都在书写我的故事。",
+    card1Title: "身体力量",
+    card1Text: "全身力量和耐力训练，每一拳都在塑造更强大的自己。",
+    card2Title: "心理韧性",
+    card2Text: "面对挑战培养韧性和自信，在擂台内外都能坚强。",
+    card3Title: "专注力",
+    card3Text: "敏锐的观察和瞬间反应培养深度专注。",
+    card4Title: "情绪控制",
+    card4Text: "通过运动释放压力，在每一滴汗水中重获平静。"
   },
-  de:{
-    hero:"Meine Boxreise",sub:"Training · Wachstum · Durchbruch",
-    about:"Warum ich Boxen wähle",desc:"Boxen ist nicht nur Sport – es ist eine Lebensphilosophie aus Ausdauer und Disziplin.",
-    train:"Trainingsinhalt",sched:"Trainingsplan",prog:"Mein Fortschritt"
+  de: {
+    hero: "MEINE BOX-REISE",
+    sub: "Training · Wachstum · Durchbruch",
+    about: "Warum ich Boxen wähle",
+    desc: "Boxen ist nicht nur Sport – es ist eine Lebensphilosophie aus Ausdauer und Disziplin.",
+    train: "Trainingsprogramm",
+    trainDesc: "Systematische Trainingspläne — Schritt für Schritt Verbesserung.",
+    sched: "Trainingsplan",
+    schedDesc: "Regelmäßiges Training — stetiger Fortschritt.",
+    prog: "Mein Fortschritt",
+    progDesc: "Jeder Schweißtropfen schreibt meine Geschichte.",
+    card1Title: "Körperliche Stärke",
+    card1Text: "Ganzkörper-Kraft und Ausdauertraining formen mit jedem Schlag ein stärkeres Selbst.",
+    card2Title: "Mentale Stärke",
+    card2Text: "Herausforderungen bauen Widerstandsfähigkeit und Selbstvertrauen auf.",
+    card3Title: "Fokus & Präzision",
+    card3Text: "Scharfe Beobachtung und sofortige Reaktionen kultivieren tiefe Konzentration.",
+    card4Title: "Emotionale Kontrolle",
+    card4Text: "Stress durch Bewegung kanalisieren und mit jedem Schweißtropfen Ruhe finden."
   }
 };
-document.querySelectorAll('.lang-switcher button').forEach(b=>{
-  b.onclick=()=>{
-    document.querySelectorAll('.lang-switcher button').forEach(x=>x.classList.remove('active'));
-    b.classList.add('active');
-    const l=b.dataset.lang, t=dict[l];
-    document.getElementById('hero-title').textContent=t.hero;
-    document.getElementById('hero-subtitle').textContent=t.sub;
-    document.getElementById('about-title').textContent=t.about;
-    document.getElementById('about-desc').textContent=t.desc;
-    document.getElementById('train-title').textContent=t.train;
-    document.getElementById('sched-title').textContent=t.sched;
-    document.getElementById('prog-title').textContent=t.prog;
+
+// Language switcher
+document.querySelectorAll('.lang-switcher button').forEach(btn => {
+  btn.onclick = () => {
+    document.querySelectorAll('.lang-switcher button').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    
+    const lang = btn.dataset.lang;
+    const t = translations[lang];
+    
+    document.getElementById('hero-title').textContent = t.hero;
+    document.getElementById('hero-subtitle').textContent = t.sub;
+    document.getElementById('about-title').textContent = t.about;
+    document.getElementById('about-desc').textContent = t.desc;
+    document.getElementById('train-title').textContent = t.train;
+    document.getElementById('train-desc').textContent = t.trainDesc;
+    document.getElementById('sched-title').textContent = t.sched;
+    document.getElementById('sched-desc').textContent = t.schedDesc;
+    document.getElementById('prog-title').textContent = t.prog;
+    document.getElementById('prog-desc').textContent = t.progDesc;
+    
+    // Update card texts
+    document.getElementById('card1-title').textContent = t.card1Title;
+    document.getElementById('card1-text').textContent = t.card1Text;
+    document.getElementById('card2-title').textContent = t.card2Title;
+    document.getElementById('card2-text').textContent = t.card2Text;
+    document.getElementById('card3-title').textContent = t.card3Title;
+    document.getElementById('card3-text').textContent = t.card3Text;
+    document.getElementById('card4-title').textContent = t.card4Title;
+    document.getElementById('card4-text').textContent = t.card4Text;
   };
+});
+
+// Navbar scroll effect
+window.addEventListener('scroll', () => {
+  const navbar = document.getElementById('navbar');
+  if (window.scrollY > 50) {
+    navbar.classList.add('scrolled');
+  } else {
+    navbar.classList.remove('scrolled');
+  }
+});
+
+// Number counter animation
+const counters = document.querySelectorAll('.stat-number');
+const speed = 200;
+
+const countUp = () => {
+  counters.forEach(counter => {
+    const target = +counter.getAttribute('data-target');
+    const count = +counter.innerText;
+    const inc = target / speed;
+    
+    if (count < target) {
+      counter.innerText = Math.ceil(count + inc);
+      setTimeout(countUp, 1);
+    } else {
+      counter.innerText = target;
+    }
+  });
+};
+
+// Intersection Observer for animations
+const observerOptions = {
+  threshold: 0.1,
+  rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('animate-in');
+      
+      // Start counter animation when stats section is visible
+      if (entry.target.querySelector('.stat-number')) {
+        countUp();
+      }
+    }
+  });
+}, observerOptions);
+
+// Observe all sections
+document.querySelectorAll('section').forEach(section => {
+  observer.observe(section);
+});
+
+// Smooth scroll for anchor links
+document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+  anchor.addEventListener('click', function (e) {
+    e.preventDefault();
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) {
+      target.scrollIntoView({
+        behavior: 'smooth',
+        block: 'start'
+      });
+    }
+  });
+});
+
+// Add parallax effect to hero section
+window.addEventListener('scroll', () => {
+  const scrolled = window.pageYOffset;
+  const hero = document.querySelector('.hero');
+  hero.style.transform = `translateY(${scrolled * 0.5}px)`;
 });
 </script>
 </body>
